@@ -1,0 +1,21 @@
+{
+  "name": "iguess-api-personal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "{{Lucas Alves L.A.}}",
+  "dependencies": {
+    "boom": "^4.2.0",
+    "colors": "^1.1.2",
+    "consign": "^0.1.2",
+    "hapi": "16.1.0",
+    "joi": "^10.1.0",
+    "loadash": "0.0.1",
+    "md5": "^2.2.1",
+    "mongoose": "^4.7.6",
+    "redis": "^2.6.3"
+  }
+}
