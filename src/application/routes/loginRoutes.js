@@ -18,7 +18,10 @@ module.exports = (app) => {
         payload: Joi.object({
           name: Joi.string().required(),
           password: Joi.string().required(),
+          description: Joi.string(),
+          email: Joi.string(),
           nickName: Joi.string().required(),
+          guessesLines: Joi.array(),
           teamsSupported: Joi.array().items(
               Joi.string(),
               Joi.string(),

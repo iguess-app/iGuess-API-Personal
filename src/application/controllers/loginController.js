@@ -5,7 +5,7 @@ module.exports = (app) => {
   const loginService = app.src.application.services.loginService;
   
   const singUp = (request, reply) => {
-    loginService.singUp(request.query)
+    loginService.singUp(request.payload, request.headers)
       .then((teams) => {
         reply(teams)
       });
