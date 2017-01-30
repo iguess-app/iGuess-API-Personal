@@ -7,6 +7,7 @@ consign()
   .include('src/helpers')
   .include('src/utils')
   .include('src/managers')
+  .include('src/translate')
   .include('src/schemas')
   .include('src/application/repositories')
   .include('src/application/services')
@@ -14,7 +15,6 @@ consign()
   .include('src/application/routes')
   .include('test/unitTests')
   .include('test/integratedTests')
-  .include('test/mock')
   .into(app);
 
 app.configServer.start((err) => {
