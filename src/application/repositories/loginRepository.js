@@ -10,7 +10,7 @@ module.exports = (app) => {
 
   const _insertUserOnDB = (userData) => 
     Promise.resolve(Profile.create(userData)
-      .then(() => ({ success: true }))
+      .then(() => ({ singUpSuccess: true }))
       .catch((err) => err)
     )
 

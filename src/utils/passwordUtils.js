@@ -12,32 +12,23 @@ module.exports = (app) => {
       if (passwordRegex.test(userData.password)) {
         resolve(userData)
       }
-
+      resolve(userData)
       reject(userErrors.passwordInvalid);
     })
 
   const cryptPassword = (userData) =>
-    new Promise((resolve, reject) => {
-      bcrypt.hash(userData.password, saltRounds, (err, hash) => {
-        if (err) {
-          reject(err);
-        }
+    bcrypt.hash(userData.password, saltRounds)
+      .then((hash) => {
         userData.password = hash;
-
-        resolve(userData);
+        
+        return userData;
       })
-    })
+      .catch((err) => err)
 
   const checkPassword = (password, cryptedPassword) =>
-    new Promise((resolve, reject) => {
-      bcrypt.compare(password, cryptedPassword, (err, res) => {
-        if (err) {
-          reject(err);
-        }
-
-        resolve(res)
-      })
-    })
+      bcrypt.compare(password, cryptedPassword)
+        .then((res) => res)
+        .catch((err) => err)
 
   return {
     checkPasswordRestrict,
