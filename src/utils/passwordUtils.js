@@ -1,10 +1,10 @@
 'use Strict';
 
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 module.exports = (app) => {
   const userErrors = app.src.utils.errorUtils.userErrors;
+  const config = app.src.config;
 
   const checkPasswordRestrict = (userData) =>
     new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ module.exports = (app) => {
     })
 
   const cryptPassword = (userData) =>
-    bcrypt.hash(userData.password, saltRounds)
+    bcrypt.hash(userData.password, config.salt)
       .then((hash) => {
         userData.password = hash;
         
