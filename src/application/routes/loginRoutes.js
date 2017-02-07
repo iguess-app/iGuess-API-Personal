@@ -23,16 +23,40 @@ module.exports = (app) => {
           nickName: Joi.string().required(),
           guessesLines: Joi.array(),
           teamsSupported: Joi.array().items(
-              Joi.string(),
-              Joi.string(),
-              Joi.string()
+            Joi.string(),
+            Joi.string(),
+            Joi.string()
           )
         })
       },
       response: {
         schema: Joi.object({}).unknown()
-          .meta({ className: 'Response' })
+          .meta({
+            className: 'Response'
+          })
       }
+    }
+  })
+
+  server.route({
+    path: '/login/singin',
+    method: 'GET',
+    config: {
+      handler: (request, reply) => {
+
+        loginController.singIn(request, reply)
+      },
+      validate: {
+        query: Joi.object({
+          email: Joi.string(),
+          password: Joi.string().required(),
+          nickName: Joi.string()
+        })
+      }
+      //response: {
+      //schema: Joi.object({}).unknown()
+      //.meta({ className: 'Response' })
+      //}
     }
   })
 

@@ -4,13 +4,23 @@ module.exports = (app) => {
 
   const loginService = app.src.application.services.loginService;
   const StatusUtils = app.src.utils.statusUtils;
-  
+
   const singUp = (request, reply) => {
     loginService.singUp(request.payload, request.headers)
-      .then((teams) => {
-        reply(teams).code(StatusUtils.created)
+      .then((singUpResponse) => {
+        reply(singUpResponse).code(StatusUtils.created)
       });
   }
 
-  return { singUp }
+  const singIn = (request, reply) => {
+    loginService.singIn(request.query, request.headers)
+      .then((singInResponse) => {
+        reply(singInResponse).code(StatusUtils.ok)
+      });
+  }
+
+  return {
+    singUp,
+    singIn
+  }
 }

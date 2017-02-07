@@ -18,17 +18,17 @@ module.exports = (app) => {
 
   const cryptPassword = (userData) =>
     bcrypt.hash(userData.password, config.salt)
-      .then((hash) => {
-        userData.password = hash;
-        
-        return userData;
-      })
-      .catch((err) => err)
+    .then((hash) => {
+      userData.password = hash;
+
+      return userData;
+    })
+    .catch((err) => err)
 
   const checkPassword = (password, cryptedPassword) =>
-      bcrypt.compare(password, cryptedPassword)
-        .then((res) => res)
-        .catch((err) => err)
+    bcrypt.compare(password, cryptedPassword)
+    .then((booleanResponse) => booleanResponse)
+    .catch((err) => err)
 
   return {
     checkPasswordRestrict,

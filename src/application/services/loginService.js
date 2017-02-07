@@ -14,18 +14,20 @@ module.exports = (app) => {
     .then((userToDB) => loginRepository.singUp(userToDB))
     .catch((err) => _treatErrors(err, payload, headers.language))
 
+  const singIn = (query, headers) => loginRepository.singIn(query, headers)
+    
 
   const _treatErrors = (err, payload, language) => {
     const dictionary = app.src.translate.gate.selectLanguage(language);
-    
+
     switch (err.code) {
       case Errors.mongoErrors._idAlreadyUsed:
         return Boom.notAcceptable(`${payload._id} ${dictionary.alreadyUsed}.`);
-      break;
+        break;
 
       case Errors.userErrors.passwordInvalid.code:
         return Boom.notAcceptable(`${dictionary.passwordAlert}.`);
-      break;
+        break;
 
       default:
         return Boom.badData(err)
@@ -35,9 +37,12 @@ module.exports = (app) => {
   const _useNicknameLikeID = (user) => {
     Reflect.set(user, '_id', user.nickName)
     Reflect.deleteProperty(user, 'nickName');
-    
+
     return user;
   }
 
-  return {singUp}
+  return {
+    singUp,
+    singIn
+  }
 };
