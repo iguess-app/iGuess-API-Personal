@@ -1,4 +1,5 @@
 module.exports = {
+  tokenCert: 'asdawUGDQ&@ET*@&GUGDASU89yHdausdg231',
   salt: '$2a$10$5PMJupkGGUJ22DxQC4UoUe',
   redis: {
     host: 'localhost',
