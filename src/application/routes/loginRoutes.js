@@ -11,7 +11,6 @@ module.exports = (app) => {
     method: 'POST',
     config: {
       handler: (request, reply) => {
-
         loginController.singUp(request, reply)
       },
       validate: {
@@ -43,7 +42,6 @@ module.exports = (app) => {
     method: 'GET',
     config: {
       handler: (request, reply) => {
-
         loginController.singIn(request, reply)
       },
       validate: {
