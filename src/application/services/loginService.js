@@ -3,7 +3,8 @@
 const Boom = require('boom');
 
 module.exports = (app) => {
-  const loginRepository = app.src.application.repositories.loginRepository;
+  const singInRepository = app.src.application.repositories.singInRepository;
+  const singUpRepository = app.src.application.repositories.singUpRepository;
   const PasswordUtils = app.src.utils.passwordUtils;
   const Errors = app.src.utils.errorUtils;
 
@@ -11,11 +12,11 @@ module.exports = (app) => {
     PasswordUtils.checkPasswordRestrict(payload)
     .then((userData) => PasswordUtils.cryptPassword(userData))
     .then((userWithPassCrypted) => _useNicknameLikeID(userWithPassCrypted))
-    .then((userToDB) => loginRepository.singUp(userToDB))
+    .then((userToDB) => singUpRepository.singUp(userToDB))
     .catch((err) => _treatErrors(err, payload, headers.language))
 
-  const singIn = (query, headers) => loginRepository.singIn(query, headers)
-    
+  const singIn = (query, headers) => singInRepository.singIn(query, headers)
+
 
   const _treatErrors = (err, payload, language) => {
     const dictionary = app.src.translate.gate.selectLanguage(language);
