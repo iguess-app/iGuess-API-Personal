@@ -4,13 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": ""
+    "dev": "NODE_ENV=dev",
+    "test": "NODE_ENV=test"
   },
   "author": "{{Lucas Alves L.A.}}",
   "dependencies": {
     "bcrypt": "^1.0.2",
     "boom": "^4.2.0",
-    "colors": "^1.1.2",
     "consign": "^0.1.2",
     "hapi": "16.1.0",
     "joi": "^10.1.0",
