@@ -3,13 +3,12 @@
 const Jwt = require('jsonwebtoken');
 
 module.exports = (app) => {
-  const expirationTime = 3600; //1hour (in Seconds)
-  const cert = app.src.config.tokenCert;
+  const tokenConfig = app.src.config.token;
 
   const generate = () => Jwt.sign({
     data: 'foobar'
-  }, cert, {
-    expiresIn: expirationTime
+  }, tokenConfig.cert, {
+    expiresIn: tokenConfig.expirationTime
   })
 
   //const isValid = () => 

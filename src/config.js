@@ -1,5 +1,8 @@
 module.exports = {
-  tokenCert: 'asdawUGDQ&@ET*@&GUGDASU89yHdausdg231',
+  token: {
+    cert: 'asdawUGDQ&@ET*@&GUGDASU89yHdausdg231',
+    expirationTime: 3600  //1hour (in Seconds)
+  },
   salt: '$2a$10$5PMJupkGGUJ22DxQC4UoUe',
   redis: {
     host: 'localhost',
