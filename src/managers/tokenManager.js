@@ -6,14 +6,15 @@ module.exports = (app) => {
   const tokenConfig = app.src.config.token;
 
   const generate = () => Jwt.sign({
-    data: 'foobar'
+    validate: true
   }, tokenConfig.cert, {
     expiresIn: tokenConfig.expirationTime
   })
 
-  //const isValid = () => 
+  const isValid = (token) => Jwt.verify(token, tokenConfig.cert)
 
   return {
-    generate
+    generate,
+    isValid
   }
 }
