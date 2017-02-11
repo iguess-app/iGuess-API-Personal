@@ -22,11 +22,11 @@ module.exports = (app) => {
     .then((isMatched) => {
       if (isMatched) {
         const token = TokenManager.generate();
-        const userFoundedWithOutPass = _removePasswordFromObject(userFounded);
+        const structuredUser = _structureUserObj(userFounded);
 
         return {
           token,
-          user: userFoundedWithOutPass
+          user: structuredUser
         }
       }
 
@@ -34,9 +34,11 @@ module.exports = (app) => {
     })
     .catch((err) => Boom.unauthorized(err))
 
-  const _removePasswordFromObject = (userFounded) => {
-    Reflect.deleteProperty(userFounded, 'password');
+  const _structureUserObj = (userFounded) => {
     Reflect.set(userFounded, 'nickName', userFounded._id)
+    Reflect.deleteProperty(userFounded, 'password');
+    Reflect.deleteProperty(userFounded, '__v');
+    Reflect.deleteProperty(userFounded, '_id');
 
     return userFounded
   }

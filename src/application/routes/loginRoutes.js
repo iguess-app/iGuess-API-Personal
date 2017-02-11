@@ -5,7 +5,8 @@ const Joi = require('joi');
 module.exports = (app) => {
   const loginController = app.src.application.controllers.loginController;
   const server = app.configServer;
-
+  const maxTeamsSupported = 3;
+  
   server.route({
     path: '/login/singup',
     method: 'POST',
@@ -50,11 +51,22 @@ module.exports = (app) => {
           password: Joi.string().required(),
           nickName: Joi.string()
         })
-      }
-      //response: {
-      //schema: Joi.object({}).unknown()
-      //.meta({ className: 'Response' })
-      //}
+      },
+      response: {
+        schema: Joi.object({
+          token: Joi.string().required(),
+          user: Joi.object({
+            name: Joi.string().required(),
+            description: Joi.string().required().allow(''),
+            email: Joi.string().required().allow(''),
+            guessesLines: Joi.array().empty(),
+            teamsSupported: Joi.array().empty().max(maxTeamsSupported),
+            nickName: Joi.string().required()
+          })
+        }).unknown()
+        .meta({ 
+          className: 'Response' 
+        })}
     }
   })
 
