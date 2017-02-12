@@ -4,9 +4,8 @@ const Joi = require('joi');
 
 module.exports = (app) => {
   const tokenController = app.src.application.controllers.tokenController;
-  const server = app.configServer;
 
-  server.route({
+  app.src.config.routes.push({
     path: '/token/verify',
     method: 'GET',
     config: {
@@ -16,7 +15,10 @@ module.exports = (app) => {
       validate: {
         query: Joi.object({
           token: Joi.string()
-        })
+        }),
+        headers: Joi.object({
+          language: Joi.string().required().default('en-us')
+        }).unknown()
       },
       response: {
         schema: Joi.object({

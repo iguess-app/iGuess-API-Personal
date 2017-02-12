@@ -4,10 +4,9 @@ const Joi = require('joi');
 
 module.exports = (app) => {
   const loginController = app.src.application.controllers.loginController;
-  const server = app.configServer;
   const maxTeamsSupported = 3;
-  
-  server.route({
+
+  app.src.config.routes.push({
     path: '/login/singup',
     method: 'POST',
     config: {
@@ -27,7 +26,10 @@ module.exports = (app) => {
             Joi.string(),
             Joi.string()
           )
-        })
+        }),
+        headers: Joi.object({
+          language: Joi.string().required().default('en-us')
+        }).unknown()
       },
       response: {
         schema: Joi.object({}).unknown()
@@ -38,7 +40,7 @@ module.exports = (app) => {
     }
   })
 
-  server.route({
+  app.src.config.routes.push({
     path: '/login/singin',
     method: 'GET',
     config: {
@@ -50,24 +52,46 @@ module.exports = (app) => {
           email: Joi.string(),
           password: Joi.string().required(),
           nickName: Joi.string()
-        })
+        }),
+        headers: Joi.object({
+          language: Joi.string().required().default('en-us')
+        }).unknown()
       },
       response: {
         schema: Joi.object({
-          token: Joi.string().required(),
-          user: Joi.object({
-            name: Joi.string().required(),
-            description: Joi.string().required().allow(''),
-            email: Joi.string().required().allow(''),
-            guessesLines: Joi.array().empty(),
-            teamsSupported: Joi.array().empty().max(maxTeamsSupported),
-            nickName: Joi.string().required()
+            token: Joi.string().required(),
+            user: Joi.object({
+              name: Joi.string().required(),
+              description: Joi.string().required().allow(''),
+              email: Joi.string().required().allow(''),
+              guessesLines: Joi.array().empty(),
+              teamsSupported: Joi.array().empty().max(maxTeamsSupported),
+              nickName: Joi.string().required()
+            })
+          }).unknown()
+          .meta({
+            className: 'Response'
           })
-        }).unknown()
-        .meta({ 
-          className: 'Response' 
-        })}
+      }
     }
   })
+
+  app.src.config.routes.push({
+    method: '*',
+    path: '/login/singup/facebook',
+    config: {
+      auth: {
+        strategy: 'facebook',
+        mode: 'try'
+      },
+      handler(request, reply) {
+
+        if (!request.auth.isAuthenticated) {
+          return reply(`Authentication failed due to: ${request.auth.error.message}`);
+        }
+        reply(`<pre>${JSON.stringify(request.auth.credentials, null, 2)}</pre>`);
+      }
+    }
+  });
 
 };
