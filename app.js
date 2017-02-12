@@ -1,8 +1,12 @@
+'use strict';
+
+const Hapi = require('hapi');
+const Bell = require('bell');
+const HapiEnding = require('hapi-ending');
 const consign = require('consign');
 const app = {};
 
 consign()
-  .include('configServer.js')
   .include('src/config.js')
   .include('src/helpers')
   .include('src/utils')
@@ -17,10 +21,44 @@ consign()
   .include('test/integratedTests')
   .into(app);
 
-app.configServer.start((err) => {
+const server = new Hapi.Server();
+server.connection({
+  host: 'localhost',
+  port: 9002
+});
+
+const HapiEndingConfig = {
+  register: HapiEnding,
+  options: {
+    baseUrl: server.uri,
+    enabled: true,
+    assetsPath: 'documentation'
+  }
+}
+
+server.register([Bell, HapiEndingConfig], (err) => {
+
   if (err) {
     throw err;
   }
 
-  console.log(`Server running at ${app.configServer.info.uri}`);
+  server.auth.strategy('facebook', 'bell', {
+    provider: 'facebook',
+    password: 'cookie_encryption_password_secure',
+    isSecure: false,
+    clientId: '1839068873039445',
+    clientSecret: '4bea584f60c0cf37b5b037b1c4bc8590',
+    location: server.info.uri
+  });
+
+  app.src.config.routes.map((route) => server.route(route))
+
+  server.start((errr) => {
+    if (errr) {
+      throw errr;
+    }
+
+    console.log(`Server running at ${server.uri}`);
+  })
+
 })
