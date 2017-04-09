@@ -8,6 +8,8 @@ module.exports = (app) => {
 
   const checkPasswordRestrict = (userData) =>
     new Promise((resolve, reject) => {
+      //TO DO
+      //Make Sure that this Regex is working well
       const passwordRegex = new RegExp(/(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,25}/);
       if (passwordRegex.test(userData.password)) {
         resolve(userData)
