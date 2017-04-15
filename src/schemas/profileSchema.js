@@ -58,7 +58,8 @@ module.exports = (app) => {
     },
     email: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     guessesLines: {
       type: Array

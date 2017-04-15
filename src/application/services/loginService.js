@@ -23,7 +23,7 @@ module.exports = (app) => {
 
     switch (err.code) {
       case Errors.mongoErrors._idAlreadyUsed:
-        return Boom.notAcceptable(`${payload._id} ${dictionary.alreadyUsed}.`);
+        return Boom.notAcceptable(`${dictionary.alreadyUsed}.`);
         break;
 
       case Errors.userErrors.passwordInvalid.code:
