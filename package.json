@@ -17,6 +17,7 @@
     "hapi-ending": "^0.9.2",
     "joi": "^10.1.0",
     "jsonwebtoken": "^7.2.1",
+    "lab": "^12.1.0",
     "loadash": "0.0.1",
     "md5": "^2.2.1",
     "mongoose": "^4.7.6",
