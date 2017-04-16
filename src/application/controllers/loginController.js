@@ -9,14 +9,16 @@ module.exports = (app) => {
     loginService.singUp(request.payload, request.headers)
       .then((singUpResponse) => {
         reply(singUpResponse).code(StatusUtils.created)
-      });
+      })
+      .catch((err) => reply(err));
   }
 
   const singIn = (request, reply) => {
     loginService.singIn(request.query, request.headers)
       .then((singInResponse) => {
         reply(singInResponse).code(StatusUtils.ok)
-      });
+      })
+      .catch((err) => reply(err));
   }
 
   return {
