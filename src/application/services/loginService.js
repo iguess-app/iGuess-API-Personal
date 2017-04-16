@@ -17,7 +17,6 @@ module.exports = (app) => {
 
   const singIn = (query, headers) => singInRepository.singIn(query, headers)
 
-
   const _treatErrors = (err, payload, language) => {
     const dictionary = app.src.translate.gate.selectLanguage(language);
 
