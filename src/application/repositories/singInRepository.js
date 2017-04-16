@@ -23,7 +23,7 @@ module.exports = (app) => {
     }
 
     return _findUser(searchQuery, dictionary)
-      .then((userFounded) => _singInJobs(data, userFounded, dictionary))
+      .then((userFound) => _singInJobs(data, userFound, dictionary))
       .catch((err) => err)
   }
 
@@ -33,12 +33,12 @@ module.exports = (app) => {
     return regex.test(email);
   }
 
-  const _singInJobs = (data, userFounded, dictionary) =>
-    PasswordUtils.checkPassword(data.password, userFounded.password)
+  const _singInJobs = (data, userFound, dictionary) =>
+    PasswordUtils.checkPassword(data.password, userFound.password)
     .then((isMatched) => {
       if (isMatched) {
         const token = TokenManager.generate();
-        const structuredUser = _structureUserObj(userFounded);
+        const structuredUser = _structureUserObj(userFound);
 
         return {
           token,
@@ -50,21 +50,21 @@ module.exports = (app) => {
     })
     .catch((err) => Boom.unauthorized(err))
 
-  const _structureUserObj = (userFounded) => {
-    Reflect.set(userFounded, 'nickName', userFounded._id)
-    Reflect.deleteProperty(userFounded, 'password');
-    Reflect.deleteProperty(userFounded, '__v');
-    Reflect.deleteProperty(userFounded, '_id');
+  const _structureUserObj = (userFound) => {
+    Reflect.set(userFound, 'nickName', userFound._id)
+    Reflect.deleteProperty(userFound, 'password');
+    Reflect.deleteProperty(userFound, '__v');
+    Reflect.deleteProperty(userFound, '_id');
 
-    return userFounded
+    return userFound
   }
 
   const _findUser = (query, dictionary) =>
     Profile
     .findOne(query)
-    .then((userFounded) => {
-      if (userFounded) {
-        return QueryUtils.makeObject(userFounded);
+    .then((userFound) => {
+      if (userFound) {
+        return QueryUtils.makeObject(userFound);
       }
 
       throw Boom.unauthorized(dictionary.invalidLogin);
