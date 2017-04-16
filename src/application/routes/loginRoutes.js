@@ -67,7 +67,8 @@ module.exports = (app) => {
               teamsSupported: Joi.array().empty().max(MAX_TEAM_SUPPORTED),
               nickName: Joi.string().required(),
               notifications: Joi.array(),
-              guessesLeagues: Joi.array()
+              guessesLeagues: Joi.array(),
+              friendList: Joi.array()
             })
           }).unknown()
           .meta({

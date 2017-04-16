@@ -65,7 +65,10 @@ module.exports = (app) => {
       type: Array
     },
     guessesLeagues: [guessesLeaguesSchema],
-    notifications: [notificationsSchema]
+    notifications: [notificationsSchema],
+    friendList: {
+      type: Array
+    }
   })
 
   return db.model('profiles', profileSchema);
