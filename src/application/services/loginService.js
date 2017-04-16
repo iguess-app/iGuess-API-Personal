@@ -5,17 +5,21 @@ const Boom = require('boom');
 module.exports = (app) => {
   const singInRepository = app.src.application.repositories.singInRepository;
   const singUpRepository = app.src.application.repositories.singUpRepository;
+  const profileRepository = app.src.application.repositories.profileRepository;
   const PasswordUtils = app.src.utils.passwordUtils;
+  const ProfileUtils = app.src.utils.profileUtils;
   const Errors = app.src.utils.errorUtils;
 
   const singUp = (payload, headers) =>
     PasswordUtils.checkPasswordRestrict(payload)
     .then((userData) => PasswordUtils.cryptPassword(userData))
-    .then((userWithPassCrypted) => _useNicknameLikeID(userWithPassCrypted))
+    .then((userWithPassCrypted) => ProfileUtils.useNicknameLikeID(userWithPassCrypted))
     .then((userToDB) => singUpRepository.singUp(userToDB))
     .catch((err) => _treatErrors(err, payload, headers.language))
 
   const singIn = (query, headers) => singInRepository.singIn(query, headers)
+
+  const update = (payload, headers) => profileRepository.update(payload, headers)
 
   const _treatErrors = (err, payload, language) => {
     const dictionary = app.src.translate.gate.selectLanguage(language);
@@ -34,15 +38,9 @@ module.exports = (app) => {
     }
   }
 
-  const _useNicknameLikeID = (user) => {
-    Reflect.set(user, '_id', user.nickName)
-    Reflect.deleteProperty(user, 'nickName');
-
-    return user;
-  }
-
   return {
     singUp,
-    singIn
+    singIn,
+    update
   }
 };

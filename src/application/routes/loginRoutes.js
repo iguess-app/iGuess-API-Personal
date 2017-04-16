@@ -79,6 +79,33 @@ module.exports = (app) => {
   })
 
   app.src.config.routes.push({
+    path: '/profile/update',
+    method: 'PUT',
+    config: {
+      handler: (request, reply) => {
+        loginController.update(request, reply)
+      },
+      validate: {
+        payload: Joi.object({
+          nickName: Joi.string().required(),
+          password: Joi.string().required(),
+          name: Joi.string(),
+          description: Joi.string().allow(''),
+          email: Joi.string().allow(''),
+          guessesLines: Joi.array().empty(),
+          teamsSupported: Joi.array().empty().max(MAX_TEAM_SUPPORTED),
+          notifications: Joi.array(),
+          guessesLeagues: Joi.array(),
+          friendList: Joi.array()
+        }),
+        headers: Joi.object({
+          language: Joi.string().required().default('en-us')
+        }).unknown()
+      }
+    }
+  })
+
+  app.src.config.routes.push({
     method: '*',
     path: '/login/singup/facebook',
     config: {

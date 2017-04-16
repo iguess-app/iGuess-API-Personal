@@ -21,8 +21,17 @@ module.exports = (app) => {
       .catch((err) => reply(err));
   }
 
+  const update = (request, reply) => {
+    loginService.update(request.payload, request.headers)
+      .then((updateResponse) => {
+        reply(updateResponse).code(StatusUtils.ok)
+      })
+      .catch((err) => reply(err));    
+  }
+
   return {
     singUp,
-    singIn
+    singIn,
+    update
   }
 }
