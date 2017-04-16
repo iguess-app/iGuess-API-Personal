@@ -45,6 +45,9 @@ module.exports = (app) => {
       type: String,
       required: true
     },
+    avatar: {
+      type: String
+    },
     teamsSupported: {
       type: Array
     },
