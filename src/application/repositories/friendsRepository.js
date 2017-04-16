@@ -20,7 +20,19 @@ module.exports = (app) => {
       }
     }
 
-    return Profile.find(searchQuery)
+    const projectionQuery = {
+      'friendList': 0,
+      'description': 0,
+      'notifications': 0,
+      'guessesLines': 0,
+      'guessesLeagues': 0,
+      'teamsSupported': 0,
+      '__v': 0,
+      'password': 0,
+      'email': 0
+    }
+
+    return Profile.find(searchQuery, projectionQuery)
       .then((usersFound) =>
         usersFound.map((userFound) => QueryUtils.makeObject(userFound))
       )
