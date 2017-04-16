@@ -17,7 +17,7 @@ module.exports = (app) => {
         payload: Joi.object({
           name: Joi.string().required(),
           password: Joi.string().required(),
-          description: Joi.string(),
+          description: Joi.string().allow(''),
           email: Joi.string(),
           nickName: Joi.string().required(),
           guessesLines: Joi.array(),
@@ -61,7 +61,7 @@ module.exports = (app) => {
             token: Joi.string().required(),
             user: Joi.object({
               name: Joi.string().required(),
-              description: Joi.string().required().allow(''),
+              description: Joi.string().allow(''),
               email: Joi.string().required().allow(''),
               guessesLines: Joi.array().empty(),
               teamsSupported: Joi.array().empty().max(MAX_TEAM_SUPPORTED),
