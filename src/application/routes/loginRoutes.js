@@ -4,7 +4,7 @@ const Joi = require('joi');
 
 module.exports = (app) => {
   const loginController = app.src.application.controllers.loginController;
-  const maxTeamsSupported = 3;
+  const MAX_TEAM_SUPPORTED = 3;
 
   app.src.config.routes.push({
     path: '/login/singup',
@@ -49,9 +49,8 @@ module.exports = (app) => {
       },
       validate: {
         query: Joi.object({
-          email: Joi.string(),
-          password: Joi.string().required(),
-          nickName: Joi.string()
+          login: Joi.string().required(),
+          password: Joi.string().required()
         }),
         headers: Joi.object({
           language: Joi.string().required().default('en-us')
@@ -65,8 +64,10 @@ module.exports = (app) => {
               description: Joi.string().required().allow(''),
               email: Joi.string().required().allow(''),
               guessesLines: Joi.array().empty(),
-              teamsSupported: Joi.array().empty().max(maxTeamsSupported),
-              nickName: Joi.string().required()
+              teamsSupported: Joi.array().empty().max(MAX_TEAM_SUPPORTED),
+              nickName: Joi.string().required(),
+              notifications: Joi.array(),
+              guessesLeagues: Joi.array()
             })
           }).unknown()
           .meta({
