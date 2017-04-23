@@ -5,13 +5,9 @@ const Bell = require('bell');
 const HapiEnding = require('hapi-ending');
 const consign = require('consign');
 const app = {};
+app.coincidents = require('../IGuess-API-Coincidents/app');
 
 consign()
-  .include('src/config.js')
-  .include('src/utils')
-  .include('src/managers')
-  .include('src/translate')
-  .include('src/schemas')
   .include('src/application/repositories')
   .include('src/application/services')
   .include('src/application/controllers')
@@ -50,7 +46,7 @@ server.register([Bell, HapiEndingConfig], (err) => {
     location: server.info.uri
   });
 
-  app.src.config.routes.map((route) => server.route(route))
+  app.coincidents.Config.routes.map((route) => server.route(route))
 
   server.start((errr) => {
     if (errr) {

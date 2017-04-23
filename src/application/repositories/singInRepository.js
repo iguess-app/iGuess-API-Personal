@@ -3,13 +3,13 @@
 const Boom = require('Boom');
 
 module.exports = (app) => {
-  const PasswordUtils = app.src.utils.passwordUtils;
-  const QueryUtils = app.src.utils.queryUtils;
-  const TokenManager = app.src.managers.tokenManager;
-  const Profile = app.src.schemas.profileSchema;
+  const PasswordUtils = app.coincidents.Utils.passwordUtils;
+  const QueryUtils = app.coincidents.Utils.queryUtils;
+  const TokenManager = app.coincidents.Managers.tokenManager;
+  const Profile = app.coincidents.Schemas.profileSchema;
 
   const singIn = (data, header) => {
-    const dictionary = app.src.translate.gate.selectLanguage(header.language);
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(header.language);
     let searchQuery = {};
 
     if (isEmail(data.login)) {

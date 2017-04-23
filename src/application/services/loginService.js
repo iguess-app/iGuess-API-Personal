@@ -6,9 +6,9 @@ module.exports = (app) => {
   const singInRepository = app.src.application.repositories.singInRepository;
   const singUpRepository = app.src.application.repositories.singUpRepository;
   const profileRepository = app.src.application.repositories.profileRepository;
-  const PasswordUtils = app.src.utils.passwordUtils;
-  const ProfileUtils = app.src.utils.profileUtils;
-  const Errors = app.src.utils.errorUtils;
+  const PasswordUtils = app.coincidents.Utils.passwordUtils;
+  const ProfileUtils = app.coincidents.Utils.profileUtils;
+  const Errors = app.coincidents.Utils.errorUtils;
 
   const singUp = (payload, headers) =>
     PasswordUtils.checkPasswordRestrict(payload)

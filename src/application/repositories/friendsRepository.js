@@ -1,8 +1,8 @@
 'use Strict';
 
 module.exports = (app) => {
-  const Profile = app.src.schemas.profileSchema;
-  const QueryUtils = app.src.utils.queryUtils;
+  const Profile = app.coincidents.Schemas.profileSchema;
+  const QueryUtils = app.coincidents.Utils.queryUtils;
 
   const search = (request) => {
     const searchField = request.searchField;

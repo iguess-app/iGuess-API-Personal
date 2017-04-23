@@ -1,7 +1,7 @@
 'use Strict';
 
 module.exports = (app) => {
-  const Profile = app.src.schemas.profileSchema;
+  const Profile = app.coincidents.Schemas.profileSchema;
 
   const update = (dataToDB) =>
     _insertUserOnDB(dataToDB)

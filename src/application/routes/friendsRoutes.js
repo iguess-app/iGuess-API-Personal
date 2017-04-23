@@ -5,7 +5,7 @@ const Joi = require('joi');
 module.exports = (app) => {
   const friendsController = app.src.application.controllers.friendsController;
 
-  app.src.config.routes.push({
+  app.coincidents.Config.routes.push({
     path: '/friends/search',
     method: 'GET',
     config: {

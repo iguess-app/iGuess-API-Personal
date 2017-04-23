@@ -1,7 +1,7 @@
 'use Strict';
 
 module.exports = (app) => {
-  const TokenManager = app.src.managers.tokenManager;
+  const TokenManager = app.coincidents.Managers.tokenManager;
 
   const verify = (data) => TokenManager.isValid(data.token)
     .then((tokenValid) => {

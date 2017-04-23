@@ -6,7 +6,7 @@ module.exports = (app) => {
   const loginController = app.src.application.controllers.loginController;
   const MAX_TEAM_SUPPORTED = 3;
 
-  app.src.config.routes.push({
+  app.coincidents.Config.routes.push({
     path: '/login/singup',
     method: 'POST',
     config: {
@@ -40,7 +40,7 @@ module.exports = (app) => {
     }
   })
 
-  app.src.config.routes.push({
+  app.coincidents.Config.routes.push({
     path: '/login/singin',
     method: 'GET',
     config: {
@@ -78,7 +78,7 @@ module.exports = (app) => {
     }
   })
 
-  app.src.config.routes.push({
+  app.coincidents.Config.routes.push({
     path: '/profile/update',
     method: 'PUT',
     config: {
@@ -105,7 +105,7 @@ module.exports = (app) => {
     }
   })
 
-  app.src.config.routes.push({
+  app.coincidents.Config.routes.push({
     method: '*',
     path: '/login/singup/facebook',
     config: {

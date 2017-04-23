@@ -3,7 +3,7 @@
 const Promise = require('bluebird');
 
 module.exports = (app) => {
-  const Profile = app.src.schemas.profileSchema;
+  const Profile = app.coincidents.Schemas.profileSchema;
 
   const singUp = (dataToDB) =>
     _insertUserOnDB(dataToDB)

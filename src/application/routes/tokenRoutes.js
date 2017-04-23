@@ -5,7 +5,7 @@ const Joi = require('joi');
 module.exports = (app) => {
   const tokenController = app.src.application.controllers.tokenController;
 
-  app.src.config.routes.push({
+  app.coincidents.Config.routes.push({
     path: '/token/verify',
     method: 'GET',
     config: {
