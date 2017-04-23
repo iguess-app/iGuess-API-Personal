@@ -8,7 +8,6 @@ const app = {};
 
 consign()
   .include('src/config.js')
-  .include('src/helpers')
   .include('src/utils')
   .include('src/managers')
   .include('src/translate')
