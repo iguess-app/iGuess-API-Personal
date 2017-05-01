@@ -8,7 +8,7 @@
     "test": "NODE_ENV=test",
     "start": "node app.js"
   },
-  "engines": {g
+  "engines": {
     "node": "6.9.1"
   },
   "author": "{{Lucas Alves L.A.}}",
