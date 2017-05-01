@@ -1,6 +1,6 @@
 'use Strict';
 
-const Boom = require('Boom');
+const Boom = require('boom');
 
 module.exports = (app) => {
   const PasswordUtils = app.coincidents.Utils.passwordUtils;

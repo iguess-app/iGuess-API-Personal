@@ -1,2 +1,13 @@
+service: default
 runtime: nodejs
-env: dev
+env: flex
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 4
+  cool_down_period_sec: 120 # default value
+  cpu_utilization:
+    target_utilization: 0.7
+env_variables:
+  redisKey: wAMK4Hig
+  redisHost: '130.211.171.212'
+  redisPort: 6379

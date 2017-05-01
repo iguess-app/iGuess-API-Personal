@@ -5,7 +5,7 @@ const Bell = require('bell');
 const HapiEnding = require('hapi-ending');
 const consign = require('consign');
 const app = {};
-app.coincidents = require('../IGuess-API-Coincidents/app');
+app.coincidents = require('./IGuess-API-Coincidents/app');
 
 consign()
   .include('src/application/repositories')
@@ -53,7 +53,7 @@ server.register([Bell, HapiEndingConfig], (err) => {
       throw errr;
     }
 
-    console.log(`Server running at ${server.uri}`);
+    console.log(`Server running at ${server.info.uri}`);
   })
 
 })
