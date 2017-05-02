@@ -15,16 +15,23 @@ consign()
 
 const server = new Hapi.Server();
 server.connection({
-  host: 'localhost',
-  port: 9002
+  host: '0.0.0.0',
+  port: 8080
 });
-
 
 app.coincidents.Config.routes.map((route) => server.route(route))
 
-server.start((errr) => {
-  if (errr) {
-    throw errr;
+server.route({
+  method: 'GET',
+  path: '/',
+  handler: (request, reply) => {
+    reply('Iguess - Personal API');
+  }
+});
+
+server.start((err) => {
+  if (err) {
+    throw err;
   }
 
   console.log(`Server running at ${server.info.uri}`);
