@@ -1,13 +1,14 @@
 service: personal
-runtime: custom
+runtime: nodejs
 env: flex
-automatic_scaling:
-  min_num_instances: 1
-  max_num_instances: 4
-  cool_down_period_sec: 120 # default value
-  cpu_utilization:
-    target_utilization: 0.7
 env_variables:
-  redisKey: wAMK4Hig
-  redisHost: 130.211.171.212
-  redisPort: 6379
+  ENV: production
+  REDIS_KEY: wAMK4Hig
+  REDIS_HOST: 130.211.171.212
+  REDIS_PORT: 6379
+  REDIS_EXPIRE_TIME: 60
+  MONGO_ATLAS: true
+  MONGO_USER: luhalvesbr
+  MONGO_DB: iguess
+  MONGO_ADDRESS: zerocluster-shard-00-00-mfooh.mongodb.net:27017,zerocluster-shard-00-01-mfooh.mongodb.net:27017,zerocluster-shard-00-02-mfooh.mongodb.net:27017
+  MONGO_KEY: xSxotVAFrlegS2yJ
