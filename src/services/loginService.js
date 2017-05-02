@@ -3,9 +3,9 @@
 const Boom = require('boom');
 
 module.exports = (app) => {
-  const singInRepository = app.src.application.repositories.singInRepository;
-  const singUpRepository = app.src.application.repositories.singUpRepository;
-  const profileRepository = app.src.application.repositories.profileRepository;
+  const singInRepository = app.src.repositories.singInRepository;
+  const singUpRepository = app.src.repositories.singUpRepository;
+  const profileRepository = app.src.repositories.profileRepository;
   const PasswordUtils = app.coincidents.Utils.passwordUtils;
   const ProfileUtils = app.coincidents.Utils.profileUtils;
   const Errors = app.coincidents.Utils.errorUtils;

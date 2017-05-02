@@ -1,7 +1,7 @@
 'use Strict';
 
 module.exports = (app) => {
-  const friendsRepository = app.src.application.repositories.friendsRepository;
+  const friendsRepository = app.src.repositories.friendsRepository;
   const ProfileUtils = app.coincidents.Utils.profileUtils;
 
   const search = (request, headers) =>

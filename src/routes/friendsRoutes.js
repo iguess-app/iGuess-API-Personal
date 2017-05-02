@@ -3,30 +3,23 @@
 const Joi = require('joi');
 
 module.exports = (app) => {
-  const tokenController = app.src.application.controllers.tokenController;
+  const friendsController = app.src.controllers.friendsController;
 
   app.coincidents.Config.routes.push({
-    path: '/token/verify',
+    path: '/friends/search',
     method: 'GET',
     config: {
       handler: (request, reply) => {
-        tokenController.verify(request, reply)
+        friendsController.search(request, reply)
       },
       validate: {
         query: Joi.object({
-          token: Joi.string()
+          searchField: Joi.string().required()
         }),
         headers: Joi.object({
           language: Joi.string().required().default('en-us')
         }).unknown()
-      },
-      response: {
-        schema: Joi.object({
-          valid: Joi.bool()
-        }).meta({
-          className: 'Response'
-        })
       }
     }
   })
-}
+};

@@ -2,7 +2,7 @@
 
 module.exports = (app) => {
 
-  const loginService = app.src.application.services.loginService;
+  const loginService = app.src.services.loginService;
   const StatusUtils = app.coincidents.Utils.statusUtils;
 
   const singUp = (request, reply) => {

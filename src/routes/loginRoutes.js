@@ -3,7 +3,7 @@
 const Joi = require('joi');
 
 module.exports = (app) => {
-  const loginController = app.src.application.controllers.loginController;
+  const loginController = app.src.controllers.loginController;
   const MAX_TEAM_SUPPORTED = 3;
 
   app.coincidents.Config.routes.push({
@@ -104,23 +104,5 @@ module.exports = (app) => {
       }
     }
   })
-
-  app.coincidents.Config.routes.push({
-    method: '*',
-    path: '/login/singup/facebook',
-    config: {
-      auth: {
-        strategy: 'facebook',
-        mode: 'try'
-      },
-      handler(request, reply) {
-
-        if (!request.auth.isAuthenticated) {
-          return reply(`Authentication failed due to: ${request.auth.error.message}`);
-        }
-        reply(`<pre>${JSON.stringify(request.auth.credentials, null, 2)}</pre>`);
-      }
-    }
-  });
 
 };

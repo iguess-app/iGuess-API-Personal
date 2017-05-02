@@ -2,7 +2,7 @@
 
 module.exports = (app) => {
 
-  const friendsService = app.src.application.services.friendsService;
+  const friendsService = app.src.services.friendsService;
 
   const search = (request, reply) => {
     friendsService.search(request.query, request.headers)
