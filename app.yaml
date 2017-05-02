@@ -1,5 +1,5 @@
-service: default
-runtime: nodejs
+service: personal
+runtime: custom
 env: flex
 automatic_scaling:
   min_num_instances: 1
@@ -9,5 +9,5 @@ automatic_scaling:
     target_utilization: 0.7
 env_variables:
   redisKey: wAMK4Hig
-  redisHost: '130.211.171.212'
+  redisHost: 130.211.171.212
   redisPort: 6379
