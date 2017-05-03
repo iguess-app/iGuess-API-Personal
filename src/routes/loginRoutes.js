@@ -4,9 +4,10 @@ const Joi = require('joi');
 
 module.exports = (app) => {
   const loginController = app.src.controllers.loginController;
+  const server = app.configServer;
   const MAX_TEAM_SUPPORTED = 3;
 
-  app.coincidents.Config.routes.push({
+  server.route({
     path: '/login/singup',
     method: 'POST',
     config: {
@@ -40,7 +41,7 @@ module.exports = (app) => {
     }
   })
 
-  app.coincidents.Config.routes.push({
+  server.route({
     path: '/login/singin',
     method: 'GET',
     config: {
@@ -78,7 +79,7 @@ module.exports = (app) => {
     }
   })
 
-  app.coincidents.Config.routes.push({
+  server.route({
     path: '/profile/update',
     method: 'PUT',
     config: {
