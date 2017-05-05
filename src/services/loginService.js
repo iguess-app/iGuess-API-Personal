@@ -22,16 +22,14 @@ module.exports = (app) => {
   const update = (payload, headers) => profileRepository.update(payload, headers)
 
   const _treatErrors = (err, payload, language) => {
-    const dictionary = app.src.translate.gate.selectLanguage(language);
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(language);
 
     switch (err.code) {
       case Errors.mongoErrors._idAlreadyUsed:
         return Boom.notAcceptable(`${dictionary.alreadyUsed}.`);
-        break;
 
       case Errors.userErrors.passwordInvalid.code:
         return Boom.notAcceptable(`${dictionary.passwordAlert}.`);
-        break;
 
       default:
         return Boom.badData(err)
