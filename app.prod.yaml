@@ -2,7 +2,10 @@ service: personal
 runtime: nodejs
 env: flex
 env_variables:
-  ENV: production
+  ENVIRONMENT: production
+  SALT: $2a$10$5PMJupkGGUJ22DxQC4UoUe
+  TOKEN_SEED: asdawUGDQ&@ET*@&GUGDASU89yHdausdg231
+  TOKEN_EXPIRATION_TIME: 3600
   REDIS_KEY: wAMK4Hig
   REDIS_HOST: 130.211.171.212
   REDIS_PORT: 6379
