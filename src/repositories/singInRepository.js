@@ -4,6 +4,7 @@ const Boom = require('boom');
 
 module.exports = (app) => {
   const PasswordUtils = app.coincidents.Utils.passwordUtils;
+  const ProfileUtils = app.coincidents.Utils.profileUtils;
   const QueryUtils = app.coincidents.Utils.queryUtils;
   const TokenManager = app.coincidents.Managers.tokenManager;
   const Profile = app.coincidents.Schemas.profileSchema;
@@ -12,7 +13,7 @@ module.exports = (app) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(header.language);
     let searchQuery = {};
 
-    if (isEmail(data.login)) {
+    if (ProfileUtils.isEmail(data.login) === true) {
       searchQuery = {
         email: data.login
       };
@@ -25,12 +26,6 @@ module.exports = (app) => {
     return _findUser(searchQuery, dictionary)
       .then((userFound) => _singInJobs(data, userFound, dictionary))
       .catch((err) => err)
-  }
-
-  const isEmail = (email) => {
-    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    return regex.test(email);
   }
 
   const _singInJobs = (data, userFound, dictionary) =>
