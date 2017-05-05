@@ -10,12 +10,14 @@ module.exports = (app) => {
   const ProfileUtils = app.coincidents.Utils.profileUtils;
   const Errors = app.coincidents.Utils.errorUtils;
 
-  const singUp = (payload, headers) =>
-    PasswordUtils.checkPasswordRestrict(payload)
-    .then((userData) => PasswordUtils.cryptPassword(userData))
-    .then((userWithPassCrypted) => ProfileUtils.useNicknameLikeID(userWithPassCrypted))
-    .then((userToDB) => singUpRepository.singUp(userToDB))
-    .catch((err) => _treatErrors(err, payload, headers.language))
+  const singUp = (payload, headers) => {
+    _checkRestricts(payload, headers.language)
+
+    return PasswordUtils.cryptPassword(payload)
+      .then((userWithPassCrypted) => ProfileUtils.useNicknameLikeID(userWithPassCrypted))
+      .then((userToDB) => singUpRepository.singUp(userToDB))
+      .catch((err) => _treatErrors(err, payload, headers.language))
+  }
 
   const singIn = (query, headers) => singInRepository.singIn(query, headers)
 
@@ -27,13 +29,22 @@ module.exports = (app) => {
     switch (err.code) {
       case Errors.mongoErrors._idAlreadyUsed:
         return Boom.notAcceptable(`${dictionary.alreadyUsed}.`);
-
-      case Errors.userErrors.passwordInvalid.code:
-        return Boom.notAcceptable(`${dictionary.passwordAlert}.`);
-
       default:
         return Boom.badData(err)
     }
+  }
+
+  const _checkRestricts = (payload, language) => {
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(language);
+
+    if (PasswordUtils.checkPasswordRestrict(payload.password) !== true) {
+      throw Boom.notAcceptable(`${dictionary.passwordAlert}.`);
+    }
+    if (ProfileUtils.isEmail(payload.email) !== true) {
+      throw Boom.notAcceptable(`${dictionary.notAEmail}.`);
+    }
+
+    return payload;
   }
 
   return {
