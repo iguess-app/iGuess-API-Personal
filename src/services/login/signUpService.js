@@ -3,8 +3,7 @@
 const Boom = require('boom');
 
 module.exports = (app) => {
-  const singInRepository = app.src.repositories.singInRepository;
-  const singUpRepository = app.src.repositories.singUpRepository;
+  const signUpRepository = app.src.repositories.login.signUpRepository;
   const PasswordUtils = app.coincidents.Utils.passwordUtils;
   const ProfileUtils = app.coincidents.Utils.profileUtils;
   const Errors = app.coincidents.Utils.errorUtils;
@@ -12,13 +11,11 @@ module.exports = (app) => {
   const singUp = (payload, headers) => {
     _checkRestricts(payload, headers.language)
 
-    return PasswordUtils.cryptPassword(payload)
+    return PasswordUtils.cryptPassword(payload.password)
       .then((cryptedPassword) => _addCryptedPasswordToUserObj(payload, cryptedPassword))
-      .then((userToDB) => singUpRepository.singUp(userToDB))
+      .then((userToDB) => signUpRepository.singUp(userToDB))
       .catch((err) => _treatErrors(err, payload, headers.language))
   }
-
-  const singIn = (query, headers) => singInRepository.singIn(query, headers)
 
   const _addCryptedPasswordToUserObj = (payload, cryptedPassword) => {
     payload.password = cryptedPassword;
@@ -51,7 +48,6 @@ module.exports = (app) => {
   }
 
   return {
-    singUp,
-    singIn
+    singUp
   }
 };

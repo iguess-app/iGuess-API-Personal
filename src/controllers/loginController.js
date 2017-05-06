@@ -1,12 +1,13 @@
 'use Strict';
 
 module.exports = (app) => {
-
-  const loginService = app.src.services.loginService;
+  const loginServices = app.src.services.login;
+  const signInService = loginServices.signInService;
+  const signUpService = loginServices.signUpService;
   const StatusUtils = app.coincidents.Utils.statusUtils;
 
   const singUp = (request, reply) => {
-    loginService.singUp(request.payload, request.headers)
+    signUpService.singUp(request.payload, request.headers)
       .then((singUpResponse) => {
         reply(singUpResponse).code(StatusUtils.created)
       })
@@ -14,9 +15,9 @@ module.exports = (app) => {
   }
 
   const singIn = (request, reply) => {
-    loginService.singIn(request.query, request.headers)
+    signInService.singIn(request.query, request.headers)
       .then((singInResponse) => {
-        reply(singInResponse).code(StatusUtils.ok)
+        reply(singInResponse)
       })
       .catch((err) => reply(err));
   }
