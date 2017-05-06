@@ -13,11 +13,18 @@ module.exports = (app) => {
     _checkRestricts(payload, headers.language)
 
     return PasswordUtils.cryptPassword(payload)
+      .then((cryptedPassword) => _addCryptedPasswordToUserObj(payload, cryptedPassword))
       .then((userToDB) => singUpRepository.singUp(userToDB))
       .catch((err) => _treatErrors(err, payload, headers.language))
   }
 
   const singIn = (query, headers) => singInRepository.singIn(query, headers)
+
+  const _addCryptedPasswordToUserObj = (payload, cryptedPassword) => {
+    payload.password = cryptedPassword;
+    
+    return payload;
+  }
 
   const _treatErrors = (err, payload, language) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(language);
