@@ -1,13 +1,13 @@
 'use Strict';
 
 module.exports = (app) => {
+  const profilesServices = app.src.services.profileUpdates;
+  const profileInfoService = profilesServices.profileInfoService;
+  const profilePasswordService = profilesServices.profilePasswordService;
+  const profileAvatarService = profilesServices.profileAvatarService;
 
-  const profileService = app.src.services.profileService;
-  const profilePasswordService = app.src.services.profilePasswordService;
-  const profileAvatarService = app.src.services.profileAvatarService;
-
-  const update = (request, reply) => {
-    profileService.update(request.payload, request.headers)
+  const updateInfo = (request, reply) => {
+    profileInfoService.updateInfo(request.payload, request.headers)
       .then((updateResponse) => {
         reply(updateResponse)
       })
@@ -35,7 +35,7 @@ module.exports = (app) => {
   }
 
   return {
-    update,
+    updateInfo,
     updatePassword,
     updateAvatar
   }

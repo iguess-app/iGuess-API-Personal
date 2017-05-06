@@ -8,11 +8,11 @@ module.exports = (app) => {
   const maxTeamToSupportAllowed = app.coincidents.Config.maxTeamToSupportAllowed;
 
   server.route({
-    path: '/profile/update',
+    path: '/profile/updateInfo',
     method: 'PUT',
     config: {
       handler: (request, reply) => {
-        profileController.update(request, reply)
+        profileController.updateInfo(request, reply)
       },
       validate: {
         payload: Joi.object({

@@ -3,7 +3,7 @@
 module.exports = (app) => {
   const Profile = app.coincidents.Schemas.profileSchema;
 
-  const update = (userData) => {
+  const updateInfo = (userData) => {
     const searchQuery = {
       'userName': userData.userName
     };
@@ -16,16 +16,19 @@ module.exports = (app) => {
     return Profile
       .update(searchQuery, updateQuery)
       .then((queryResult) => {
+        let modified = false;
         if (queryResult.nModified) {
-          return true;
+          modified = true;
         }
 
-        return false;
+        return {
+          profileModified: modified
+        };
       })
       .catch((err) => err)
   }
 
   return {
-    update
+    updateInfo
   }
 }
