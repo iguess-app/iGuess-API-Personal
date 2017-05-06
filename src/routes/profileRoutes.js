@@ -70,4 +70,31 @@ module.exports = (app) => {
     }
   })
 
+  server.route({
+    path: '/profile/updateAvatar',
+    method: 'PUT',
+    config: {
+      handler: (request, reply) => {
+        profileController.updatePassword(request, reply)
+      },
+      validate: {
+        payload: Joi.object({
+          avatarFile: Joi.string().required(),
+          userName: Joi.string()
+        }),
+        headers: Joi.object({
+          language: Joi.string().required().default('en-us')
+        }).unknown()
+      },
+      response: {
+        schema: Joi.object({
+            profileModified: Joi.bool().required()
+          }).unknown()
+          .meta({
+            className: 'Response'
+          })
+      }
+    }
+  })
+
 }
