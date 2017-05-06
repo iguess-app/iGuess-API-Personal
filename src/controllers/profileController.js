@@ -2,11 +2,11 @@
 
 module.exports = (app) => {
 
-  const loginService = app.src.services.loginService;
+  const profileService = app.src.services.profileService;
   const StatusUtils = app.coincidents.Utils.statusUtils;
 
   const update = (request, reply) => {
-    loginService.update(request.payload, request.headers)
+    profileService.update(request.payload, request.headers)
       .then((updateResponse) => {
         reply(updateResponse).code(StatusUtils.ok)
       })
