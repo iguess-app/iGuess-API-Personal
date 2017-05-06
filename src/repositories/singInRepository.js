@@ -19,7 +19,7 @@ module.exports = (app) => {
       };
     } else {
       searchQuery = {
-        _id: data.login
+        userName: data.login
       };
     }
 
@@ -46,7 +46,6 @@ module.exports = (app) => {
     .catch((err) => Boom.unauthorized(err))
 
   const _structureUserObj = (userFound) => {
-    Reflect.set(userFound, 'nickName', userFound._id)
     Reflect.deleteProperty(userFound, 'password');
     Reflect.deleteProperty(userFound, '__v');
     Reflect.deleteProperty(userFound, '_id');

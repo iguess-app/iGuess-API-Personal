@@ -22,7 +22,6 @@ module.exports = (app) => {
     .catch((err) => err)
 
   const _structureUserObj = (user) => {
-    Reflect.set(user, 'nickName', user._id)
     Reflect.deleteProperty(user, 'password');
     Reflect.deleteProperty(user, '__v');
     Reflect.deleteProperty(user, '_id');

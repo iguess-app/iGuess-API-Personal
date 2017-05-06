@@ -14,7 +14,7 @@ module.exports = (app) => {
 
     const usrRegex = new RegExp(searchField);
     const searchQuery = {
-      '_id': {
+      'userName': {
         '$regex': usrRegex,
         '$options': 'i'
       }
@@ -29,7 +29,8 @@ module.exports = (app) => {
       'teamsSupported': 0,
       '__v': 0,
       'password': 0,
-      'email': 0
+      'email': 0,
+      '_id': 0
     }
 
     return Profile.find(searchQuery, projectionQuery)

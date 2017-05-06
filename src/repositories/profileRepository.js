@@ -8,7 +8,7 @@ module.exports = (app) => {
 
   const _insertUserOnDB = (userData) => {
     const searchQuery = {
-      '_id': userData.nickName
+      'userName': userData.userName
     };
     const updateQuery = {
       '$set': {
