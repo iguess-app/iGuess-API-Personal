@@ -5,7 +5,7 @@ const Joi = require('joi');
 module.exports = (app) => {
   const loginController = app.src.controllers.loginController;
   const server = app.configServer;
-  const MAX_TEAM_SUPPORTED = 3;
+  const maxTeamToSupportAllowed = app.coincidents.Config.maxTeamToSupportAllowed;
 
   server.route({
     path: '/login/singup',
@@ -65,7 +65,7 @@ module.exports = (app) => {
               description: Joi.string().allow(''),
               email: Joi.string().required().allow(''),
               guessesLines: Joi.array().empty(),
-              teamsSupported: Joi.array().empty().max(MAX_TEAM_SUPPORTED),
+              teamsSupported: Joi.array().empty().max(maxTeamToSupportAllowed),
               userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),
@@ -75,33 +75,6 @@ module.exports = (app) => {
           .meta({
             className: 'Response'
           })
-      }
-    }
-  })
-
-  server.route({
-    path: '/profile/update',
-    method: 'PUT',
-    config: {
-      handler: (request, reply) => {
-        loginController.update(request, reply)
-      },
-      validate: {
-        payload: Joi.object({
-          userName: Joi.string().required(),
-          password: Joi.string().required(),
-          name: Joi.string(),
-          description: Joi.string().allow(''),
-          email: Joi.string().allow(''),
-          guessesLines: Joi.array().empty(),
-          teamsSupported: Joi.array().empty().max(MAX_TEAM_SUPPORTED),
-          notifications: Joi.array(),
-          guessesLeagues: Joi.array(),
-          friendList: Joi.array()
-        }),
-        headers: Joi.object({
-          language: Joi.string().required().default('en-us')
-        }).unknown()
       }
     }
   })
