@@ -11,6 +11,7 @@
   },
   "author": "{{Lucas Alves L.A.}}",
   "dependencies": {
+    "@google-cloud/storage": "1.1.0",
     "bcrypt": "1.0.2",
     "bluebird": "3.5.0",
     "boom": "4.2.0",
