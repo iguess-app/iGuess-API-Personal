@@ -56,14 +56,15 @@ module.exports = (app) => {
   }
 
   const _setErrorTriedOnCache = (cacheKey) => {
+    const ONE_HOUR_IN_SECONDS = 3600;
     CacheManager.get(cacheKey).then((cacheResponse) => {
       const newWrongAttempt = 1
       let wrongAttempts = parseInt(cacheResponse, 10);
       if (!wrongAttempts) {
-        CacheManager.set(cacheKey, newWrongAttempt)
+        CacheManager.set(cacheKey, newWrongAttempt, ONE_HOUR_IN_SECONDS)
       }
       wrongAttempts += newWrongAttempt;
-      CacheManager.set(cacheKey, wrongAttempts)
+      CacheManager.set(cacheKey, wrongAttempts, ONE_HOUR_IN_SECONDS)
     })
   }
 
