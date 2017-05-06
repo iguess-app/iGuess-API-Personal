@@ -20,7 +20,7 @@ module.exports = (app) => {
           password: Joi.string().required(),
           description: Joi.string().allow(''),
           email: Joi.string(),
-          nickName: Joi.string().required(),
+          userName: Joi.string().required(),
           guessesLines: Joi.array(),
           teamsSupported: Joi.array().items(
             Joi.string(),
@@ -66,7 +66,7 @@ module.exports = (app) => {
               email: Joi.string().required().allow(''),
               guessesLines: Joi.array().empty(),
               teamsSupported: Joi.array().empty().max(MAX_TEAM_SUPPORTED),
-              nickName: Joi.string().required(),
+              userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),
               friendList: Joi.array()
@@ -88,7 +88,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: Joi.object({
-          nickName: Joi.string().required(),
+          userName: Joi.string().required(),
           password: Joi.string().required(),
           name: Joi.string(),
           description: Joi.string().allow(''),
