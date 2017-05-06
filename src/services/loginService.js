@@ -14,7 +14,6 @@ module.exports = (app) => {
     _checkRestricts(payload, headers.language)
 
     return PasswordUtils.cryptPassword(payload)
-      .then((userWithPassCrypted) => ProfileUtils.useNicknameLikeID(userWithPassCrypted))
       .then((userToDB) => singUpRepository.singUp(userToDB))
       .catch((err) => _treatErrors(err, payload, headers.language))
   }
