@@ -33,7 +33,21 @@ module.exports = (app) => {
         }).unknown()
       },
       response: {
-        schema: Joi.object({}).unknown()
+        schema: Joi.object({
+            token: Joi.string().required(),
+            user: Joi.object({
+              name: Joi.string().required(),
+              description: Joi.string().allow(''),
+              email: Joi.string().required().allow(''),
+              confirmedEmail: Joi.bool(),
+              guessesLines: Joi.array().empty(),
+              teamsSupported: Joi.array().empty().max(maxTeamToSupportAllowed),
+              userName: Joi.string().required(),
+              notifications: Joi.array(),
+              guessesLeagues: Joi.array(),
+              friendList: Joi.array()
+            })
+          }).unknown()
           .meta({
             className: 'Response'
           })
@@ -64,6 +78,7 @@ module.exports = (app) => {
               name: Joi.string().required(),
               description: Joi.string().allow(''),
               email: Joi.string().required().allow(''),
+              confirmedEmail: Joi.bool(),
               guessesLines: Joi.array().empty(),
               teamsSupported: Joi.array().empty().max(maxTeamToSupportAllowed),
               userName: Joi.string().required(),
