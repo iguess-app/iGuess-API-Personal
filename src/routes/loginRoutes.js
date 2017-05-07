@@ -84,7 +84,9 @@ module.exports = (app) => {
               userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),
-              friendList: Joi.array()
+              friendList: Joi.array(),
+              thereIsUnreadableNotification: Joi.bool().required(),
+              id: Joi.string().required()
             })
           })
           .meta({
