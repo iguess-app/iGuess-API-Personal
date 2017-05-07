@@ -30,4 +30,29 @@ module.exports = (app) => {
       }
     }
   })
+
+  server.route({
+    path: '/availability/email',
+    method: 'GET',
+    config: {
+      handler: (request, reply) => {
+        availabilityController.emailAvailability(request, reply)
+      },
+      validate: {
+        query: Joi.object({
+          email: Joi.string().required()
+        }),
+        headers: Joi.object({
+          language: Joi.string().required().default('en-us')
+        }).unknown()
+      },
+      response: {
+        schema: Joi.object({
+          available: Joi.bool().required()
+        }).meta({
+          className: 'Response'
+        })
+      }
+    }
+  })
 };
