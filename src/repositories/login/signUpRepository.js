@@ -19,7 +19,16 @@ module.exports = (app) => {
         user
       }
     })
-    .catch((err) => err)
+    .catch((err) => {
+      if (err.errors && err.errors.userName) {
+        err.code = parseInt(err.errors.userName.message, 10)
+      }
+      if (err.errors && err.errors.name) {
+        err.code = parseInt(err.errors.name.message, 10)
+      }
+
+      return err
+    })
 
   const _structureUserObj = (user) => {
     Reflect.deleteProperty(user, 'password');
