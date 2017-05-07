@@ -45,9 +45,8 @@ module.exports = (app) => {
   const _checkWrongAttemptsNumbers = (cacheKey) => {
     const MAXIMUM_NUMBER_ERRORS_IN_ONE_HOUR = 10;
 
-    return CacheManager.get(cacheKey).then((wrongAttempts) => {
-      const wrongAttemptsInt = parseInt(wrongAttempts, 10);
-      if (wrongAttemptsInt > MAXIMUM_NUMBER_ERRORS_IN_ONE_HOUR) {
+    return CacheManager.get(cacheKey).then((cacheResponse) => {
+      if (cacheResponse.wrongAttempts > MAXIMUM_NUMBER_ERRORS_IN_ONE_HOUR) {
         throw new Error(ErrorUtils.userErrors.tooManyPasswordsWrong);
       }
     })
@@ -56,13 +55,15 @@ module.exports = (app) => {
   const _setErrorTriedOnCache = (cacheKey) => {
     const ONE_HOUR_IN_SECONDS = 3600;
     CacheManager.get(cacheKey).then((cacheResponse) => {
-      const newWrongAttempt = 1
-      let wrongAttempts = parseInt(cacheResponse, 10);
-      if (!wrongAttempts) {
+
+      if (!cacheResponse) {
+        const newWrongAttempt = {
+          wrongAttempts: 1
+        }
         CacheManager.set(cacheKey, newWrongAttempt, ONE_HOUR_IN_SECONDS)
       }
-      wrongAttempts += newWrongAttempt;
-      CacheManager.set(cacheKey, wrongAttempts, ONE_HOUR_IN_SECONDS)
+      cacheResponse.wrongAttempts += 1;
+      CacheManager.set(cacheKey, cacheResponse, ONE_HOUR_IN_SECONDS)
     })
   }
 
