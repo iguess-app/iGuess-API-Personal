@@ -30,6 +30,10 @@ module.exports = (app) => {
     switch (err.code) {
       case Errors.mongoErrors._idAlreadyUsed:
         return Boom.notAcceptable(`${dictionary.alreadyUsed}.`);
+      case Errors.userErrors.userNameSizeExplode:
+        return Boom.notAcceptable(`${dictionary.tooLongUserName}.`);
+      case Errors.userErrors.nameSizeExplode:
+        return Boom.notAcceptable(`${dictionary.tooLongName}.`);
       default:
         return Boom.badData(err)
     }

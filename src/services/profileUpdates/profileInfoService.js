@@ -23,6 +23,10 @@ module.exports = (app) => {
           throw Boom.notAcceptable(`${dictionary.emailAlreadyUsed}.`);
         }
         throw Boom.badData(err.message)
+      case Errors.userErrors.userNameSizeExplode:
+        throw Boom.notAcceptable(`${dictionary.tooLongUserName}.`);
+      case Errors.userErrors.nameSizeExplode:
+        throw Boom.notAcceptable(`${dictionary.tooLongName}.`);
       default:
         throw Boom.badData(err.message)
     }
