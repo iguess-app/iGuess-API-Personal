@@ -43,11 +43,11 @@ module.exports = (app) => {
 
       throw Boom.unauthorized(dictionary.invalidLogin);
     })
-    .catch((err) => Boom.unauthorized(err))
 
   const _structureUserObj = (userFound) => {
     Reflect.deleteProperty(userFound, 'password');
     Reflect.deleteProperty(userFound, '__v');
+    Reflect.set(userFound, 'id', userFound._id.toString())
     Reflect.deleteProperty(userFound, '_id');
 
     return userFound
