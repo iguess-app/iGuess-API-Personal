@@ -1,35 +1,14 @@
 'use Strict';
 
-const Boom = require('boom');
-
 module.exports = (app) => {
   const profileInfoRepository = app.src.repositories.profileUpdates.profileInfoRepository;
-  const Errors = app.coincidents.Utils.errorUtils;
+  const ProfileUtils = app.coincidents.Utils.profileUtils;
 
-  const updateInfo = (payload, headers) =>
-    profileInfoRepository.updateInfo(payload, headers)
-    .catch((err) => _treatErrors(err, headers.language))
+  const updateInfo = (payload, headers) => {
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
 
-
-  const _treatErrors = (err, language) => {
-    const dictionary = app.coincidents.Translate.gate.selectLanguage(language);
-
-    switch (err.code) {
-      case Errors.mongoErrors._idAlreadyUsed:
-        if (err.message.includes('userName')) {
-          throw Boom.notAcceptable(`${dictionary.userNameAlreadyUsed}.`);
-        }
-        if (err.message.includes('email')) {
-          throw Boom.notAcceptable(`${dictionary.emailAlreadyUsed}.`);
-        }
-        throw Boom.badData(err.message)
-      case Errors.userErrors.userNameSizeExplode:
-        throw Boom.notAcceptable(`${dictionary.tooLongUserName}.`);
-      case Errors.userErrors.nameSizeExplode:
-        throw Boom.notAcceptable(`${dictionary.tooLongName}.`);
-      default:
-        throw Boom.badData(err.message)
-    }
+    return profileInfoRepository.updateInfo(payload, headers)
+    .catch((err) => ProfileUtils.treatErrors(err, dictionary))
   }
 
   return {

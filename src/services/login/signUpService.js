@@ -6,42 +6,25 @@ module.exports = (app) => {
   const signUpRepository = app.src.repositories.login.signUpRepository;
   const PasswordUtils = app.coincidents.Utils.passwordUtils;
   const ProfileUtils = app.coincidents.Utils.profileUtils;
-  const Errors = app.coincidents.Utils.errorUtils;
 
   const singUp = (payload, headers) => {
-    _checkRestricts(payload, headers.language)
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
+    _checkRestricts(payload, dictionary)
 
     return PasswordUtils.cryptPassword(payload.password)
       .then((cryptedPassword) => _buildNewUserObj(payload, cryptedPassword))
       .then((userToDB) => signUpRepository.singUp(userToDB))
-      .catch((err) => _treatErrors(err, payload, headers.language))
+      .catch((err) => ProfileUtils.treatErrors(err, dictionary))
   }
 
   const _buildNewUserObj = (payload, cryptedPassword) => {
     payload.password = cryptedPassword;
     payload.confirmedEmail = false;
-    
+
     return payload;
   }
 
-  const _treatErrors = (err, payload, language) => {
-    const dictionary = app.coincidents.Translate.gate.selectLanguage(language);
-
-    switch (err.code) {
-      case Errors.mongoErrors._idAlreadyUsed:
-        return Boom.notAcceptable(`${dictionary.alreadyUsed}.`);
-      case Errors.userErrors.userNameSizeExplode:
-        return Boom.notAcceptable(`${dictionary.tooLongUserName}.`);
-      case Errors.userErrors.nameSizeExplode:
-        return Boom.notAcceptable(`${dictionary.tooLongName}.`);
-      default:
-        return Boom.badData(err)
-    }
-  }
-
-  const _checkRestricts = (payload, language) => {
-    const dictionary = app.coincidents.Translate.gate.selectLanguage(language);
-
+  const _checkRestricts = (payload, dictionary) => {
     if (PasswordUtils.checkPasswordRestrict(payload.password) !== true) {
       throw Boom.notAcceptable(`${dictionary.passwordAlert}.`);
     }
