@@ -9,25 +9,7 @@ module.exports = (app) => {
 
   const updateInfo = (userData, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
-
-    const updateObject = {};
-    if (userData.name) {
-      updateObject.name = userData.name;
-    }
-    if (userData.description) {
-      updateObject.description = userData.description;
-    }
-    if (userData.newUserName) {
-      updateObject.userName = userData.newUserName;
-    }
-    if (userData.email) {
-      if (ProfileUtils.isEmail(userData.email) === Errors.userErrors.notEmail) {
-        throw Boom.notAcceptable(`${dictionary.notAEmail}.`);
-      }
-      updateObject.email = userData.email;
-      updateObject.confirmedEmail = updateObject.confirmedEmail;
-      //TODO add flag to verify is email was really changed, if yes: call the code to send a confirmation email
-    }
+    const updateObject = _buildUpdatedObject(userData, dictionary);
 
     const searchQuery = {
       'userName': userData.userName
@@ -49,6 +31,29 @@ module.exports = (app) => {
         };
       })
       .catch((err) => err)
+  }
+
+  const _buildUpdatedObject = (payload, dictionary) => {
+    const updateObject = {};
+    if (payload.name) {
+      updateObject.name = payload.name;
+    }
+    if (payload.description) {
+      updateObject.description = payload.description;
+    }
+    if (payload.newUserName) {
+      updateObject.userName = payload.newUserName;
+    }
+    if (payload.email) {
+      if (ProfileUtils.isEmail(payload.email) === Errors.userErrors.notEmail) {
+        throw Boom.notAcceptable(`${dictionary.notAEmail}.`);
+      }
+      updateObject.email = payload.email;
+      updateObject.confirmedEmail = updateObject.confirmedEmail;
+      //TODO add flag to verify is email was really changed, if yes: call the code to send a confirmation email
+    }
+
+    return updateObject;
   }
 
   return {
