@@ -17,9 +17,12 @@ module.exports = (app) => {
     const updateQuery = {
       '$set': updateObject
     }
+    const optionsQuery = {
+      runValidators: true
+    }
 
     return Profile
-      .update(searchQuery, updateQuery)
+      .update(searchQuery, updateQuery, optionsQuery)
       .then((queryResult) => {
         let modified = false;
         if (queryResult.nModified) {
@@ -30,7 +33,16 @@ module.exports = (app) => {
           profileModified: modified
         };
       })
-      .catch((err) => err)
+      .catch((err) => {
+        if (err.errors && err.errors.userName) {
+          err.code = parseInt(err.errors.userName.message, 10)
+        }
+        if (err.errors && err.errors.name) {
+          err.code = parseInt(err.errors.name.message, 10)
+        }
+
+        return err
+      })
   }
 
   const _buildUpdatedObject = (payload, dictionary) => {
@@ -49,7 +61,7 @@ module.exports = (app) => {
         throw Boom.notAcceptable(`${dictionary.notAEmail}.`);
       }
       updateObject.email = payload.email;
-      updateObject.confirmedEmail = updateObject.confirmedEmail;
+      updateObject.confirmedEmail = false;
       //TODO add flag to verify is email was really changed, if yes: call the code to send a confirmation email
     }
 
