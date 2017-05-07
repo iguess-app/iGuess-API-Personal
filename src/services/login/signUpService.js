@@ -12,13 +12,14 @@ module.exports = (app) => {
     _checkRestricts(payload, headers.language)
 
     return PasswordUtils.cryptPassword(payload.password)
-      .then((cryptedPassword) => _addCryptedPasswordToUserObj(payload, cryptedPassword))
+      .then((cryptedPassword) => _buildNewUserObj(payload, cryptedPassword))
       .then((userToDB) => signUpRepository.singUp(userToDB))
       .catch((err) => _treatErrors(err, payload, headers.language))
   }
 
-  const _addCryptedPasswordToUserObj = (payload, cryptedPassword) => {
+  const _buildNewUserObj = (payload, cryptedPassword) => {
     payload.password = cryptedPassword;
+    payload.confirmedEmail = false;
     
     return payload;
   }
