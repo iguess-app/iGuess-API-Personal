@@ -47,7 +47,7 @@ module.exports = (app) => {
               guessesLeagues: Joi.array(),
               friendList: Joi.array()
             })
-          }).unknown()
+          })
           .meta({
             className: 'Response'
           })
@@ -86,7 +86,7 @@ module.exports = (app) => {
               guessesLeagues: Joi.array(),
               friendList: Joi.array()
             })
-          }).unknown()
+          })
           .meta({
             className: 'Response'
           })
