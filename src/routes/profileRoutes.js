@@ -17,6 +17,7 @@ module.exports = (app) => {
       validate: {
         payload: Joi.object({
           userName: Joi.string().required(),
+          newUserName: Joi.string(),
           name: Joi.string(),
           description: Joi.string().allow(''),
           email: Joi.string().allow(''),
