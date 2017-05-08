@@ -16,7 +16,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: Joi.object({
-          name: Joi.string().required(),
+          name: Joi.string(),
           password: Joi.string().required(),
           description: Joi.string().allow(''),
           email: Joi.string(),
@@ -36,7 +36,7 @@ module.exports = (app) => {
         schema: Joi.object({
             token: Joi.string().required(),
             user: Joi.object({
-              name: Joi.string().required(),
+              name: Joi.string(),
               description: Joi.string().allow(''),
               email: Joi.string().required().allow(''),
               confirmedEmail: Joi.bool(),
@@ -75,7 +75,7 @@ module.exports = (app) => {
         schema: Joi.object({
             token: Joi.string().required(),
             user: Joi.object({
-              name: Joi.string().required(),
+              name: Joi.string(),
               description: Joi.string().allow(''),
               email: Joi.string().required().allow(''),
               confirmedEmail: Joi.bool(),
