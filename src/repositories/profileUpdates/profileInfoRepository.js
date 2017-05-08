@@ -40,6 +40,9 @@ module.exports = (app) => {
         if (err.errors && err.errors.name) {
           err.code = parseInt(err.errors.name.message, 10)
         }
+        if (err.errors && err.errors.description) {
+          err.code = parseInt(err.errors.description.message, 10)
+        }
 
         return err
       })
