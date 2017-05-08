@@ -27,6 +27,7 @@ module.exports = (app) => {
       'guessesLines': 0,
       'guessesLeagues': 0,
       'teamsSupported': 0,
+      'confirmedEmail': 0,
       '__v': 0,
       'password': 0,
       'email': 0,
