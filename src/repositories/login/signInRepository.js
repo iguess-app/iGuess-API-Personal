@@ -12,6 +12,9 @@ module.exports = (app) => {
   const singIn = (data, header) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(header.language);
     let searchQuery = {};
+    const projectionQuery = {
+      'friendList': 0
+    }
 
     if (ProfileUtils.isEmail(data.login) === true) {
       searchQuery = {
@@ -23,7 +26,7 @@ module.exports = (app) => {
       };
     }
 
-    return _findUser(searchQuery, dictionary)
+    return _findUser(searchQuery, projectionQuery, dictionary)
       .then((userFound) => _singInJobs(data, userFound, dictionary))
       .catch((err) => err)
   }
@@ -53,9 +56,9 @@ module.exports = (app) => {
     return userFound
   }
 
-  const _findUser = (query, dictionary) =>
+  const _findUser = (query, projectionQuery, dictionary) =>
     Profile
-    .findOne(query)
+    .findOne(query, projectionQuery)
     .then((userFound) => {
       if (userFound) {
         return QueryUtils.makeObject(userFound);

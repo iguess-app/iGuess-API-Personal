@@ -1,9 +1,12 @@
 'use Strict';
 
 const Boom = require('boom');
+const Promise = require('bluebird');
 
 module.exports = (app) => {
   const signUpRepository = app.src.repositories.login.signUpRepository;
+  const getNotificationsRepository = app.src.repositories.notifications.getNotificationsRepository;
+  const friendsNumberRepository = app.src.repositories.friends.friendsNumberRepository;
   const PasswordUtils = app.coincidents.Utils.passwordUtils;
   const ProfileUtils = app.coincidents.Utils.profileUtils;
 
@@ -14,7 +17,21 @@ module.exports = (app) => {
     return PasswordUtils.cryptPassword(payload.password)
       .then((cryptedPassword) => _buildNewUserObj(payload, cryptedPassword))
       .then((userToDB) => signUpRepository.singUp(userToDB))
+      .then((user) => _structureUserObj(user))
       .catch((err) => ProfileUtils.treatErrors(err, dictionary))
+  }
+
+  const _structureUserObj = (singUpObj) => {
+    const notificationsPromise = getNotificationsRepository.getNotifications(singUpObj.user.id)
+    const friendListSizePromise = friendsNumberRepository.getNumberOfFriends(singUpObj.user.userName)
+
+    return Promise.all([notificationsPromise, friendListSizePromise])
+      .spread((notificationsObj, numberOfFriends) => {
+        singUpObj.user.unreadableNotification = notificationsObj.notifications.some((notification) => notification.saw === false)
+        singUpObj.user.numberOfFriends = numberOfFriends;
+
+        return singUpObj
+      })
   }
 
   const _buildNewUserObj = (payload, cryptedPassword) => {

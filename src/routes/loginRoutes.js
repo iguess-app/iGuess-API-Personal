@@ -45,7 +45,9 @@ module.exports = (app) => {
               userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),
-              friendList: Joi.array()
+              numberOfFriends: Joi.number().required(),
+              unreadableNotification: Joi.bool().required(),
+              id: Joi.string().required()
             })
           })
           .meta({
@@ -84,8 +86,8 @@ module.exports = (app) => {
               userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),
-              friendList: Joi.array(),
-              thereIsUnreadableNotification: Joi.bool().required(),
+              numberOfFriends: Joi.number().required(),
+              unreadableNotification: Joi.bool().required(),
               id: Joi.string().required()
             })
           })
