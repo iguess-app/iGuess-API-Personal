@@ -24,8 +24,9 @@ module.exports = (app) => {
     })
 
   const _setNotificationsOnCache = (userName, notificationsObj) => {
+    const ONE_MINUTE = 60;
     const notificationsCacheKey = `${userName}'s Notifications`
-    CacheManager.set(notificationsCacheKey, notificationsObj)
+    CacheManager.set(notificationsCacheKey, notificationsObj, ONE_MINUTE)
   }
 
   return {
