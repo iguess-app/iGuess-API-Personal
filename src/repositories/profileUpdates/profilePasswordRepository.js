@@ -17,7 +17,7 @@ module.exports = (app) => {
     return Profile
       .findOne(searchQuery)
       .then((userFound) => {
-        if (userFound.password !== payload.oldPassword) {
+        if (userFound && userFound.password !== payload.oldPassword) {
           throw new Error(ErrorUtils.userErrors.passwordInvalid);
         }
 
