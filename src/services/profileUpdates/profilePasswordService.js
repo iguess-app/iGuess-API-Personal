@@ -46,7 +46,7 @@ module.exports = (app) => {
     const MAXIMUM_NUMBER_ERRORS_IN_ONE_HOUR = 10;
 
     return CacheManager.get(cacheKey).then((cacheResponse) => {
-      if (cacheResponse.wrongAttempts > MAXIMUM_NUMBER_ERRORS_IN_ONE_HOUR) {
+      if (cacheResponse && cacheResponse.wrongAttempts > MAXIMUM_NUMBER_ERRORS_IN_ONE_HOUR) {
         throw new Error(ErrorUtils.userErrors.tooManyPasswordsWrong);
       }
     })
@@ -60,10 +60,12 @@ module.exports = (app) => {
         const newWrongAttempt = {
           wrongAttempts: 1
         }
-        CacheManager.set(cacheKey, newWrongAttempt, ONE_HOUR_IN_SECONDS)
+
+        return CacheManager.set(cacheKey, newWrongAttempt, ONE_HOUR_IN_SECONDS)
       }
       cacheResponse.wrongAttempts += 1;
-      CacheManager.set(cacheKey, cacheResponse, ONE_HOUR_IN_SECONDS)
+
+      return CacheManager.set(cacheKey, cacheResponse, ONE_HOUR_IN_SECONDS)
     })
   }
 
