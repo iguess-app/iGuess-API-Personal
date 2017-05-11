@@ -3,15 +3,15 @@
 const Joi = require('joi');
 
 module.exports = (app) => {
-  const friendsController = app.src.controllers.friendsController;
+  const searchProfilesController = app.src.controllers.searchProfilesController;
   const server = app.configServer;
 
   server.route({
-    path: '/friends/search',
+    path: '/profiles/search',
     method: 'GET',
     config: {
       handler: (request, reply) => {
-        friendsController.search(request, reply)
+        searchProfilesController.search(request, reply)
       },
       validate: {
         query: Joi.object({

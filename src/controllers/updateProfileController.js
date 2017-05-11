@@ -2,12 +2,12 @@
 
 module.exports = (app) => {
   const profilesServices = app.src.services.profileUpdates;
-  const profileInfoService = profilesServices.profileInfoService;
-  const profilePasswordService = profilesServices.profilePasswordService;
-  const profileAvatarService = profilesServices.profileAvatarService;
+  const updateInfoService = profilesServices.updateInfoService;
+  const updatePasswordService = profilesServices.updatePasswordService;
+  const updateAvatarService = profilesServices.updateAvatarService;
 
   const updateInfo = (request, reply) => {
-    profileInfoService.updateInfo(request.payload, request.headers)
+    updateInfoService.updateInfo(request.payload, request.headers)
       .then((updateResponse) => {
         reply(updateResponse)
       })
@@ -15,7 +15,7 @@ module.exports = (app) => {
   }
 
   const updatePassword = (request, reply) => {
-    profilePasswordService.updatePassword(request.payload, request.headers)
+    updatePasswordService.updatePassword(request.payload, request.headers)
       .then((updateResponse) => {
         reply(updateResponse)
       })
@@ -25,7 +25,7 @@ module.exports = (app) => {
   }
 
   const updateAvatar = (request, reply) => {
-    profileAvatarService.updateAvatar(request.payload, request.headers)
+    updateAvatarService.updateAvatar(request.payload, request.headers)
       .then((updateResponse) => {
         reply(updateResponse)
       })

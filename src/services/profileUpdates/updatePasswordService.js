@@ -4,7 +4,7 @@ const Boom = require('boom');
 const Promise = require('bluebird');
 
 module.exports = (app) => {
-  const profilePasswordRepository = app.src.repositories.profileUpdates.profilePasswordRepository;
+  const updatePasswordRepository = app.src.repositories.profileUpdates.updatePasswordRepository;
   const PasswordUtis = app.coincidents.Utils.passwordUtils;
   const ErrorUtils = app.coincidents.Utils.errorUtils;
   const CacheManager = app.coincidents.Managers.cacheManager;
@@ -26,7 +26,7 @@ module.exports = (app) => {
           payload.newPassword = newCryptedPassword;
           payload.oldPassword = oldCryptedPassword;
 
-          return profilePasswordRepository.updatePassword(payload, headers)
+          return updatePasswordRepository.updatePassword(payload, headers)
         }))
       .catch((err) => {
         switch (parseInt(err.message, 10)) {

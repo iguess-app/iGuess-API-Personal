@@ -2,10 +2,10 @@
 
 module.exports = (app) => {
 
-  const friendsService = app.src.services.friendsService;
+  const searchProfilesService = app.src.services.searchProfilesService;
 
   const search = (request, reply) => {
-    friendsService.search(request.query, request.headers)
+    searchProfilesService.search(request.query, request.headers)
       .then((singUpResponse) => {
         reply(singUpResponse)
       })
