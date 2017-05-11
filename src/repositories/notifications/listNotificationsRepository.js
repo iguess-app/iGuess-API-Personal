@@ -11,10 +11,17 @@ module.exports = (app) => {
     }
 
     return Notifications.findOne(searchQuery)
-      .then((notifications) => QueryUtils.makeObject(notifications))
-      .catch((err) => 
+      .then((notifications) => {
+        if (notifications) {
+          return QueryUtils.makeObject(notifications)
+        }
+
+        return null;
+        }
+      )
+      .catch((err) =>
         err
-        )
+      )
   }
 
 

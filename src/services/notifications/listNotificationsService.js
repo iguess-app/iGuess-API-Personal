@@ -17,7 +17,9 @@ module.exports = (app) => {
 
     return listNotificationsRepository.getNotifications(userName, headers)
       .then((listOfNotifications) => {
-
+        if (!listOfNotifications) {
+          return [];
+        }
         const notificationsPromisesArray = listOfNotifications.notifications.map((notification) =>
           _getNotificationFullMessage(notification, dictionary))
 

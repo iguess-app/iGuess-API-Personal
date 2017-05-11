@@ -19,7 +19,9 @@ module.exports = (app) => {
       .then((singInResponse) => {
         reply(singInResponse)
       })
-      .catch((err) => reply(err));
+      .catch((err) => 
+        reply(err)
+      );
   }
 
   return {

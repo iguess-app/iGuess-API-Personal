@@ -15,9 +15,12 @@ module.exports = (app) => {
 
       return Promise.all([singInObj, notificationsPromise, friendListSizePromise])
         .spread((userObj, notificationsObj, numberOfFriends) => {
-          userObj.user.unreadableNotification = notificationsObj.notifications.some((notification) => notification.saw === false)
           userObj.user.numberOfFriends = numberOfFriends;
-          _setNotificationsOnCache(userObj.user.userName, notificationsObj)
+          userObj.user.unreadableNotification = false;
+          if (notificationsObj) {
+            userObj.user.unreadableNotification = notificationsObj.notifications.some((notification) => notification.saw === false)
+            _setNotificationsOnCache(userObj.user.userName, notificationsObj)
+          }
 
           return userObj
         })
