@@ -4,15 +4,17 @@ module.exports = (app) => {
   const Notifications = app.coincidents.Schemas.notificationsSchema;
   const QueryUtils = app.coincidents.Utils.queryUtils;
 
-  const getNotifications = (userId) => {
+  const getNotifications = (user) => {
 
     const searchQuery = {
-      'user': userId
+      user
     }
 
     return Notifications.findOne(searchQuery)
       .then((notifications) => QueryUtils.makeObject(notifications))
-      .catch((err) => err)
+      .catch((err) => 
+        err
+        )
   }
 
 
