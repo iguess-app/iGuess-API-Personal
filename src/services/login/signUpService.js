@@ -5,7 +5,7 @@ const Promise = require('bluebird');
 
 module.exports = (app) => {
   const signUpRepository = app.src.repositories.login.signUpRepository;
-  const getNotificationsRepository = app.src.repositories.notifications.getNotificationsRepository;
+  const listNotificationsRepository = app.src.repositories.notifications.listNotificationsRepository;
   const friendsNumberRepository = app.src.repositories.friends.friendsNumberRepository;
   const PasswordUtils = app.coincidents.Utils.passwordUtils;
   const ProfileUtils = app.coincidents.Utils.profileUtils;
@@ -22,7 +22,7 @@ module.exports = (app) => {
   }
 
   const _structureUserObj = (singUpObj) => {
-    const notificationsPromise = getNotificationsRepository.getNotifications(singUpObj.user.id)
+    const notificationsPromise = listNotificationsRepository.getNotifications(singUpObj.user.id)
     const friendListSizePromise = friendsNumberRepository.getNumberOfFriends(singUpObj.user.userName)
 
     return Promise.all([notificationsPromise, friendListSizePromise])

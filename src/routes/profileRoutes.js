@@ -3,7 +3,7 @@
 const Joi = require('joi');
 
 module.exports = (app) => {
-  const profileController = app.src.controllers.profileController;
+  const updateProfileController = app.src.controllers.updateProfileController;
   const server = app.configServer;
   const maxTeamToSupportAllowed = app.coincidents.Config.maxTeamToSupportAllowed;
 
@@ -12,7 +12,7 @@ module.exports = (app) => {
     method: 'PUT',
     config: {
       handler: (request, reply) => {
-        profileController.updateInfo(request, reply)
+        updateProfileController.updateInfo(request, reply)
       },
       validate: {
         payload: Joi.object({
@@ -47,7 +47,7 @@ module.exports = (app) => {
     method: 'PUT',
     config: {
       handler: (request, reply) => {
-        profileController.updatePassword(request, reply)
+        updateProfileController.updatePassword(request, reply)
       },
       validate: {
         payload: Joi.object({
@@ -76,7 +76,7 @@ module.exports = (app) => {
     method: 'PUT',
     config: {
       handler: (request, reply) => {
-        profileController.updatePassword(request, reply)
+        updateProfileController.updatePassword(request, reply)
       },
       validate: {
         payload: Joi.object({
