@@ -22,6 +22,59 @@ module.exports = (app) => {
         }).unknown()
       },
       response: {
+        schema: Joi.array(Joi.object({
+          //Add NotificationID, cuz on '/response' we will need
+          message: Joi.string().required(),
+          guessLeague: Joi.string(),
+          profile: Joi.string(),
+          avatar: Joi.string()
+        })).meta({
+          className: 'Response'
+        })
+      }
+    }
+  })
+
+  server.route({
+    path: '/notifications/saw',
+    method: 'PUT',
+    config: {
+      handler: (request, reply) => {
+        notificationsController.putNotificationsSaw(request, reply)
+      },
+      validate: {
+        query: Joi.object({
+          userName: Joi.string().required()
+        }),
+        headers: Joi.object({
+          language: Joi.string().required().default('en-us')
+        }).unknown()
+      },
+      response: {
+        schema: Joi.array().meta({
+          className: 'Response'
+        })
+      }
+    }
+  })
+
+  server.route({
+    path: '/notifications/response',
+    method: 'PUT',
+    config: {
+      handler: (request, reply) => {
+        notificationsController.putNotificationsSaw(request, reply)
+      },
+      validate: {
+        query: Joi.object({
+          userName: Joi.string().required(),
+          notificationId: Joi.string().required()
+        }),
+        headers: Joi.object({
+          language: Joi.string().required().default('en-us')
+        }).unknown()
+      },
+      response: {
         schema: Joi.array().meta({
           className: 'Response'
         })

@@ -17,8 +17,7 @@ module.exports = (app) => {
         }
 
         return null;
-        }
-      )
+      })
       .catch((err) =>
         err
       )
