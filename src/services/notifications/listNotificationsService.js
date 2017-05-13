@@ -30,7 +30,7 @@ module.exports = (app) => {
   const _getNotificationFullMessage = (notification, dictionary) => {
     switch (notification.messageType) {
       case FRIENDSHIP_TYPE:
-        return _buildFrienshipReqText(notification, dictionary.friendshipRequest)
+        return _buildFriendshipReqText(notification, dictionary.friendshipRequest)
       case GUESSLEAGUE_TYPE:
         return _buildGuessLeagueReqText(notification, dictionary.guessLeagueRequest)
       default:
@@ -51,7 +51,7 @@ module.exports = (app) => {
         }))
   }
 
-  const _buildFrienshipReqText = (notification, message) => getUserByIdRepository.getUserById(notification.messageUserRef)
+  const _buildFriendshipReqText = (notification, message) => getUserByIdRepository.getUserById(notification.messageUserRef)
     .then((userData) => ({
         message: message.replace('{{userName}}', userData.userName).replace('{{leagueName}}'),
         profile: userData.userName,
