@@ -1,6 +1,6 @@
 'use Strict';
 
-//THIS FILE SHOULD BE ON GUESS MICROSERVICE< NOT HERE
+//TODO: CHECK IF THIS FILE SHOULD BE ON GUESS MICROSERVICE
 module.exports = (app) => {
   const GuessesLeagues = app.coincidents.Schemas.guessesLeaguesSchema;
   const QueryUtils = app.coincidents.Utils.queryUtils;
