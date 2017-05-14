@@ -3,13 +3,12 @@
 const Boom = require('boom');
 const Promise = require('bluebird')
 
-const FRIENDSHIP_TYPE = 1
-const GUESSLEAGUE_TYPE = 2
-
 module.exports = (app) => {
   const listNotificationsRepository = app.src.repositories.notifications.listNotificationsRepository;
   const getUserByIdRepository = app.src.repositories.getById.getUserByIdRepository;
   const getGuessLeagueByIdRepository = app.src.repositories.getById.getGuessLeagueByIdRepository;
+  const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest;
+  const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest;
 
   const listNotifications = (request, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);

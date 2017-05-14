@@ -2,11 +2,11 @@
 
 const Promise = require('bluebird')
 const Boom = require('boom')
-const FRIENDSHIP_TYPE = 1 //TODO isolate this guy at config, cuz is use by the file and by listNot..Service
 
 module.exports = (app) => {
   const Profile = app.coincidents.Schemas.profileSchema;
   const Notifications = app.coincidents.Schemas.notificationsSchema;
+  const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest;
 
   const addFriend = (request, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
