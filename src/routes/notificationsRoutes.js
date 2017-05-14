@@ -15,7 +15,7 @@ module.exports = (app) => {
       },
       validate: {
         query: Joi.object({
-          userName: Joi.string()
+          userId: Joi.string().required()
         }),
         headers: Joi.object({
           language: Joi.string().required().default('en-us')
