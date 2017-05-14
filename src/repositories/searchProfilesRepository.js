@@ -27,7 +27,7 @@ module.exports = (app) => {
       'guessesLines': 0,
       'guessesLeagues': 0,
       'supportedTeam': 0,
-      'appreciateTeams': 0,
+      'appreciatedTeams': 0,
       'confirmedEmail': 0,
       'invitedFriendList': 0,
       '__v': 0,
