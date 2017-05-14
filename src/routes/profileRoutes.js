@@ -28,7 +28,7 @@ module.exports = (app) => {
           friendList: Joi.array()
         }),
         headers: Joi.object({
-          language: Joi.string().required().default('en-us')
+          language: Joi.string().default('en-us')
         }).unknown()
       },
       response: {
@@ -56,7 +56,7 @@ module.exports = (app) => {
           userName: Joi.string()
         }),
         headers: Joi.object({
-          language: Joi.string().required().default('en-us')
+          language: Joi.string().default('en-us')
           //token: Joi.string().token().required()
         }).unknown()
       },
@@ -84,7 +84,7 @@ module.exports = (app) => {
           userName: Joi.string()
         }),
         headers: Joi.object({
-          language: Joi.string().required().default('en-us')
+          language: Joi.string().default('en-us')
         }).unknown()
       },
       response: {

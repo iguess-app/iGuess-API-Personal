@@ -18,7 +18,7 @@ module.exports = (app) => {
           token: Joi.string()
         }),
         headers: Joi.object({
-          language: Joi.string().required().default('en-us')
+          language: Joi.string().default('en-us')
         }).unknown()
       },
       response: {

@@ -29,7 +29,7 @@ module.exports = (app) => {
           )
         }),
         headers: Joi.object({
-          language: Joi.string().required().default('en-us')
+          language: Joi.string().default('en-us')
         }).unknown()
       },
       response: {
@@ -71,7 +71,7 @@ module.exports = (app) => {
           password: Joi.string().required()
         }),
         headers: Joi.object({
-          language: Joi.string().required().default('en-us')
+          language: Joi.string().default('en-us')
         }).unknown()
       },
       response: {
