@@ -14,22 +14,26 @@ module.exports = (app) => {
     const getInvitedPromise = _getUser(request.invitedUserName, dictionary);
 
     return Promise.all([getInvitatorPromise, getInvitedPromise])
-      .spread((invitatorUser, invitedUser) => {
-        const saveInvitatorPromise = _saveInvitatorUserProfile(invitatorUser, invitedUser)
-        const updateInvitedPromise = _updateInvitedUserNotifications(invitatorUser, invitedUser, dictionary)
+      .spread((invitatorUser, invitedUser) => _updateDate(invitatorUser, invitedUser, dictionary))
+      .spread((invitatorResult, invitedResult) => _checkResponse(invitatorResult, invitedResult))
+  }
 
-        return Promise.all([saveInvitatorPromise, updateInvitedPromise])
-          .spread((invitatorResult, invitedResult) => {
-            const responseObj = {
-              invitedSent: false
-            }
-            if (invitatorResult.nModified && invitedResult) {
-              responseObj.invitedSent = true;
-            }
+  const _updateDate = (invitatorUser, invitedUser, dictionary) => {
+    const saveInvitatorPromise = _saveInvitatorUserProfile(invitatorUser, invitedUser)
+    const updateInvitedPromise = _updateInvitedUserNotifications(invitatorUser, invitedUser, dictionary)
 
-            return responseObj
-          })
-      })
+    return Promise.all([saveInvitatorPromise, updateInvitedPromise])
+  }
+
+  const _checkResponse = (invitatorResult, invitedResult) => {
+    const responseObj = {
+      invitedSent: false
+    }
+    if (invitatorResult.nModified && invitedResult) {
+      responseObj.invitedSent = true;
+    }
+
+    return responseObj
   }
 
   const _getUser = (userName, dictionary) =>
