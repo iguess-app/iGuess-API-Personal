@@ -13,7 +13,8 @@ module.exports = (app) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(header.language);
     let searchQuery = {};
     const projectionQuery = {
-      'friendList': 0
+      'friendList': 0,
+      'invitedFriendList': 0
     }
 
     if (ProfileUtils.isEmail(data.login) === true) {
