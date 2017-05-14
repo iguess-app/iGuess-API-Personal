@@ -5,7 +5,7 @@ const Joi = require('joi');
 module.exports = (app) => {
   const loginController = app.src.controllers.loginController;
   const server = app.configServer;
-  const maxTeamToSupportAllowed = app.coincidents.Config.maxTeamToSupportAllowed;
+  const maxTeamToAppreciateAllowed = app.coincidents.Config.maxTeamToAppreciateAllowed;
 
   server.route({
     path: '/login/singup',
@@ -22,8 +22,8 @@ module.exports = (app) => {
           email: Joi.string(),
           userName: Joi.string().required(),
           guessesLines: Joi.array(),
-          teamsSupported: Joi.array().items(
-            Joi.string(),
+          supportedTeam: Joi.string(),
+          appreciateTeams: Joi.array().items(
             Joi.string(),
             Joi.string()
           )
@@ -42,7 +42,8 @@ module.exports = (app) => {
               confirmedEmail: Joi.bool(),
               avatar: Joi.string(),
               guessesLines: Joi.array().empty(),
-              teamsSupported: Joi.array().empty().max(maxTeamToSupportAllowed),
+              supportedTeam: Joi.string(),
+              appreciateTeams: Joi.array().empty().max(maxTeamToAppreciateAllowed),
               userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),
@@ -84,7 +85,8 @@ module.exports = (app) => {
               confirmedEmail: Joi.bool(),
               avatar: Joi.string(),
               guessesLines: Joi.array().empty(),
-              teamsSupported: Joi.array().empty().max(maxTeamToSupportAllowed),
+              supportedTeam: Joi.string(),
+              appreciateTeams: Joi.array().empty().max(maxTeamToAppreciateAllowed),
               userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),

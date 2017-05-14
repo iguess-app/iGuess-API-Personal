@@ -5,7 +5,7 @@ const Joi = require('joi');
 module.exports = (app) => {
   const updateProfileController = app.src.controllers.updateProfileController;
   const server = app.configServer;
-  const maxTeamToSupportAllowed = app.coincidents.Config.maxTeamToSupportAllowed;
+  const maxTeamToAppreciateAllowed = app.coincidents.Config.maxTeamToAppreciateAllowed;
 
   server.route({
     path: '/profile/updateInfo',
@@ -22,7 +22,8 @@ module.exports = (app) => {
           description: Joi.string().allow(''),
           email: Joi.string().allow(''),
           guessesLines: Joi.array().empty(),
-          teamsSupported: Joi.array().empty().max(maxTeamToSupportAllowed),
+          supportedTeam: Joi.string(),
+          appreciateTeams: Joi.array().empty().max(maxTeamToAppreciateAllowed),
           notifications: Joi.array(),
           guessesLeagues: Joi.array(),
           friendList: Joi.array()
