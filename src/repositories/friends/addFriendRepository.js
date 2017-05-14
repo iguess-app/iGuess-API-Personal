@@ -19,6 +19,10 @@ module.exports = (app) => {
   }
 
   const _updateDate = (invitatorUser, invitedUser, dictionary) => {
+    const alreadyFriends = invitatorUser.friendList.find((invitatorFriendId) => invitatorFriendId === invitedUser.id)
+    if (alreadyFriends) {
+      throw Boom.notAcceptable(dictionary.alreadyFriends)
+    }
     const saveInvitatorPromise = _saveInvitatorUserProfile(invitatorUser, invitedUser)
     const updateInvitedPromise = _updateInvitedUserNotifications(invitatorUser, invitedUser, dictionary)
 
