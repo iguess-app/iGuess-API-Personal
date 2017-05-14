@@ -70,14 +70,18 @@ module.exports = (app) => {
       validate: {
         payload: Joi.object({
           userId: Joi.string().required(),
-          notificationId: Joi.string().required()
+          notificationId: Joi.string().required(),
+          accepted: Joi.bool().required()
         }),
         headers: Joi.object({
           language: Joi.string().default('en-us')
         }).unknown()
       },
       response: {
-        schema: Joi.array().meta({
+        schema: Joi.object({
+          notificationRemoved: Joi.bool().required(),
+          notificationDataSetted: Joi.bool().required()
+        }).meta({
           className: 'Response'
         })
       }

@@ -4,6 +4,7 @@ module.exports = (app) => {
   const notificationsServices = app.src.services.notifications;
   const listNotificationsService = notificationsServices.listNotificationsService;
   const putNotificationsSawService = notificationsServices.putNotificationsSawService;
+  const responseNotificationService = notificationsServices.responseNotificationService;
 
   const listNotifications = (request, reply) => {
     listNotificationsService.listNotifications(request.query, request.headers)
@@ -21,8 +22,17 @@ module.exports = (app) => {
       .catch((err) => reply(err));
   }
 
+  const responseNotification = (request, reply) => {
+    responseNotificationService.responseNotification(request.payload, request.headers)
+      .then((response) => {
+        reply(response)
+      })
+      .catch((err) => reply(err));
+  }
+
   return {
     listNotifications,
-    putNotificationsSaw
+    putNotificationsSaw,
+    responseNotification
   }
 }
