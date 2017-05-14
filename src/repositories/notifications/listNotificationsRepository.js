@@ -3,9 +3,9 @@
 module.exports = (app) => {
   const Notifications = app.coincidents.Schemas.notificationsSchema;
 
-  const getNotifications = (user) => {
+  const getNotifications = (userId) => {
     const searchQuery = {
-      user
+      user: userId
     }
 
     return Notifications.findOne(searchQuery)

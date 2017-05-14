@@ -12,9 +12,9 @@ module.exports = (app) => {
 
   const listNotifications = (request, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
-    const userName = request.userName;
+    const userId = request.userId;
 
-    return listNotificationsRepository.getNotifications(userName, headers)
+    return listNotificationsRepository.getNotifications(userId, headers)
       .then((listOfNotifications) => {
         if (!listOfNotifications) {
           return [];
