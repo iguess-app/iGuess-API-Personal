@@ -4,7 +4,6 @@ module.exports = (app) => {
   const Notifications = app.coincidents.Schemas.notificationsSchema;
 
   const getNotifications = (user) => {
-
     const searchQuery = {
       user
     }
