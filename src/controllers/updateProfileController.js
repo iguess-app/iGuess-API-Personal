@@ -5,6 +5,7 @@ module.exports = (app) => {
   const updateInfoService = profilesServices.updateInfoService;
   const updatePasswordService = profilesServices.updatePasswordService;
   const updateAvatarService = profilesServices.updateAvatarService;
+  const updateSupportedTeamService = profilesServices.updateSupportedTeamService;
 
   const updateInfo = (request, reply) => {
     updateInfoService.updateInfo(request.payload, request.headers)
@@ -33,10 +34,21 @@ module.exports = (app) => {
         reply(err)
       );
   }
+   
+  const updateSupportedTeam = (request, reply) => {
+    updateSupportedTeamService.updateSupportedTeam(request.payload, request.headers)
+      .then((updateResponse) => {
+        reply(updateResponse)
+      })
+      .catch((err) =>
+        reply(err)
+      );
+  }
 
   return {
     updateInfo,
     updatePassword,
-    updateAvatar
+    updateAvatar,
+    updateSupportedTeam
   }
 }
