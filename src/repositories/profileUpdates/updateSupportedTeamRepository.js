@@ -17,31 +17,26 @@ module.exports = (app) => {
         const searchQuery = {
           userName: payload.userName
         }
-        const updateQuery = {
-          '$set': {
-            supportedTeam: {
+
+        return Profile.findOne(searchQuery)
+          .then((userFound) => {
+            const responseObj = {
+              profileModified: false
+            }
+            if (userFound.supportedTeam.id === teamChosen.id) {
+              return responseObj;
+            }
+            userFound.supportedTeam = {
               id: teamChosen.id,
               fullName: teamChosen.fullName,
               shortName: teamChosen.shortName,
               logo: teamChosen.logo,
               league: teamChosen.league
             }
-          }
-        }
-        const optionsQuery = {
-          runValidators: true
-        }
+            userFound.save()
+            responseObj.profileModified = true
 
-        return Profile.update(searchQuery, updateQuery, optionsQuery)
-          .then((queryResult) => {
-            let modified = false;
-            if (queryResult.nModified) {
-              modified = true;
-            }
-
-            return {
-              profileModified: modified
-            };
+            return responseObj
           })
       })
 

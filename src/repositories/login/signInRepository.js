@@ -53,6 +53,7 @@ module.exports = (app) => {
     Reflect.deleteProperty(userFound, '__v');
     Reflect.set(userFound, 'id', userFound._id.toString())
     Reflect.deleteProperty(userFound, '_id');
+    Reflect.deleteProperty(userFound.supportedTeam, '_id');
 
     return userFound
   }
