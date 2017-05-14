@@ -5,7 +5,6 @@ const Joi = require('joi');
 module.exports = (app) => {
   const updateProfileController = app.src.controllers.updateProfileController;
   const server = app.configServer;
-  const maxTeamToAppreciateAllowed = app.coincidents.Config.maxTeamToAppreciateAllowed;
 
   server.route({
     path: '/profile/updateInfo',
@@ -20,13 +19,7 @@ module.exports = (app) => {
           newUserName: Joi.string(),
           name: Joi.string(),
           description: Joi.string().allow(''),
-          email: Joi.string().allow(''),
-          guessesLines: Joi.array().empty(),
-          supportedTeam: Joi.string(),
-          appreciateTeams: Joi.array().empty().max(maxTeamToAppreciateAllowed),
-          notifications: Joi.array(),
-          guessesLeagues: Joi.array(),
-          friendList: Joi.array()
+          email: Joi.string().allow('')
         }),
         headers: Joi.object({
           language: Joi.string().default('en-us')
@@ -82,6 +75,33 @@ module.exports = (app) => {
       validate: {
         payload: Joi.object({
           avatarFile: Joi.string().required(),
+          userName: Joi.string()
+        }),
+        headers: Joi.object({
+          language: Joi.string().default('en-us')
+        }).unknown()
+      },
+      response: {
+        schema: Joi.object({
+            profileModified: Joi.bool().required()
+          }).unknown()
+          .meta({
+            className: 'Response'
+          })
+      }
+    }
+  })
+
+  server.route({
+    path: '/profile/updateSupportedTeam',
+    method: 'PUT',
+    config: {
+      handler: (request, reply) => {
+        updateProfileController.updateSupportedTeam(request, reply)
+      },
+      validate: {
+        payload: Joi.object({
+          supportedTeamId: Joi.string().required(),
           userName: Joi.string()
         }),
         headers: Joi.object({
