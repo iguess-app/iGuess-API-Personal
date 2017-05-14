@@ -43,15 +43,17 @@ module.exports = (app) => {
         notificationsController.putNotificationsSaw(request, reply)
       },
       validate: {
-        query: Joi.object({
-          userName: Joi.string().required()
+        payload: Joi.object({
+          userId: Joi.string().required()
         }),
         headers: Joi.object({
           language: Joi.string().default('en-us')
         }).unknown()
       },
       response: {
-        schema: Joi.array().meta({
+        schema: Joi.object({
+          profileModified: Joi.bool().required()
+        }).meta({
           className: 'Response'
         })
       }
@@ -63,11 +65,11 @@ module.exports = (app) => {
     method: 'PUT',
     config: {
       handler: (request, reply) => {
-        notificationsController.putNotificationsSaw(request, reply)
+        notificationsController.responseNotification(request, reply)
       },
       validate: {
-        query: Joi.object({
-          userName: Joi.string().required(),
+        payload: Joi.object({
+          userId: Joi.string().required(),
           notificationId: Joi.string().required()
         }),
         headers: Joi.object({
