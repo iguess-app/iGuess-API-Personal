@@ -20,13 +20,7 @@ module.exports = (app) => {
           password: Joi.string().required(),
           description: Joi.string().allow(''),
           email: Joi.string(),
-          userName: Joi.string().required(),
-          guessesLines: Joi.array(),
-          supportedTeam: Joi.string(),
-          appreciateTeams: Joi.array().items(
-            Joi.string(),
-            Joi.string()
-          )
+          userName: Joi.string().required()
         }),
         headers: Joi.object({
           language: Joi.string().default('en-us')
@@ -42,8 +36,14 @@ module.exports = (app) => {
               confirmedEmail: Joi.bool(),
               avatar: Joi.string(),
               guessesLines: Joi.array().empty(),
-              supportedTeam: Joi.string(),
-              appreciateTeams: Joi.array().empty().max(maxTeamToAppreciateAllowed),
+              supportedTeam: Joi.object(),
+              appreciateTeams: Joi.array().items({
+                id: Joi.string(),
+                fullName: Joi.string(),
+                shortName: Joi.string(),
+                logo: Joi.string(),
+                league: Joi.string()
+              }).empty().max(maxTeamToAppreciateAllowed),
               userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),
@@ -85,8 +85,20 @@ module.exports = (app) => {
               confirmedEmail: Joi.bool(),
               avatar: Joi.string(),
               guessesLines: Joi.array().empty(),
-              supportedTeam: Joi.string(),
-              appreciateTeams: Joi.array().empty().max(maxTeamToAppreciateAllowed),
+              supportedTeam: Joi.object({
+                id: Joi.string(),
+                fullName: Joi.string(),
+                shortName: Joi.string(),
+                logo: Joi.string(),
+                league: Joi.string()
+              }),
+              appreciateTeams: Joi.array().items({
+                id: Joi.string(),
+                fullName: Joi.string(),
+                shortName: Joi.string(),
+                logo: Joi.string(),
+                league: Joi.string()
+              }).empty().max(maxTeamToAppreciateAllowed),
               userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),
