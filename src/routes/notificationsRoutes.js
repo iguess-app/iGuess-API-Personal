@@ -22,8 +22,8 @@ module.exports = (app) => {
         }).unknown()
       },
       response: {
-        schema: Joi.array(Joi.object({
-          //Add NotificationID, cuz on '/response' we will need
+        schema: Joi.array().items(Joi.object({
+          notificationId: Joi.string(),
           message: Joi.string().required(),
           guessLeague: Joi.string(),
           profile: Joi.string(),

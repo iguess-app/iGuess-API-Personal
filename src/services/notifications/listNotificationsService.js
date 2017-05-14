@@ -42,20 +42,23 @@ module.exports = (app) => {
     const getUserPromise = getUserByIdRepository.getUserById(notification.messageUserRef);
     const getGuessLeaguePromise = getGuessLeagueByIdRepository.getGuessLeagueById(notification.messageGuessLeagueRef);
 
-    return Promise.all([getUserPromise, getGuessLeaguePromise])
-      .spread((userData, guessLeagueData) => ({
+    return Promise.all([getUserPromise, getGuessLeaguePromise, notification.id])
+      .spread((userData, guessLeagueData, notificationId) => ({
           message: message.replace('{{userName}}', userData.userName).replace('{{guessLeagueName}}', guessLeagueData.guessLeagueName),
           guessLeague: guessLeagueData.guessLeagueName,
           profile: userData.userName,
-          avatar: userData.avatar
+          avatar: userData.avatar,
+          notificationId
         }))
   }
 
-  const _buildFriendshipReqText = (notification, message) => getUserByIdRepository.getUserById(notification.messageUserRef)
-    .then((userData) => ({
+  const _buildFriendshipReqText = (notification, message) => 
+   Promise.all([getUserByIdRepository.getUserById(notification.messageUserRef), notification.id])
+    .spread((userData, notificationId) => ({
         message: message.replace('{{userName}}', userData.userName).replace('{{leagueName}}'),
         profile: userData.userName,
-        avatar: userData.avatar
+        avatar: userData.avatar,
+        notificationId
       }))
 
   return {
