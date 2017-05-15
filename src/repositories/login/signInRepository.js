@@ -9,8 +9,8 @@ module.exports = (app) => {
   const TokenManager = app.coincidents.Managers.tokenManager;
   const Profile = app.coincidents.Schemas.profileSchema;
 
-  const singIn = (data, header) => {
-    const dictionary = app.coincidents.Translate.gate.selectLanguage(header.language);
+  const singIn = (data, headers) => {
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
     let searchQuery = {};
     const projectionQuery = {
       'friendList': 0,
@@ -53,7 +53,14 @@ module.exports = (app) => {
     Reflect.deleteProperty(userFound, '__v');
     Reflect.set(userFound, 'id', userFound._id.toString())
     Reflect.deleteProperty(userFound, '_id');
-    Reflect.deleteProperty(userFound.supportedTeam, '_id');
+    if (userFound.supportedTeam) {
+      Reflect.deleteProperty(userFound.supportedTeam, '_id');
+    }
+    userFound.appreciatedTeams.map((appreciatedTeam) => {
+      Reflect.deleteProperty(appreciatedTeam, '_id');
+
+      return appreciatedTeam;
+    })
 
     return userFound
   }
