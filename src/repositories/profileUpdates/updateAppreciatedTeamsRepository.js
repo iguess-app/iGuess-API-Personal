@@ -1,0 +1,78 @@
+'use Strict';
+
+const Boom = require('boom')
+const Promise = require('bluebird')
+
+const POSITION_ZERO = 0
+const POSITION_ONE = 1
+const NOT_SENT_BY_USER = []
+
+module.exports = (app) => {
+  const Profile = app.coincidents.Schemas.profileSchema;
+  const Team = app.coincidents.Schemas.teamSchema;
+
+  const updateAppreciatedTeams = (payload, headers) => {
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
+
+    const firstAppreciatedTeamPromise = Team.findById(payload.firstAppreciatedTeam)
+    let secondAppreciatedTeamPromise = NOT_SENT_BY_USER;
+    if (payload.secondAppreciatedTeam) {
+      secondAppreciatedTeamPromise = Team.findById(payload.secondAppreciatedTeam)
+    }
+
+    return Promise.all([firstAppreciatedTeamPromise, secondAppreciatedTeamPromise])
+      .spread((firstAppreciatedTeam, secondAppreciatedTeam) => {
+        if (!firstAppreciatedTeam || !secondAppreciatedTeam) {
+          throw Boom.notFound(dictionary.teamNotFound)
+        }
+        const searchQuery = {
+          userName: payload.userName
+        }
+
+        return Profile.findOne(searchQuery)
+          .then((userFound) => {
+            const responseObj = {
+              profileModified: false
+            }
+
+            if (_theSupportedTeamIsEqualToAppreciatedTeam(userFound.supportedTeam, firstAppreciatedTeam.id, secondAppreciatedTeam.id)) {
+              throw Boom.notAcceptable(dictionary.sameTeams)
+            }
+
+            if (_isTheSameAppreciatedTeamsAtDataBase(userFound.appreciatedTeams, firstAppreciatedTeam.id, secondAppreciatedTeam.id)) {
+              return responseObj;
+            }
+
+            if (secondAppreciatedTeam === NOT_SENT_BY_USER) {
+              userFound.appreciatedTeams.pop()
+            } else if (secondAppreciatedTeam) {
+              userFound.appreciatedTeams[POSITION_ONE] = _getTeamObj(secondAppreciatedTeam)
+            }
+            userFound.appreciatedTeams[POSITION_ZERO] = _getTeamObj(firstAppreciatedTeam)
+            userFound.save()
+            responseObj.profileModified = true
+
+            return responseObj
+          })
+      })
+  }
+
+  const _isTheSameAppreciatedTeamsAtDataBase = (appreciatedTeams, firstAppreciatedTeamId, secondAppreciatedTeamId) =>
+    appreciatedTeams[POSITION_ZERO].teamId === firstAppreciatedTeamId &&
+    appreciatedTeams[POSITION_ONE].teamId === secondAppreciatedTeamId
+
+  const _theSupportedTeamIsEqualToAppreciatedTeam = (supportedTeam, firstAppreciatedTeamId, secondAppreciatedTeamId) =>
+    supportedTeam && (supportedTeam.teamId === firstAppreciatedTeamId || supportedTeam.teamId === secondAppreciatedTeamId)
+
+  const _getTeamObj = (team) => ({
+    teamId: team.id,
+    fullName: team.fullName,
+    shortName: team.shortName,
+    logo: team.logo,
+    league: team.league
+  })
+
+  return {
+    updateAppreciatedTeams
+  }
+}

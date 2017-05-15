@@ -5,6 +5,7 @@ const Joi = require('joi');
 module.exports = (app) => {
   const updateProfileController = app.src.controllers.updateProfileController;
   const server = app.configServer;
+  const maxTeamToAppreciateAllowed = app.coincidents.Config.maxTeamToAppreciateAllowed;
 
   server.route({
     path: '/profile/updateInfo',
@@ -102,6 +103,33 @@ module.exports = (app) => {
       validate: {
         payload: Joi.object({
           supportedTeamId: Joi.string().required(),
+          userName: Joi.string()
+        }),
+        headers: Joi.object({
+          language: Joi.string().default('en-us')
+        }).unknown()
+      },
+      response: {
+        schema: Joi.object({
+            profileModified: Joi.bool().required()
+          }).unknown()
+          .meta({
+            className: 'Response'
+          })
+      }
+    }
+  })
+
+  server.route({
+    path: '/profile/updateAppreciatedTeams',
+    method: 'PUT',
+    config: {
+      handler: (request, reply) => {
+        updateProfileController.updateAppreciatedTeams(request, reply)
+      },
+      validate: {
+        payload: Joi.object({
+          appreciatedTeamsId: Joi.array().required().max(maxTeamToAppreciateAllowed),
           userName: Joi.string()
         }),
         headers: Joi.object({
