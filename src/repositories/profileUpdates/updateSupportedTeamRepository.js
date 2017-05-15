@@ -23,11 +23,11 @@ module.exports = (app) => {
             const responseObj = {
               profileModified: false
             }
-            if (userFound.supportedTeam.id === teamChosen.id) {
+            if (userFound.supportedTeam && userFound.supportedTeam.teamId === teamChosen.id) {
               return responseObj;
             }
             userFound.supportedTeam = {
-              id: teamChosen.id,
+              teamId: teamChosen.id,
               fullName: teamChosen.fullName,
               shortName: teamChosen.shortName,
               logo: teamChosen.logo,
