@@ -38,7 +38,7 @@ module.exports = (app) => {
               guessesLines: Joi.array().empty(),
               supportedTeam: Joi.object(),
               appreciatedTeams: Joi.array().items({
-                id: Joi.string(),
+                teamId: Joi.string(),
                 fullName: Joi.string(),
                 shortName: Joi.string(),
                 logo: Joi.string(),
@@ -86,14 +86,14 @@ module.exports = (app) => {
               avatar: Joi.string(),
               guessesLines: Joi.array().empty(),
               supportedTeam: Joi.object({
-                id: Joi.string(),
+                teamId: Joi.string(),
                 fullName: Joi.string(),
                 shortName: Joi.string(),
                 logo: Joi.string(),
                 league: Joi.string()
               }),
               appreciatedTeams: Joi.array().items({
-                id: Joi.string(),
+                teamId: Joi.string(),
                 fullName: Joi.string(),
                 shortName: Joi.string(),
                 logo: Joi.string(),
