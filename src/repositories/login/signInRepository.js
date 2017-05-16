@@ -53,14 +53,14 @@ module.exports = (app) => {
     Reflect.deleteProperty(userFound, '__v');
     Reflect.set(userFound, 'id', userFound._id.toString())
     Reflect.deleteProperty(userFound, '_id');
-    if (userFound.supportedTeam) {
-      Reflect.deleteProperty(userFound.supportedTeam, '_id');
-    }
-    userFound.appreciatedTeams.map((appreciatedTeam) => {
-      Reflect.deleteProperty(appreciatedTeam, '_id');
+    if (userFound.footballSupportedTeams) {
+      Reflect.deleteProperty(userFound.footballSupportedTeams.supportedTeam, '_id');
+      userFound.footballSupportedTeams.appreciatedTeams.map((appreciatedTeam) => {
+        Reflect.deleteProperty(appreciatedTeam, '_id');
 
-      return appreciatedTeam;
-    })
+        return appreciatedTeam;
+      })
+    }
 
     return userFound
   }

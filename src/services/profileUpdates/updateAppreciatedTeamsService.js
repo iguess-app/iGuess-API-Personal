@@ -28,6 +28,8 @@ module.exports = (app) => {
       if (err.kind === 'ObjectId') {
        throw Boom.conflict('The ID sent is not the expected format');
       }
+
+      return err;
     })
   }
 

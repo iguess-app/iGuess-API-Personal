@@ -36,14 +36,22 @@ module.exports = (app) => {
               confirmedEmail: Joi.bool(),
               avatar: Joi.string(),
               guessesLines: Joi.array().empty(),
-              supportedTeam: Joi.object(),
-              appreciatedTeams: Joi.array().items({
-                teamId: Joi.string(),
-                fullName: Joi.string(),
-                shortName: Joi.string(),
-                logo: Joi.string(),
-                league: Joi.string()
-              }).empty().max(maxTeamToAppreciateAllowed),
+              footballSupportedTeams: Joi.object({
+                supportedTeam: Joi.object({
+                  teamId: Joi.string(),
+                  fullName: Joi.string(),
+                  shortName: Joi.string(),
+                  logo: Joi.string(),
+                  league: Joi.string()
+                }),
+                appreciatedTeams: Joi.array().items({
+                  teamId: Joi.string(),
+                  fullName: Joi.string(),
+                  shortName: Joi.string(),
+                  logo: Joi.string(),
+                  league: Joi.string()
+                }).empty().max(maxTeamToAppreciateAllowed)
+              }),
               userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),
@@ -85,20 +93,22 @@ module.exports = (app) => {
               confirmedEmail: Joi.bool(),
               avatar: Joi.string(),
               guessesLines: Joi.array().empty(),
-              supportedTeam: Joi.object({
-                teamId: Joi.string(),
-                fullName: Joi.string(),
-                shortName: Joi.string(),
-                logo: Joi.string(),
-                league: Joi.string()
+              footballSupportedTeams: Joi.object({
+                supportedTeam: Joi.object({
+                  teamId: Joi.string(),
+                  fullName: Joi.string(),
+                  shortName: Joi.string(),
+                  logo: Joi.string(),
+                  league: Joi.string()
+                }),
+                appreciatedTeams: Joi.array().items({
+                  teamId: Joi.string(),
+                  fullName: Joi.string(),
+                  shortName: Joi.string(),
+                  logo: Joi.string(),
+                  league: Joi.string()
+                }).empty().max(maxTeamToAppreciateAllowed)
               }),
-              appreciatedTeams: Joi.array().items({
-                teamId: Joi.string(),
-                fullName: Joi.string(),
-                shortName: Joi.string(),
-                logo: Joi.string(),
-                league: Joi.string()
-              }).empty().max(maxTeamToAppreciateAllowed),
               userName: Joi.string().required(),
               notifications: Joi.array(),
               guessesLeagues: Joi.array(),

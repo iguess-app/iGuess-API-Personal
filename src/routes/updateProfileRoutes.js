@@ -94,7 +94,7 @@ module.exports = (app) => {
   })
 
   server.route({
-    path: '/profile/updateSupportedTeam',
+    path: '/profile/updateFootballSupportedTeams/supportedTeam',
     method: 'PUT',
     config: {
       handler: (request, reply) => {
@@ -121,7 +121,7 @@ module.exports = (app) => {
   })
 
   server.route({
-    path: '/profile/updateAppreciatedTeams',
+    path: '/profile/updateFootballSupportedTeams/appreciatedTeams',
     method: 'PUT',
     config: {
       handler: (request, reply) => {

@@ -20,13 +20,18 @@ module.exports = (app) => {
 
         return Profile.findOne(searchQuery)
           .then((userFound) => {
+            if (!userFound) {
+              const errMsg = dictionary.userNotFound.replace('{{userName}}', payload.userName)
+              throw Boom.notFound(errMsg)
+            }
             const responseObj = {
               profileModified: false
             }
-            if (userFound.supportedTeam && userFound.supportedTeam.teamId === teamChosen.id) {
+            const footballSupportedTeams = userFound.footballSupportedTeams;
+            if (footballSupportedTeams.supportedTeam && footballSupportedTeams.supportedTeam.teamId === teamChosen.id) {
               return responseObj;
             }
-            userFound.supportedTeam = {
+            userFound.footballSupportedTeams.supportedTeam = {
               teamId: teamChosen.id,
               fullName: teamChosen.fullName,
               shortName: teamChosen.shortName,

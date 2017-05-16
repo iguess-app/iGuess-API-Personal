@@ -31,24 +31,28 @@ module.exports = (app) => {
 
         return Profile.findOne(searchQuery)
           .then((userFound) => {
+            if (!userFound) {
+              const errMsg = dictionary.userNotFound.replace('{{userName}}', payload.userName)
+              throw Boom.notFound(errMsg)
+            }
             const responseObj = {
               profileModified: false
             }
-
-            if (_theSupportedTeamIsEqualToAppreciatedTeam(userFound.supportedTeam, firstAppreciatedTeam.id, secondAppreciatedTeam.id)) {
+            const footballSupportedTeams = userFound.footballSupportedTeams;
+            if (_theSupportedTeamIsEqualToAppreciatedTeam(footballSupportedTeams.supportedTeam, firstAppreciatedTeam.id, secondAppreciatedTeam.id)) {
               throw Boom.notAcceptable(dictionary.sameTeams)
             }
 
-            if (_isTheSameAppreciatedTeamsAtDataBase(userFound.appreciatedTeams, firstAppreciatedTeam.id, secondAppreciatedTeam.id)) {
+            if (_isTheSameAppreciatedTeamsAtDataBase(footballSupportedTeams.appreciatedTeams, firstAppreciatedTeam.id, secondAppreciatedTeam.id)) {
               return responseObj;
             }
 
             if (secondAppreciatedTeam === NOT_SENT_BY_USER) {
-              userFound.appreciatedTeams.pop()
+              userFound.footballSupportedTeams.appreciatedTeams.pop()
             } else if (secondAppreciatedTeam) {
-              userFound.appreciatedTeams[POSITION_ONE] = _getTeamObj(secondAppreciatedTeam)
+              userFound.footballSupportedTeams.appreciatedTeams[POSITION_ONE] = _getTeamObj(secondAppreciatedTeam)
             }
-            userFound.appreciatedTeams[POSITION_ZERO] = _getTeamObj(firstAppreciatedTeam)
+            userFound.footballSupportedTeams.appreciatedTeams[POSITION_ZERO] = _getTeamObj(firstAppreciatedTeam)
             userFound.save()
             responseObj.profileModified = true
 
@@ -58,8 +62,8 @@ module.exports = (app) => {
   }
 
   const _isTheSameAppreciatedTeamsAtDataBase = (appreciatedTeams, firstAppreciatedTeamId, secondAppreciatedTeamId) =>
-    appreciatedTeams[POSITION_ZERO].teamId === firstAppreciatedTeamId &&
-    appreciatedTeams[POSITION_ONE].teamId === secondAppreciatedTeamId
+    appreciatedTeams[POSITION_ZERO] && appreciatedTeams[POSITION_ZERO].teamId === firstAppreciatedTeamId &&
+    appreciatedTeams[POSITION_ONE] && appreciatedTeams[POSITION_ONE].teamId === secondAppreciatedTeamId
 
   const _theSupportedTeamIsEqualToAppreciatedTeam = (supportedTeam, firstAppreciatedTeamId, secondAppreciatedTeamId) =>
     supportedTeam && (supportedTeam.teamId === firstAppreciatedTeamId || supportedTeam.teamId === secondAppreciatedTeamId)
