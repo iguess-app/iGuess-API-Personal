@@ -54,7 +54,10 @@ module.exports = (app) => {
     Reflect.set(userFound, 'id', userFound._id.toString())
     Reflect.deleteProperty(userFound, '_id');
     if (userFound.footballSupportedTeams) {
-      Reflect.deleteProperty(userFound.footballSupportedTeams.supportedTeam, '_id');
+      const supportedTeam = userFound.footballSupportedTeams.supportedTeam;
+      if (typeof supportedTeam === 'object') {
+        Reflect.deleteProperty(supportedTeam, '_id');
+      }
       userFound.footballSupportedTeams.appreciatedTeams.map((appreciatedTeam) => {
         Reflect.deleteProperty(appreciatedTeam, '_id');
 
