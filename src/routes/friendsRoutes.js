@@ -33,4 +33,63 @@ module.exports = (app) => {
     }
   })
 
+  server.route({
+    path: '/friends/list',
+    method: 'GET',
+    config: {
+      handler: (request, reply) => {
+        friendsController.list(request, reply)
+      },
+      validate: {
+        query: Joi.object({
+          userName: Joi.string(),
+          page: Joi.number()
+        }),
+        headers: Joi.object({
+          language: Joi.string().default('en-us')
+        }).unknown()
+      },
+      response: {
+        schema: Joi.array().items(Joi.object({
+            userId: Joi.string().required(),
+            avatar: Joi.string().empty(''),
+            userName: Joi.string().required()
+          })).required()
+          .meta({
+            className: 'Response'
+          })
+      }
+    }
+  })
+
+
+  server.route({
+    path: '/friends/search',
+    method: 'GET',
+    config: {
+      handler: (request, reply) => {
+        friendsController.search(request, reply)
+      },
+      validate: {
+        query: Joi.object({
+          userName: Joi.string(),
+          searchField: Joi.string()
+        }),
+        headers: Joi.object({
+          language: Joi.string().default('en-us')
+        }).unknown()
+      },
+      response: {
+        schema: Joi.array().items(Joi.object({
+            userId: Joi.string().required(),
+            avatar: Joi.string().empty(''),
+            userName: Joi.string().required()
+          })).required()
+          .meta({
+            className: 'Response'
+          })
+      }
+    }
+  })
+
 };
