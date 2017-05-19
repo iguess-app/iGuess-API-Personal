@@ -22,17 +22,18 @@ module.exports = (app) => {
           notificationDataSetted: false
         }
         if (!userNotifications) {
-          return responseObj 
+          return responseObj
         }
         const notification = _getNotification(userNotifications.notifications, userResponse.notificationId)
 
         return Promise.all([_removeNotification(userResponse, searchQuery), _updateUsersInfos(notification, userResponse)])
           .spread((notificationRemoved, notificationDataSetted) => {
-              responseObj.notificationRemoved = notificationRemoved
-              responseObj.notificationDataSetted = notificationDataSetted
-              
-              return responseObj;
-            })
+            _removeFromInvitedFriendList(notification.messageUserRef, userResponse.userId)
+            responseObj.notificationRemoved = notificationRemoved
+            responseObj.notificationDataSetted = notificationDataSetted
+
+            return responseObj;
+          })
       })
   }
 
@@ -72,12 +73,22 @@ module.exports = (app) => {
     }
 
     return Notifications.update(searchQuery, updateQuery, optionsQuery)
-      .then((removed) => { 
+      .then((removed) => {
         if (removed.nModified) {
           return true
         }
 
         return false
+      })
+  }
+
+  const _removeFromInvitedFriendList = (invitatorUserId, invitedUserId) => {
+    Profile.findById(invitatorUserId)
+      .then((invitatorUser) => {
+        const SPLICE_NUMBER = 1;
+        const position = invitatorUser.invitedFriendList.indexOf(invitedUserId)
+        invitatorUser.invitedFriendList.splice(position, SPLICE_NUMBER)
+        invitatorUser.save();
       })
   }
 

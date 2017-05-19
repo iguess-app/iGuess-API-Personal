@@ -48,7 +48,7 @@ module.exports = (app) => {
           userId: Joi.string().required(),
           footballSupportedTeams: Joi.object({
             appreciatedTeams: Joi.array(),
-            supportedTeam: Joi.array()
+            supportedTeam: Joi.object()
           }).required(),
           numberOfFriends: Joi.number().required()
 
