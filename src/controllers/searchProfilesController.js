@@ -2,7 +2,9 @@
 
 module.exports = (app) => {
 
-  const searchProfilesService = app.src.services.searchProfilesService;
+  const searchProfilesServices = app.src.services.searchProfiles;
+  const searchProfilesService = searchProfilesServices.searchProfilesService;
+  const getProfileService = searchProfilesServices.getProfileService;
 
   const search = (request, reply) => {
     searchProfilesService.search(request.query, request.headers)
@@ -12,7 +14,16 @@ module.exports = (app) => {
       .catch((err) => reply(err));
   }
 
+  const getProfile = (request, reply) => {
+    getProfileService.getProfile(request.query, request.headers)
+      .then((singUpResponse) => {
+        reply(singUpResponse)
+      })
+      .catch((err) => reply(err));
+  }
+
   return {
-    search
+    search,
+    getProfile
   }
 }
