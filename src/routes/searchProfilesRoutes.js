@@ -45,6 +45,9 @@ module.exports = (app) => {
           email: Joi.string().required(),
           guessesLeagues: Joi.array().required(),
           guessesLines: Joi.array().required(),
+          description: Joi.string(),
+          name: Joi.string(),
+          avatar: Joi.string(),
           userId: Joi.string().required(),
           footballSupportedTeams: Joi.object({
             appreciatedTeams: Joi.array(),
