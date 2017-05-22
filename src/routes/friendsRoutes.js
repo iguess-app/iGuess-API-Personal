@@ -62,7 +62,6 @@ module.exports = (app) => {
     }
   })
 
-
   server.route({
     path: '/friends/search',
     method: 'GET',
@@ -85,6 +84,33 @@ module.exports = (app) => {
             avatar: Joi.string().empty(''),
             userName: Joi.string().required()
           })).required()
+          .meta({
+            className: 'Response'
+          })
+      }
+    }
+  })
+
+  server.route({
+    path: '/friends/undo',
+    method: 'PUT',
+    config: {
+      handler: (request, reply) => {
+        friendsController.undoFriendship(request, reply)
+      },
+      validate: {
+        payload: Joi.object({
+          userName: Joi.string(),
+          friendUserName: Joi.string()
+        }),
+        headers: Joi.object({
+          language: Joi.string().default('en-us')
+        }).unknown()
+      },
+      response: {
+        schema: Joi.object({
+            friendshipUndone: Joi.bool().required()
+          }).required()
           .meta({
             className: 'Response'
           })

@@ -4,6 +4,7 @@ module.exports = (app) => {
   const friendsServices = app.src.services.friends;
   const addFriendService = friendsServices.addFriendService;
   const searchFriendService = friendsServices.searchFriendService;
+  const undoFriendShipService = friendsServices.undoFriendShipService;
 
   const addFriend = (request, reply) => {
     addFriendService.addFriend(request.payload, request.headers)
@@ -28,10 +29,19 @@ module.exports = (app) => {
       })
       .catch((err) => reply(err));
   }
+  
+  const undoFriendship = (request, reply) => {
+    undoFriendShipService.undoFriendship(request.payload, request.headers)
+      .then((response) => {
+        reply(response)
+      })
+      .catch((err) => reply(err));
+  }
 
   return {
     addFriend,
     list,
-    search
+    search,
+    undoFriendship
   }
 }
