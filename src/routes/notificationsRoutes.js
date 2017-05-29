@@ -87,4 +87,30 @@ module.exports = (app) => {
       }
     }
   })
+
+  
+  server.route({
+    path: '/notifications/setGuessLeagueNotifications',
+    method: 'PUT',
+    config: {
+      handler: (request, reply) => {
+        notificationsController.setGuessLeagueNotifications(request, reply)
+      },
+      validate: {
+        payload: Joi.object({
+          inviteads: Joi.array().required()
+        }),
+        headers: Joi.object({
+          language: Joi.string().default('en-us')
+        }).unknown()
+      },
+      response: {
+        schema: Joi.object({
+          notificationsSent: Joi.bool().required()
+        }).meta({
+          className: 'Response'
+        })
+      }
+    }
+  })  
 }

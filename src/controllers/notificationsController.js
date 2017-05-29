@@ -5,6 +5,7 @@ module.exports = (app) => {
   const listNotificationsService = notificationsServices.listNotificationsService;
   const putNotificationsSawService = notificationsServices.putNotificationsSawService;
   const responseNotificationService = notificationsServices.responseNotificationService;
+  const setGuessLeagueNotificationsService = notificationsServices.setGuessLeagueNotificationsService;
 
   const listNotifications = (request, reply) => {
     listNotificationsService.listNotifications(request.query, request.headers)
@@ -30,9 +31,18 @@ module.exports = (app) => {
       .catch((err) => reply(err));
   }
 
+  const setGuessLeagueNotifications = (request, reply) => {
+    setGuessLeagueNotificationsService.setGuessLeagueNotifications(request.payload, request.headers)
+      .then((response) => {
+        reply(response)
+      })
+      .catch((err) => reply(err));
+  }
+
   return {
     listNotifications,
     putNotificationsSaw,
-    responseNotification
+    responseNotification,
+    setGuessLeagueNotifications
   }
 }
