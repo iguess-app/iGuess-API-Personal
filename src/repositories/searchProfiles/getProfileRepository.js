@@ -31,7 +31,6 @@ module.exports = (app) => {
     Reflect.deleteProperty(userFound, 'friendList');
     Reflect.deleteProperty(userFound, 'invitedFriendList');
     Reflect.deleteProperty(userFound, 'password');
-    Reflect.deleteProperty(userFound, '__v');
     Reflect.deleteProperty(userFound, 'confirmedEmail');
 
     return userFound

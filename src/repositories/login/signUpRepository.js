@@ -36,7 +36,6 @@ module.exports = (app) => {
     Reflect.deleteProperty(user, 'password');
     Reflect.deleteProperty(user, 'friendList');
     Reflect.deleteProperty(user, 'invitedFriendList');
-    Reflect.deleteProperty(user, '__v');
     Reflect.set(user, 'id', user._id.toString())
     Reflect.deleteProperty(user, '_id');
 

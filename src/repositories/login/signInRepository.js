@@ -50,21 +50,9 @@ module.exports = (app) => {
 
   const _structureUserObj = (userFound) => {
     Reflect.deleteProperty(userFound, 'password');
-    Reflect.deleteProperty(userFound, '__v');
     Reflect.set(userFound, 'id', userFound._id.toString())
     Reflect.deleteProperty(userFound, '_id');
-    if (userFound.footballSupportedTeams) {
-      const supportedTeam = userFound.footballSupportedTeams.supportedTeam;
-      if (typeof supportedTeam === 'object') {
-        Reflect.deleteProperty(supportedTeam, '_id');
-      }
-      userFound.footballSupportedTeams.appreciatedTeams.map((appreciatedTeam) => {
-        Reflect.deleteProperty(appreciatedTeam, '_id');
-
-        return appreciatedTeam;
-      })
-    }
-
+    
     return userFound
   }
 

@@ -29,7 +29,8 @@ module.exports = (app) => {
       'footballSupportedTeams': 0,
       'confirmedEmail': 0,
       'invitedFriendList': 0,
-      '__v': 0,
+      'updatedAt': 0,
+      'created_at': 0,
       'password': 0,
       'email': 0,
       '_id': 0

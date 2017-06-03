@@ -49,6 +49,8 @@ module.exports = (app) => {
           name: Joi.string(),
           avatar: Joi.string(),
           userId: Joi.string().required(),
+          updatedAt: Joi.date(),
+          createdAt: Joi.date(),
           footballSupportedTeams: Joi.object({
             appreciatedTeams: Joi.array(),
             supportedTeam: Joi.object()

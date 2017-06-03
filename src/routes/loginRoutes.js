@@ -36,6 +36,8 @@ module.exports = (app) => {
               confirmedEmail: Joi.bool(),
               avatar: Joi.string(),
               guessesLines: Joi.array().empty(),
+              updatedAt: Joi.date(),
+              createdAt: Joi.date(),
               footballSupportedTeams: Joi.object({
                 supportedTeam: Joi.object({
                   teamId: Joi.string(),
@@ -92,6 +94,8 @@ module.exports = (app) => {
               email: Joi.string().required().allow(''),
               confirmedEmail: Joi.bool(),
               avatar: Joi.string(),
+              updatedAt: Joi.date(),
+              createdAt: Joi.date(),
               guessesLines: Joi.array().empty(),
               footballSupportedTeams: Joi.object({
                 supportedTeam: Joi.object({
