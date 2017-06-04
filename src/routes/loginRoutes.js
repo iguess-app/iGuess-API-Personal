@@ -5,7 +5,7 @@ const Joi = require('joi');
 module.exports = (app) => {
   const loginController = app.src.controllers.loginController;
   const server = app.configServer;
-  const maxTeamToAppreciateAllowed = app.coincidents.Config.maxTeamToAppreciateAllowed;
+  const maxTeamToAppreciateAllowed = app.coincidents.Config.profile.maxTeamToAppreciateAllowed;
 
   server.route({
     path: '/login/singup',
