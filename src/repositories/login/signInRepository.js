@@ -1,6 +1,7 @@
 'use Strict';
 
 const Boom = require('boom');
+const moment = require('moment');
 
 module.exports = (app) => {
   const PasswordUtils = app.coincidents.Utils.passwordUtils;
@@ -36,6 +37,7 @@ module.exports = (app) => {
     PasswordUtils.checkPassword(data.password, userFound.password)
     .then((isMatched) => {
       if (isMatched) {
+        updatelastSignIn(userFound)
         const token = TokenManager.generate();
         const structuredUser = _structureUserObj(userFound);
 
@@ -49,11 +51,12 @@ module.exports = (app) => {
     })
 
   const _structureUserObj = (userFound) => {
-    Reflect.deleteProperty(userFound, 'password');
-    Reflect.set(userFound, 'id', userFound._id.toString())
-    Reflect.deleteProperty(userFound, '_id');
+    const userObj = QueryUtils.makeObject(userFound)
+    Reflect.deleteProperty(userObj, 'password');
+    Reflect.set(userObj, 'id', userObj._id.toString())
+    Reflect.deleteProperty(userObj, '_id');
     
-    return userFound
+    return userObj
   }
 
   const _findUser = (query, projectionQuery, dictionary) =>
@@ -61,12 +64,19 @@ module.exports = (app) => {
     .findOne(query, projectionQuery)
     .then((userFound) => {
       if (userFound) {
-        return QueryUtils.makeObject(userFound);
+        return userFound;
       }
 
       throw Boom.unauthorized(dictionary.invalidLogin);
     })
     .catch((err) => err)
+
+  const updatelastSignIn = (user) => {
+    user.lastSignInAt = getCurrentTime()
+    user.save()
+  }
+
+  const getCurrentTime = () => moment.parseZone().utc().format()
 
   return {
     singIn
