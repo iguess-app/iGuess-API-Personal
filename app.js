@@ -2,7 +2,7 @@
 
 const consign = require('consign');
 const app = {};
-app.coincidents = require('./IGuess-API-Coincidents/app');
+app.coincidents = require('IGuess-API-Coincidents');
 
 consign()
   .include('configServer.js')
