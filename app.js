@@ -17,5 +17,5 @@ app.configServer.start((err) => {
     throw err;
   }
 
-  console.log(`Server running at ${app.configServer.info.uri}`);
+  app.coincidents.Managers.logManager.info(`Server running at ${app.configServer.info.uri}`)
 })
