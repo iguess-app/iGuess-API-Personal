@@ -1,7 +1,7 @@
 'use Strict';
 
 module.exports = (app) => {
-  const Profile = app.coincidents.Schemas.profileSchema;
+  const Profile = app.src.models.profileModel;
   const QueryUtils = app.coincidents.Utils.queryUtils;
 
   const search = (request) => {

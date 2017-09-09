@@ -3,9 +3,9 @@
 const Promise = require('bluebird');
 
 module.exports = (app) => {
-  const Notifications = app.coincidents.Schemas.notificationsSchema;
-  const Profile = app.coincidents.Schemas.profileSchema;
-  const GuessesLeagues = app.coincidents.Schemas.guessesLeaguesSchema;
+  const Notifications = app.src.models.notificationsModel;
+  const Profile = app.src.models.profileModel;
+  const GuessesLeagues = app.src.models.guessesLeaguesSchema;
   const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest;
   const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest;
 

@@ -8,7 +8,7 @@ module.exports = (app) => {
   const ProfileUtils = app.coincidents.Utils.profileUtils;
   const QueryUtils = app.coincidents.Utils.queryUtils;
   const TokenManager = app.coincidents.Managers.tokenManager;
-  const Profile = app.coincidents.Schemas.profileSchema;
+  const Profile = app.src.models.profileModel;
 
   const singIn = (data, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
@@ -82,3 +82,5 @@ module.exports = (app) => {
     singIn
   }
 }
+
+/*eslint max-statements: 0*/

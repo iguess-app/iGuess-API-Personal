@@ -2,7 +2,7 @@
 
 //TODO: CHECK IF THIS FILE SHOULD BE ON GUESS MICROSERVICE
 module.exports = (app) => {
-  const GuessesLeagues = app.coincidents.Schemas.guessesLeaguesSchema;
+  const GuessesLeagues = app.src.models.guessesLeaguesSchema;
   const QueryUtils = app.coincidents.Utils.queryUtils;
 
   const getGuessLeagueById = (guessLeagueId) => {

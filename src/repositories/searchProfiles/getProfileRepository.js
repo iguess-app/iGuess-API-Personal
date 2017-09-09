@@ -3,7 +3,7 @@
 const Boom = require('boom')
 
 module.exports = (app) => {
-  const Profile = app.coincidents.Schemas.profileSchema;
+  const Profile = app.src.models.profileModel;
   const QueryUtils = app.coincidents.Utils.queryUtils;
 
   const getProfile = (payload, dictionary) => {

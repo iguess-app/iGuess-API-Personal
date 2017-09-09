@@ -3,8 +3,8 @@
 const Boom = require('boom')
 
 module.exports = (app) => {
-  const Profile = app.coincidents.Schemas.profileSchema;
-  const Team = app.coincidents.Schemas.teamSchema;
+  const Profile = app.src.models.profileModel;
+  const Team = app.src.models.teamSchema;
 
   const updateSupportedTeam = (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);

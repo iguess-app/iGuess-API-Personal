@@ -1,8 +1,8 @@
 'use Strict';
 
 module.exports = (app) => {
-  const Profile = app.coincidents.Schemas.profileSchema;
-  const Notifications = app.coincidents.Schemas.notificationsSchema;
+  const Profile = app.src.models.profileModel;
+  const Notifications = app.src.models.notificationsModel;
   const TokenManager = app.coincidents.Managers.tokenManager;
   const QueryUtils = app.coincidents.Utils.queryUtils;
 

@@ -4,8 +4,8 @@ const Promise = require('bluebird')
 const Boom = require('boom')
 
 module.exports = (app) => {
-  const Profile = app.coincidents.Schemas.profileSchema;
-  const Notifications = app.coincidents.Schemas.notificationsSchema;
+  const Profile = app.src.models.profileModel;
+  const Notifications = app.src.models.notificationsModel;
   const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest;
 
   const addFriend = (request, headers) => {

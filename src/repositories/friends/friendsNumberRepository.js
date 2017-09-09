@@ -1,7 +1,7 @@
 'use Strict';
 
 module.exports = (app) => {
-  const Profile = app.coincidents.Schemas.profileSchema;
+  const Profile = app.src.models.profileModel;
 
   const getNumberOfFriends = (userName) => {
 

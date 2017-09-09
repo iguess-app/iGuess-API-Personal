@@ -1,7 +1,7 @@
 'use Strict';
 
 module.exports = (app) => {
-  const Notifications = app.coincidents.Schemas.notificationsSchema;
+  const Notifications = app.src.models.notificationsModel;
 
   const getNotifications = (userId) => {
     const searchQuery = {

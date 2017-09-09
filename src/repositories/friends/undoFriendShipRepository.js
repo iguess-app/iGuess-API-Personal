@@ -7,7 +7,7 @@ const SPLICE_NUMBER = 1;
 const NOT_FOUND_FRIEND = -1;
 
 module.exports = (app) => {
-  const Profile = app.coincidents.Schemas.profileSchema;
+  const Profile = app.src.models.profileModel;
 
   const undoFriendship = (request, dictionary) => {
 
