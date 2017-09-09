@@ -1,0 +1,14 @@
+{
+  "correctSchema": {
+    "user" : "591df6c78d1fdc0bb4eba371",
+    "notifications" : []
+},
+  "userRefIncorrect": {
+    "user" : "notObjectID",
+    "notifications" : []
+  },
+  "notificationArrayIncorrect": {
+    "user" : "591df6c78d1fdc0bb4eba371",
+    "notifications" : []
+  }
+}

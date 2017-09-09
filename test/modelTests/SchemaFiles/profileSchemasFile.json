@@ -1,0 +1,134 @@
+{
+  "correctSchema": {
+    "userName": "toniKross",
+    "password": "$2a$10$5PMJupkGGUJ22DxQC4UoUeUJYoDmg89vIEZ4v23KpkuHu1XcIPutK",
+    "email": "kross@madrid.com",
+    "name": "Toni Kross",
+    "confirmedEmail": false,
+    "invitedFriendList": [
+      "591e5c21a8634f1f9880e8b4"
+    ],
+    "friendList": [
+      "591e5c0fa8634f1f9880e8b0",
+      "591e5ccca8634f1f9880e8ca"
+    ],
+    "guessesLeagues": [],
+    "guessesLines": [],
+    "footballSupportedTeams": {
+      "appreciatedTeams": [{
+          "teamId": "5872a51a4db3fb378bc7ee15",
+          "fullName": "Clube Atlético Mineiro",
+          "shortName": "Atlético-MG",
+          "logo": "nothing =(",
+          "league": "5872467bed1b02314e08828a"
+        },
+        {
+          "teamId": "5872420ded1b02314e088289",
+          "fullName": "Santos Futebol Clube",
+          "shortName": "Santos",
+          "logo": "nothing =(",
+          "league": "5872467bed1b02314e08828a"
+        }
+      ],
+      "supportedTeam": {
+        "teamId": "587261c5ed1b02314e08828c",
+        "fullName": "Real Madrid Club de Fútbol",
+        "shortName": "Real Madrid",
+        "logo": "nothing =[",
+        "league": "58726176ed1b02314e08828b"
+      }
+    },
+    "description": "Insta: TONY",
+    "lastSignInAt": "2017-06-06T02:22:51.000Z"
+  },
+  "textsTooLoong": {
+    "userName": "toniKrosstoniKrosstoniKrossto",
+    "name": "Toni Kross Toni Kross",
+    "description": "Insta: TONY Insta: TONY Insta: TONY Insta: TONY Insta: TONY Insta: TONY Insta: TONY Insta: TONY Insta",
+    "password": "$2a$10$5PMJupkGGUJ22DxQC4UoUeUJYoDmg89vIEZ4v23KpkuHu1XcIPutK",
+    "email": "kross@madrid.com",
+    "confirmedEmail": false,
+    "invitedFriendList": [
+      "591e5c21a8634f1f9880e8b4"
+    ],
+    "friendList": [
+      "591e5c0fa8634f1f9880e8b0",
+      "591e5ccca8634f1f9880e8ca"
+    ],
+    "guessesLeagues": [],
+    "guessesLines": [],
+    "footballSupportedTeams": {
+      "appreciatedTeams": [{
+          "teamId": "5872a51a4db3fb378bc7ee15",
+          "fullName": "Clube Atlético Mineiro",
+          "shortName": "Atlético-MG",
+          "logo": "nothing =(",
+          "league": "5872467bed1b02314e08828a"
+        },
+        {
+          "teamId": "5872420ded1b02314e088289",
+          "fullName": "Santos Futebol Clube",
+          "shortName": "Santos",
+          "logo": "nothing =(",
+          "league": "5872467bed1b02314e08828a"
+        },
+        {
+          "teamId": "5872a51a4db3fb378bc7ee1c",
+          "league": "5872467bed1b02314e08828a",
+          "fullName": "Cruzeiro Esporte Clube",
+          "shortName": "Cruzeiro",
+          "logo": "nothing =("
+        }
+      ],
+      "supportedTeam": {
+        "teamId": "587261c5ed1b02314e08828c",
+        "fullName": "Real Madrid Club de Fútbol",
+        "shortName": "Real Madrid",
+        "logo": "nothing =[",
+        "league": "58726176ed1b02314e08828b"
+      }
+    },
+    "lastSignInAt": "2017-06-06T02:22:51.000Z"
+  },
+  "wrongFriendAndInvitedList": {
+    "userName": "toniKross",
+    "password": "$2a$10$5PMJupkGGUJ22DxQC4UoUeUJYoDmg89vIEZ4v23KpkuHu1XcIPutK",
+    "email": "kross@madrid.com",
+    "confirmedEmail": false,
+    "invitedFriendList": [
+      "591e5c21a8634f1f9880e8"
+    ],
+    "friendList": [
+      "591e5c0fa8634f1f988ççççç",
+      "591e5ccca8634f1f9880e8ca"
+    ],
+    "guessesLeagues": [],
+    "guessesLines": [],
+    "footballSupportedTeams": {
+      "appreciatedTeams": [{
+          "teamId": "5872a51a4db3fb378bc7ee15",
+          "fullName": "Clube Atlético Mineiro",
+          "shortName": "Atlético-MG",
+          "logo": "nothing =(",
+          "league": "5872467bed1b02314e08828a"
+        },
+        {
+          "teamId": "5872420ded1b02314e088289",
+          "fullName": "Santos Futebol Clube",
+          "shortName": "Santos",
+          "logo": "nothing =(",
+          "league": "5872467bed1b02314e08828a"
+        }
+      ],
+      "supportedTeam": {
+        "teamId": "587261c5ed1b02314e08828c",
+        "fullName": "Real Madrid Club de Fútbol",
+        "shortName": "Real Madrid",
+        "logo": "nothing =[",
+        "league": "58726176ed1b02314e08828b"
+      }
+    },
+    "description": "Insta: TONY",
+    "lastSignInAt": "2017-06-06T02:22:51.000Z"
+  }
+}
