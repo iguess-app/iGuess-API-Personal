@@ -1,21 +1,24 @@
-'use strict';
+'use strict'
 
-const consign = require('consign');
-const app = {};
-app.coincidents = require('iguess-api-coincidents');
+const consign = require('consign')
+const app = {}
+app.coincidents = require('iguess-api-coincidents')
 
 consign()
   .include('configServer.js')
+  .include('src/models')
   .include('src/repositories')
   .include('src/services')
   .include('src/controllers')
   .include('src/routes')
-  .into(app);
+  .into(app)
 
 app.configServer.start((err) => {
   if (err) {
-    throw err;
+    throw err
   }
 
   app.coincidents.Managers.logManager.info(`Server running at ${app.configServer.info.uri}`)
 })
+
+module.exports = app
