@@ -20,7 +20,7 @@
     "boom": "4.2.0",
     "consign": "0.1.2",
     "google-cloud": "^0.56.0",
-    "hapi": "16.1.0",
+    "hapi": "16.6.0",
     "iguess-api-coincidents": "git+https://github.com/LuhalvesBR/iGuess-API-Coincidents.git",
     "joi": "10.1.0",
     "jsonwebtoken": "7.2.1",
