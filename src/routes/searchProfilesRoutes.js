@@ -3,9 +3,10 @@
 const Joi = require('joi');
 
 module.exports = (app) => {
-  const searchProfilesController = app.src.controllers.searchProfilesController;
-  const server = app.configServer;
-
+  const searchProfilesController = app.src.controllers.searchProfilesController
+  const server = app.configServer
+  const schemas = app.src.routes.schemas
+  
   server.route({
     path: '/profiles/search',
     method: 'GET',
@@ -32,34 +33,11 @@ module.exports = (app) => {
         searchProfilesController.getProfile(request, reply)
       },
       validate: {
-        query: Joi.object({
-          userName: Joi.string().required()
-        }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        query: schemas.searchProfiles.searchProfilesSchema.request,
+        headers: schemas.defaultHeaderSchema
       },
       response: {
-        schema: Joi.object({
-          userName: Joi.string().required(),
-          email: Joi.string().required(),
-          guessesLeagues: Joi.array().required(),
-          guessesLines: Joi.array().required(),
-          description: Joi.string(),
-          name: Joi.string(),
-          avatar: Joi.string(),
-          userId: Joi.string().required(),
-          updatedAt: Joi.date(),
-          createdAt: Joi.date(),
-          footballSupportedTeams: Joi.object({
-            appreciatedTeams: Joi.array(),
-            supportedTeam: Joi.object()
-          }).required(),
-          numberOfFriends: Joi.number().required()
-
-        }).meta({
-          className: 'Response'
-        })
+        schema: schemas.searchProfiles.searchProfilesSchema.response
       }
     }
   })

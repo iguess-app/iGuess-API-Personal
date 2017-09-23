@@ -1,6 +1,8 @@
 'use Strict';
 
 const Boom = require('boom')
+const Mongoose = require('mongoose')
+const objectId = Mongoose.Types.ObjectId
 
 module.exports = (app) => {
   const Profile = app.src.models.profileModel;
@@ -8,9 +10,7 @@ module.exports = (app) => {
 
   const getProfile = (payload, dictionary) => {
 
-    const searchQuery = {
-      userName: payload.userName
-    };
+    const searchQuery = _buildSearchQuery(payload)
 
     return Profile
       .findOne(searchQuery)
@@ -39,4 +39,18 @@ module.exports = (app) => {
   return {
     getProfile
   }
+}
+
+
+const _buildSearchQuery = (request) => {
+  const searchQuery = {}
+
+  if (request.userName) {
+    searchQuery.userName = request.userName
+  }
+  if (request.userRef) {
+    searchQuery._id = objectId(request.userRef)
+  }
+
+  return searchQuery
 }

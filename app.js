@@ -10,6 +10,7 @@ consign()
   .include('src/repositories')
   .include('src/services')
   .include('src/controllers')
+  .include('src/routes/schemas')
   .include('src/routes')
   .into(app)
 
