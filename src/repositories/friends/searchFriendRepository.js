@@ -6,11 +6,9 @@ module.exports = (app) => {
   const Profile = app.src.models.profileModel;
 
   const search = (payload) => {
-
     const searchQuery = {
       userName: payload.userName
     }
-
     const projectionQuery = {
       'friendList': 1,
       '_id': 0
@@ -22,11 +20,9 @@ module.exports = (app) => {
   }
 
   const list = (payload) => {
-
     const searchQuery = {
       userName: payload.userName
     }
-
     const projectionQuery = {
       'friendList': 1,
       '_id': 0
@@ -37,7 +33,6 @@ module.exports = (app) => {
   }
 
   const _getFriendByID = (user) => {
-
     const projectionQuery = {
       'userName': 1,
       'avatar': 1,
@@ -59,7 +54,9 @@ module.exports = (app) => {
   }
 
   const _findUserText = (friends, searchField) =>
-    friends.filter((friend) => friend.userName.toLowerCase().includes(searchField.toLowerCase()))
+    friends.filter((friend) => 
+      friend.userName.toLowerCase().includes(searchField.toLowerCase())
+    )
 
   return {
     search,
