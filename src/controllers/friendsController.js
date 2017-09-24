@@ -37,11 +37,18 @@ module.exports = (app) => {
       })
       .catch((err) => reply(err));
   }
+  
+  const areFriends = (request, reply) => {
+    friendsServices.areFriendsService(request.query, request.headers)
+      .then((response) => reply(response))
+      .catch((err) => reply(err))
+  }
 
   return {
     addFriend,
     list,
     search,
-    undoFriendship
+    undoFriendship,
+    areFriends
   }
 }

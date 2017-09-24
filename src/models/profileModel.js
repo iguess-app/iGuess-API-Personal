@@ -104,10 +104,16 @@ module.exports = (app) => {
       type: Array
     },
     friendList: {
-      type: [Schema.Types.ObjectId]
+      type: [{
+        type: String,
+        validate: [mongo.checkObjectId, String(serverErrors.notMongoIdValid)]
+      }]
     },
     invitedFriendList: {
-      type: [Schema.Types.ObjectId]
+      type: [{
+        type: String,
+        validate: [mongo.checkObjectId, String(serverErrors.notMongoIdValid)]
+      }]
     },
     lastSignInAt: {
       type: Date

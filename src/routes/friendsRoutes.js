@@ -3,8 +3,11 @@
 const Joi = require('joi');
 
 module.exports = (app) => {
-  const friendsController = app.src.controllers.friendsController;
-  const server = app.configServer;
+  const friendsController = app.src.controllers.friendsController
+  const server = app.configServer
+
+  const Config = app.coincidents.Config
+  const ID_SIZE = Config.mongo.idStringSize
 
   server.route({
     path: '/friends/add',
@@ -118,4 +121,31 @@ module.exports = (app) => {
     }
   })
 
-};
+  server.route({
+    path: '/friends/areFriends',
+    method: 'GET',
+    config: {
+      handler: (request, reply) => {
+        friendsController.areFriends(request, reply)
+      },
+      validate: {
+        query: Joi.object({
+          userRef: Joi.string().required().length(ID_SIZE),
+          userRefFriend: Joi.string().required().length(ID_SIZE)
+        }),
+        headers: Joi.object({
+          language: Joi.string().default('en-us')
+        }).unknown()
+      },
+      response: {
+        schema: Joi.object({
+            areFriends: Joi.bool().required()
+          }).required()
+          .meta({
+            className: 'Response'
+          })
+      }
+    }
+  })
+
+}
