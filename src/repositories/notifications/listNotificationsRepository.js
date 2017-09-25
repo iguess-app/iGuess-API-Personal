@@ -3,9 +3,9 @@
 module.exports = (app) => {
   const Notifications = app.src.models.notificationsModel;
 
-  const getNotifications = (userId) => {
+  const getNotifications = (userRef) => {
     const searchQuery = {
-      user: userId
+      userRef
     }
 
     return Notifications.findOne(searchQuery)

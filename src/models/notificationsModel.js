@@ -31,7 +31,7 @@ module.exports = (app) => {
   }, optionsSchemas.versionKeyDisable)
 
   const notificationsSchema = new Schema({
-    user: {
+    userRef: {
       type: String,
       required: true,
       validate: [mongo.checkObjectId, String(serverErrors.notMongoIdValid)]

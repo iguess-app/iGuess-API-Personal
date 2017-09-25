@@ -6,7 +6,7 @@ module.exports = (app) => {
   const putNotificationsSaw = (user) => {
 
     const searchQuery = {
-      user: user.userId,
+      userRef: user.userRef,
       'notifications.saw': false
     }
 

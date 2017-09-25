@@ -15,7 +15,7 @@ module.exports = (app) => {
       },
       validate: {
         query: Joi.object({
-          userId: Joi.string().required()
+          userRef: Joi.string().required()
         }),
         headers: Joi.object({
           language: Joi.string().default('en-us')
@@ -44,7 +44,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: Joi.object({
-          userId: Joi.string().required()
+          userRef: Joi.string().required()
         }),
         headers: Joi.object({
           language: Joi.string().default('en-us')
@@ -69,7 +69,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: Joi.object({
-          userId: Joi.string().required(),
+          userRef: Joi.string().required(),
           notificationId: Joi.string().required(),
           accepted: Joi.bool().required()
         }),

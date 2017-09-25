@@ -11,7 +11,7 @@ module.exports = (app) => {
 
   const responseNotification = (userResponse) => {
     const searchQuery = {
-      user: userResponse.userId,
+      userRef: userResponse.userRef,
       'notifications._id': userResponse.notificationId
     }
 
@@ -28,7 +28,7 @@ module.exports = (app) => {
 
         return Promise.all([_removeNotification(userResponse, searchQuery), _updateUsersInfos(notification, userResponse)])
           .spread((notificationRemoved, notificationDataSetted) => {
-            _removeFromInvitedFriendList(notification.messageUserRef, userResponse.userId)
+            _removeFromInvitedFriendList(notification.messageUserRef, userResponse.userRef)
             responseObj.notificationRemoved = notificationRemoved
             responseObj.notificationDataSetted = notificationDataSetted
 
@@ -41,12 +41,12 @@ module.exports = (app) => {
     if (userResponse.accepted === true) {
       switch (notification.messageType) {
         case FRIENDSHIP_TYPE:
-          return _findUserProfiles(notification.messageUserRef, userResponse.userId)
+          return _findUserProfiles(notification.messageUserRef, userResponse.userRef)
             .spread((invitatorUser, invitedUser) => _updateFriendListsProfiles(invitatorUser, invitedUser))
         case GUESSLEAGUE_TYPE:
           //TODO: return true for success and false to not modified
-          _updatedGuessesLeagueProfile(notification.messageGuessLeagueRef, userResponse.userId)
-          _updatedGuessLeague(notification.messageGuessLeagueRef, userResponse.userId)
+          _updatedGuessesLeagueProfile(notification.messageGuessLeagueRef, userResponse.userRef)
+          _updatedGuessLeague(notification.messageGuessLeagueRef, userResponse.userRef)
           break
         default:
           throw Error('No notification type found')
@@ -61,7 +61,7 @@ module.exports = (app) => {
 
   const _removeNotification = (userResponse, searchQuery) => {
     const updateQuery = {
-      user: userResponse.userId,
+      userRef: userResponse.userRef,
       '$pull': {
         'notifications': {
           '_id': userResponse.notificationId

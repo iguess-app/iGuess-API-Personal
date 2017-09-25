@@ -54,7 +54,7 @@ module.exports = (app) => {
 
   const _updateInvitedUserNotifications = (invitatorUser, invitedUser, dictionary) => {
     const searchQuery = {
-      user: invitedUser.id
+      userRef: invitedUser.id
     }
     const newNotification = {
       saw: false,

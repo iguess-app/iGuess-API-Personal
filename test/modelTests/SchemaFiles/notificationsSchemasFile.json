@@ -1,14 +1,14 @@
 {
   "correctSchema": {
-    "user" : "591df6c78d1fdc0bb4eba371",
+    "userRef" : "591df6c78d1fdc0bb4eba371",
     "notifications" : []
 },
   "userRefIncorrect": {
-    "user" : "notObjectID",
+    "userRef" : "notObjectID",
     "notifications" : []
   },
   "notificationArrayIncorrect": {
-    "user" : "591df6c78d1fdc0bb4eba371",
+    "userRef" : "591df6c78d1fdc0bb4eba371",
     "notifications" : []
   }
 }
