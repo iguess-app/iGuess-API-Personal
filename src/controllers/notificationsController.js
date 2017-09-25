@@ -36,7 +36,9 @@ module.exports = (app) => {
       .then((response) => {
         reply(response)
       })
-      .catch((err) => reply(err));
+      .catch((err) => 
+        reply(err)
+      );
   }
 
   return {

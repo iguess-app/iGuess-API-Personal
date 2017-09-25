@@ -98,18 +98,11 @@ module.exports = (app) => {
       },
       validate: {
         payload: Joi.object({
-          inviteads: Joi.array().required()
-        }),
+          inviteads: Joi.array()
+        }).unknown(),
         headers: Joi.object({
           language: Joi.string().default('en-us')
         }).unknown()
-      },
-      response: {
-        schema: Joi.object({
-          notificationsSent: Joi.bool().required()
-        }).meta({
-          className: 'Response'
-        })
       }
     }
   })  

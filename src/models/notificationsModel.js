@@ -26,7 +26,8 @@ module.exports = (app) => {
     },
     saw: {
       type: Boolean,
-      required: true
+      required: true,
+      default: false
     }
   }, optionsSchemas.versionKeyDisable)
 
