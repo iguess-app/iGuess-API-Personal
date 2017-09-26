@@ -24,8 +24,6 @@ module.exports = (app) => {
       'friendList': 0,
       'description': 0,
       'notifications': 0,
-      'guessesLines': 0,
-      'guessesLeagues': 0,
       'footballSupportedTeams': 0,
       'confirmedEmail': 0,
       'invitedFriendList': 0,

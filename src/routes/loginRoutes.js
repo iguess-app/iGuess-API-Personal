@@ -35,7 +35,6 @@ module.exports = (app) => {
               email: Joi.string().required().allow(''),
               confirmedEmail: Joi.bool(),
               avatar: Joi.string(),
-              guessesLines: Joi.array().empty(),
               updatedAt: Joi.date(),
               createdAt: Joi.date(),
               footballSupportedTeams: Joi.object({
@@ -56,7 +55,6 @@ module.exports = (app) => {
               }),
               userName: Joi.string().required(),
               notifications: Joi.array(),
-              guessesLeagues: Joi.array(),
               numberOfFriends: Joi.number().required(),
               unreadableNotification: Joi.bool().required(),
               id: Joi.string().required()
@@ -97,7 +95,6 @@ module.exports = (app) => {
               updatedAt: Joi.date(),
               createdAt: Joi.date(),
               lastSignInAt: Joi.date(),
-              guessesLines: Joi.array().empty(),
               footballSupportedTeams: Joi.object({
                 supportedTeam: Joi.object({
                   teamId: Joi.string(),
@@ -116,7 +113,6 @@ module.exports = (app) => {
               }),
               userName: Joi.string().required(),
               notifications: Joi.array(),
-              guessesLeagues: Joi.array(),
               numberOfFriends: Joi.number().required(),
               unreadableNotification: Joi.bool().required(),
               id: Joi.string().required()

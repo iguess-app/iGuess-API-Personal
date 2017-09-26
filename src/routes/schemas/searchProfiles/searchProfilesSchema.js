@@ -20,8 +20,6 @@ module.exports = (app) => {
   const response = Joi.object({
     userName: Joi.string().required(),
     email: Joi.string().required(),
-    guessesLeagues: Joi.array().required(),
-    guessesLines: Joi.array().required(),
     description: Joi.string(),
     name: Joi.string(),
     avatar: Joi.string(),

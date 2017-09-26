@@ -25,18 +25,6 @@ module.exports = (app) => {
   const checkDescriptionSize = (name) => name.length <= DESCRIPTION_MAX_SIZE
   const checkAppreciatedTeamsArraySize = (array) => array.length <= TEAM_TO_APPRECIATE_MAX_SIZE
 
-  const guessesLinesSchema = new Schema({
-    championshipRef: {
-      type: String,
-      required: true,
-      validate: [mongo.checkObjectId, String(serverErrors.notMongoIdValid)]
-    },
-    pontuation: {
-      type: Number,
-      required: true
-    }
-  }, optionsSchemas._idAndVersionKeyDisable)
-
   const teamSchema = new Schema({
     teamId: {
       type: String,
@@ -99,10 +87,6 @@ module.exports = (app) => {
     confirmedEmail: {
       type: Boolean
     },
-    guessesLines: [guessesLinesSchema],
-    guessesLeagues: {
-      type: Array
-    },
     friendList: {
       type: [{
         type: String,
@@ -123,7 +107,6 @@ module.exports = (app) => {
   const profileSchema = new Schema(profileDefinitionSchema, optionsSchemas.optionsProfileSchema)
 
   return db.model('profiles', profileSchema)
-
 }
 
 /*eslint max-statements: 0*/
