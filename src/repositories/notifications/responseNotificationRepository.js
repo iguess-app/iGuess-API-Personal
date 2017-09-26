@@ -1,6 +1,7 @@
 'use Strict';
 
-const Promise = require('bluebird');
+const Promise = require('bluebird')
+const Boom = require('boom')
 
 const inviteResponseRepository = require('../guess/inviteResponseRepository')
 
@@ -23,46 +24,48 @@ module.exports = (app) => {
           notificationRemoved: false,
           notificationDataSetted: false
         }
-        if (!userNotifications) {
-          return responseObj
-        }
+        _checkErrors(userNotifications, dictionary)
+
         const notification = _getNotification(userNotifications.notifications, userResponse.notificationId)
 
-        return Promise.all([_removeNotification(userResponse, searchQuery), _updateUsersInfos(notification, userResponse)])
-          .spread((notificationRemoved, notificationDataSetted) => {
-            responseObj.notificationRemoved = notificationRemoved
-            responseObj.notificationDataSetted = notificationDataSetted
-
-            return responseObj;
-          })
+        return _updateUsersInfos(notification, userResponse)
+        .then(() => _removeNotification(userResponse, searchQuery))
+        .then((removeNotificationResponse) => {
+          responseObj.notificationRemoved = removeNotificationResponse
+          responseObj.notificationDataSetted = userResponse.accepted
+          return responseObj
+        })
       })
   }
 
-  const _updateUsersInfos = (notification, userResponse) => {
-    if (userResponse.accepted === true || FRIENDSHIP_TYPE != notification.messageType) {
-      switch (notification.messageType) {
-        case FRIENDSHIP_TYPE:
-          return _findUserProfiles(notification.messageUserRef, userResponse.userRef)
-            .spread((invitatorUser, invitedUser) => {
-              _removeFromInvitedFriendList(notification.messageUserRef, userResponse.userRef)  
-
-              return _updateFriendListsProfiles(invitatorUser, invitedUser)
-            })
-        case GUESSLEAGUE_TYPE:
-          const requestObj = {
-            userRef: userResponse.userRef,
-            guessLeagueRef: notification.messageGuessLeagueRef,
-            championshipRef: notification.championship.championshipRef,
-            response: userResponse.accepted
-          }
-          return inviteResponseRepository.inviteReponse(requestObj)
-            .then(() => userResponse.accepted)
-        default:
-          throw Error('No notification type found')
-      }
+  const _checkErrors = (userNotifications,dictionary) => {
+    if (!userNotifications) {
+      throw Boom.notFound(dictionary.notificationNotFound)
     }
+  }
 
-    return false;
+  const _updateUsersInfos = (notification, userResponse) => {
+    if (notification.messageType === FRIENDSHIP_TYPE) {
+      if (userResponse.accepted === true) {
+        return _findUserProfiles(notification.messageUserRef, userResponse.userRef)
+          .spread((invitatorUser, invitedUser) => {
+            _removeFromInvitedFriendList(notification.messageUserRef, userResponse.userRef)
+
+            return _updateFriendListsProfiles(invitatorUser, invitedUser)
+          })
+      }
+      return Promise.resolve(false)
+    }
+    if (notification.messageType === GUESSLEAGUE_TYPE) {
+      const requestObj = {
+        userRef: userResponse.userRef,
+        guessLeagueRef: notification.messageGuessLeagueRef,
+        championshipRef: notification.championship.championshipRef,
+        response: userResponse.accepted
+      }
+      return inviteResponseRepository.inviteReponse(requestObj)
+    }
+    throw Boom.notImplemented('No messageType found')
   }
 
   const _getNotification = (notifications, notificationId) =>
