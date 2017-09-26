@@ -13,6 +13,8 @@ module.exports = (app) => {
   const Schema = mongoose.Schema
   const serverErrors = Utils.errorUtils.serverErrors
 
+  const championshipEmbeddedSchema = require('./subValidations/championshipEmbeddedModel')(app)
+
   const notificationsArraySchema = new Schema({
     messageType: {
       type: Number,
@@ -28,7 +30,8 @@ module.exports = (app) => {
       type: Boolean,
       required: true,
       default: false
-    }
+    },
+    championship: championshipEmbeddedSchema
   }, optionsSchemas.versionKeyDisable)
 
   const notificationsSchema = new Schema({
