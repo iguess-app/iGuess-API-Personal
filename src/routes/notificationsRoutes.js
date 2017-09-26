@@ -62,7 +62,7 @@ module.exports = (app) => {
 
   server.route({
     path: '/notifications/response',
-    method: 'PUT',
+    method: 'PATCH',
     config: {
       handler: (request, reply) => {
         notificationsController.responseNotification(request, reply)
@@ -88,7 +88,7 @@ module.exports = (app) => {
     }
   })
 
-  
+
   server.route({
     path: '/notifications/setGuessLeagueNotifications',
     method: 'PUT',
@@ -105,5 +105,5 @@ module.exports = (app) => {
         }).unknown()
       }
     }
-  })  
+  })
 }

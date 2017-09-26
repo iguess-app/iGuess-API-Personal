@@ -13,7 +13,8 @@ module.exports = (app) => {
       messageType: GUESSLEAGUE_TYPE,
       messageUserRef: request.invitatorUserRef,
       messageGuessLeagueRef: request._id,
-      saw: false
+      saw: false,
+      championship: request.championship
     }
 
     const setNotificationsToInviteadsArrayPromise = request.inviteads.map((invitedUserRef) => {

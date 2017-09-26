@@ -6,7 +6,6 @@ const Promise = require('bluebird')
 module.exports = (app) => {
   const listNotificationsRepository = app.src.repositories.notifications.listNotificationsRepository;
   const getUserByIdRepository = app.src.repositories.getById.getUserByIdRepository;
-  const getGuessLeagueByIdRepository = app.src.repositories.getById.getGuessLeagueByIdRepository;
   const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest;
   const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest;
 
@@ -39,12 +38,12 @@ module.exports = (app) => {
 
   const _buildGuessLeagueReqText = (notification, message) => {
     const getUserPromise = getUserByIdRepository.getUserById(notification.messageUserRef);
-    const getGuessLeaguePromise = getGuessLeagueByIdRepository.getGuessLeagueById(notification.messageGuessLeagueRef);
 
-    return Promise.all([getUserPromise, getGuessLeaguePromise, notification.id])
-      .spread((userData, guessLeagueData, notificationId) => ({
-          message: message.replace('{{userName}}', userData.userName).replace('{{guessLeagueName}}', guessLeagueData.guessLeagueName),
-          guessLeague: guessLeagueData.guessLeagueName,
+    const championshipHumanName = `${notification.championship.championship} ${notification.championship.season}`
+
+    return Promise.all([getUserPromise, notification.id])
+      .spread((userData, notificationId) => ({
+          message: message.replace('{{userName}}', userData.userName).replace('{{championshipName}}', championshipHumanName),
           profile: userData.userName,
           avatar: userData.avatar,
           notificationId
@@ -54,7 +53,7 @@ module.exports = (app) => {
   const _buildFriendshipReqText = (notification, message) => 
    Promise.all([getUserByIdRepository.getUserById(notification.messageUserRef), notification.id])
     .spread((userData, notificationId) => ({
-        message: message.replace('{{userName}}', userData.userName).replace('{{leagueName}}'),
+        message: message.replace('{{userName}}', userData.userName),
         profile: userData.userName,
         avatar: userData.avatar,
         notificationId
