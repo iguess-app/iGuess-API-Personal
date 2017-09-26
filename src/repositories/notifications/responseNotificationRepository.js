@@ -2,6 +2,8 @@
 
 const Promise = require('bluebird');
 
+const inviteResponseRepository = require('../guess/inviteResponseRepository')
+
 module.exports = (app) => {
   const Notifications = app.src.models.notificationsModel;
   const Profile = app.src.models.profileModel;
@@ -9,7 +11,7 @@ module.exports = (app) => {
   const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest;
   const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest;
 
-  const responseNotification = (userResponse) => {
+  const responseNotification = (userResponse, dictionary) => {
     const searchQuery = {
       userRef: userResponse.userRef,
       'notifications._id': userResponse.notificationId
@@ -28,7 +30,6 @@ module.exports = (app) => {
 
         return Promise.all([_removeNotification(userResponse, searchQuery), _updateUsersInfos(notification, userResponse)])
           .spread((notificationRemoved, notificationDataSetted) => {
-            _removeFromInvitedFriendList(notification.messageUserRef, userResponse.userRef)
             responseObj.notificationRemoved = notificationRemoved
             responseObj.notificationDataSetted = notificationDataSetted
 
@@ -38,16 +39,24 @@ module.exports = (app) => {
   }
 
   const _updateUsersInfos = (notification, userResponse) => {
-    if (userResponse.accepted === true) {
+    if (userResponse.accepted === true || FRIENDSHIP_TYPE != notification.messageType) {
       switch (notification.messageType) {
         case FRIENDSHIP_TYPE:
           return _findUserProfiles(notification.messageUserRef, userResponse.userRef)
-            .spread((invitatorUser, invitedUser) => _updateFriendListsProfiles(invitatorUser, invitedUser))
+            .spread((invitatorUser, invitedUser) => {
+              _removeFromInvitedFriendList(notification.messageUserRef, userResponse.userRef)  
+
+              return _updateFriendListsProfiles(invitatorUser, invitedUser)
+            })
         case GUESSLEAGUE_TYPE:
-          //TODO: return true for success and false to not modified
-          _updatedGuessesLeagueProfile(notification.messageGuessLeagueRef, userResponse.userRef)
-          _updatedGuessLeague(notification.messageGuessLeagueRef, userResponse.userRef)
-          break
+          const requestObj = {
+            userRef: userResponse.userRef,
+            guessLeagueRef: notification.messageGuessLeagueRef,
+            championshipRef: notification.championship.championshipRef,
+            response: userResponse.accepted
+          }
+          return inviteResponseRepository.inviteReponse(requestObj)
+            .then(() => userResponse.accepted)
         default:
           throw Error('No notification type found')
       }
@@ -105,19 +114,6 @@ module.exports = (app) => {
 
     return Promise.all([invitedUser.save(), invitatorUser.save()])
       .spread(() => true)
-  }
-
-  const _updatedGuessesLeagueProfile = (guessLeagueId, invitedUserId) => {
-    Profile.findById(invitedUserId)
-      .then((userFound) => {
-        userFound.guessesLeagues.push(guessLeagueId)
-        userFound.save()
-      })
-  }
-
-  const _updatedGuessLeague = (guessLeagueId, invitedUserId) => {
-    //TODO
-    //GuessesLeagues
   }
 
   return {
