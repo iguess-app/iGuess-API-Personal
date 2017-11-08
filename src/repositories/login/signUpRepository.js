@@ -44,7 +44,7 @@ module.exports = (app) => {
 
   const _createNotificationDocument = (userData) => {
     const notificationObj = {
-      user: userData.id,
+      userRef: userData.id,
       notifications: []
     }
     Notifications.create(notificationObj)

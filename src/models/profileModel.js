@@ -10,7 +10,7 @@ module.exports = (app) => {
   const Config = app.coincidents.Config
   const mongo = Config.mongo
 
-  const db = Managers.mongoManager
+  const db = Managers.mongoManager()
   const Schema = mongoose.Schema
   const serverErrors = Utils.errorUtils.serverErrors
   const userErrors = Utils.errorUtils.userErrors
