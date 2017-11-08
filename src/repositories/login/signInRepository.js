@@ -53,7 +53,7 @@ module.exports = (app) => {
   const _structureUserObj = (userFound) => {
     const userObj = QueryUtils.makeObject(userFound)
     Reflect.deleteProperty(userObj, 'password');
-    Reflect.set(userObj, 'id', userObj._id.toString())
+    Reflect.set(userObj, 'userRef', userObj._id.toString())
     Reflect.deleteProperty(userObj, '_id');
     
     return userObj
