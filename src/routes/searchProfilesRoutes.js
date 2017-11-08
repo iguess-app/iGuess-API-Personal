@@ -1,6 +1,7 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('joi')
+const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
 
 module.exports = (app) => {
   const searchProfilesController = app.src.controllers.searchProfilesController
@@ -18,9 +19,7 @@ module.exports = (app) => {
         query: Joi.object({
           searchField: Joi.string().required()
         }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        headers: defaultHeaderSchema
       }
     }
   })
@@ -34,7 +33,7 @@ module.exports = (app) => {
       },
       validate: {
         query: schemas.searchProfiles.searchProfilesSchema.request,
-        headers: schemas.defaultHeaderSchema
+        headers: defaultHeaderSchema
       },
       response: {
         schema: schemas.searchProfiles.searchProfilesSchema.response
