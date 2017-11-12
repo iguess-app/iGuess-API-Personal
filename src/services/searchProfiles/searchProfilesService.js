@@ -1,4 +1,4 @@
-'use Strict';
+'use strict'
 
 module.exports = (app) => {
   const searchProfilesRepository = app.src.repositories.searchProfiles.searchProfilesRepository;

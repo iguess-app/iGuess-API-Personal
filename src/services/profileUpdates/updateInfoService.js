@@ -1,4 +1,4 @@
-'use Strict';
+'use strict'
 
 module.exports = (app) => {
   const updateInfoRepository = app.src.repositories.profileUpdates.updateInfoRepository;

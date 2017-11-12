@@ -1,4 +1,4 @@
-'use Strict';
+'use strict'
 
 module.exports = (app) => {
   const responseNotificationRepository = app.src.repositories.notifications.responseNotificationRepository;

@@ -1,4 +1,4 @@
-'use Strict';
+'use strict'
 
 module.exports = (app) => {
   const updateSupportedTeamRepository = app.src.repositories.profileUpdates.updateSupportedTeamRepository;

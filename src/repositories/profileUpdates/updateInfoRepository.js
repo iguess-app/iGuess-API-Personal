@@ -1,4 +1,4 @@
-'use Strict';
+'use strict'
 
 const Boom = require('boom');
 

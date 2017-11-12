@@ -1,4 +1,4 @@
-'use Strict';
+'use strict'
 
 module.exports = (app) => {
   const putNotificationsSawRepository = app.src.repositories.notifications.putNotificationsSawRepository;

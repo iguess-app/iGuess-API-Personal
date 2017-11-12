@@ -1,4 +1,4 @@
-'use Strict';
+'use strict'
 
 const Promise = require('bluebird')
 const Boom = require('boom')

@@ -1,4 +1,4 @@
-'use Strict';
+'use strict'
 
 module.exports = (app) => {
   const undoFriendShipRepository = app.src.repositories.friends.undoFriendShipRepository;

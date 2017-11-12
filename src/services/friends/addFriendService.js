@@ -1,4 +1,4 @@
-'use Strict';
+'use strict'
 
 module.exports = (app) => {
   const addFriendRepository = app.src.repositories.friends.addFriendRepository;
