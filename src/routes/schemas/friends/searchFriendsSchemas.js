@@ -8,7 +8,7 @@ const request = Joi.object({
 })
 
 const response = Joi.array().items(Joi.object({
-  userId: Joi.string().required(),
+  userRef: Joi.string().required(),
   avatar: Joi.string().empty(''),
   userName: Joi.string().required()
 }))
