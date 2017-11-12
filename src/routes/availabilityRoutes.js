@@ -1,6 +1,7 @@
 'use strict';
 
-const Joi = require('joi');
+const schema = require('./schemas/availability')
+const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
 
 module.exports = (app) => {
   const availabilityController = app.src.controllers.availabilityController;
@@ -14,19 +15,11 @@ module.exports = (app) => {
         availabilityController.userNameAvailability(request, reply)
       },
       validate: {
-        query: Joi.object({
-          userName: Joi.string().required()
-        }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        query: schema.userNameAvailabilitySchema.request,
+        headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.object({
-          available: Joi.bool().required()
-        }).meta({
-          className: 'Response'
-        })
+        schema: schema.userNameAvailabilitySchema.response
       }
     }
   })
@@ -39,19 +32,11 @@ module.exports = (app) => {
         availabilityController.emailAvailability(request, reply)
       },
       validate: {
-        query: Joi.object({
-          email: Joi.string().required()
-        }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        query: schema.emailAvailabilitySchema.request,
+        headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.object({
-          available: Joi.bool().required()
-        }).meta({
-          className: 'Response'
-        })
+        schema: schema.emailAvailabilitySchema.response
       }
     }
   })

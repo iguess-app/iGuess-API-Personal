@@ -10,7 +10,7 @@ module.exports = (app) => {
   const emailAvailability = (request, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
     if (ProfileUtils.isEmail(request.email) === Errors.userErrors.notEmail) {
-      throw Boom.notAcceptable(`${dictionary.notAEmail}.`);
+      return Promise.reject(Boom.notAcceptable(dictionary.notAEmail))
     }
 
     return availabilityEmailRepository.emailAvailability(request, headers)
