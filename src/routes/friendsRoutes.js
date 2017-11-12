@@ -1,14 +1,11 @@
 'use strict';
 
-const Joi = require('joi')
+const schemas = require('./schemas/friends')
 const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
 
 module.exports = (app) => {
   const friendsController = app.src.controllers.friendsController
   const server = app.configServer
-
-  const Config = app.coincidents.Config
-  const ID_SIZE = Config.mongo.idStringSize
 
   server.route({
     path: '/friends/add',
@@ -18,16 +15,11 @@ module.exports = (app) => {
         friendsController.addFriend(request, reply)
       },
       validate: {
-        payload: Joi.object({
-          userName: Joi.string(),
-          invitedUserName: Joi.string()
-        }),
+        payload: schemas.addFriendsSchemas.request,
         headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.object({
-            invitedSent: Joi.bool().required()
-          }).required()
+        schema: schemas.addFriendsSchemas.response
       }
     }
   })
@@ -40,18 +32,11 @@ module.exports = (app) => {
         friendsController.list(request, reply)
       },
       validate: {
-        query: Joi.object({
-          userName: Joi.string(),
-          page: Joi.number()
-        }),
+        query: schemas.listFriendsSchemas.request,
         headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.array().items(Joi.object({
-            userId: Joi.string().required(),
-            avatar: Joi.string().empty(''),
-            userName: Joi.string().required()
-          })).required()
+        schema: schemas.listFriendsSchemas.response
       }
     }
   })
@@ -64,18 +49,11 @@ module.exports = (app) => {
         friendsController.search(request, reply)
       },
       validate: {
-        query: Joi.object({
-          userName: Joi.string(),
-          searchField: Joi.string()
-        }),
+        query: schemas.searchFriendsSchemas.request,
         headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.array().items(Joi.object({
-            userId: Joi.string().required(),
-            avatar: Joi.string().empty(''),
-            userName: Joi.string().required()
-          })).required()
+        schema: schemas.searchFriendsSchemas.response
       }
     }
   })
@@ -88,16 +66,11 @@ module.exports = (app) => {
         friendsController.undoFriendship(request, reply)
       },
       validate: {
-        payload: Joi.object({
-          userName: Joi.string(),
-          friendUserName: Joi.string()
-        }),
+        payload: schemas.undoFriendshipSchemas.request,
         headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.object({
-            friendshipUndone: Joi.bool().required()
-          }).required()
+        schema: schemas.undoFriendshipSchemas.response
       }
     }
   })
@@ -110,16 +83,11 @@ module.exports = (app) => {
         friendsController.areFriends(request, reply)
       },
       validate: {
-        query: Joi.object({
-          userRef: Joi.string().required().length(ID_SIZE),
-          userRefFriend: Joi.string().required().length(ID_SIZE)
-        }),
+        query: schemas.areFriendsSchemas.request,
         headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.object({
-            areFriends: Joi.bool().required()
-          }).required()
+        schema: schemas.areFriendsSchemas.response
       }
     }
   })
