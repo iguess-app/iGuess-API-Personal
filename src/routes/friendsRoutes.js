@@ -1,6 +1,7 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('joi')
+const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
 
 module.exports = (app) => {
   const friendsController = app.src.controllers.friendsController
@@ -21,17 +22,12 @@ module.exports = (app) => {
           userName: Joi.string(),
           invitedUserName: Joi.string()
         }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        headers: defaultHeaderSchema
       },
       response: {
         schema: Joi.object({
             invitedSent: Joi.bool().required()
           }).required()
-          .meta({
-            className: 'Response'
-          })
       }
     }
   })
@@ -48,9 +44,7 @@ module.exports = (app) => {
           userName: Joi.string(),
           page: Joi.number()
         }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        headers: defaultHeaderSchema
       },
       response: {
         schema: Joi.array().items(Joi.object({
@@ -58,9 +52,6 @@ module.exports = (app) => {
             avatar: Joi.string().empty(''),
             userName: Joi.string().required()
           })).required()
-          .meta({
-            className: 'Response'
-          })
       }
     }
   })
@@ -77,9 +68,7 @@ module.exports = (app) => {
           userName: Joi.string(),
           searchField: Joi.string()
         }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        headers: defaultHeaderSchema
       },
       response: {
         schema: Joi.array().items(Joi.object({
@@ -87,9 +76,6 @@ module.exports = (app) => {
             avatar: Joi.string().empty(''),
             userName: Joi.string().required()
           })).required()
-          .meta({
-            className: 'Response'
-          })
       }
     }
   })
@@ -106,17 +92,12 @@ module.exports = (app) => {
           userName: Joi.string(),
           friendUserName: Joi.string()
         }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        headers: defaultHeaderSchema
       },
       response: {
         schema: Joi.object({
             friendshipUndone: Joi.bool().required()
           }).required()
-          .meta({
-            className: 'Response'
-          })
       }
     }
   })
@@ -133,17 +114,12 @@ module.exports = (app) => {
           userRef: Joi.string().required().length(ID_SIZE),
           userRefFriend: Joi.string().required().length(ID_SIZE)
         }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        headers: defaultHeaderSchema
       },
       response: {
         schema: Joi.object({
             areFriends: Joi.bool().required()
           }).required()
-          .meta({
-            className: 'Response'
-          })
       }
     }
   })
