@@ -2,6 +2,8 @@
 
 const Promise = require('bluebird')
 
+const EMPTY_FRIEND_LIST = []
+
 module.exports = (app) => {
   const Profile = app.src.models.profileModel
 
@@ -21,24 +23,27 @@ module.exports = (app) => {
   }
 
   const _getFriendByID = (user) => {
-    const projectionQuery = {
-      userName: 1,
-      avatar: 1,
-      _id: 1
+    if (user) {
+      const projectionQuery = {
+        userName: 1,
+        avatar: 1,
+        _id: 1
+      }
+      const friendsUserNamePromiseArray = user.friendList.map((friendId) =>
+        Profile.findById(friendId, projectionQuery)
+        .then((friend) => ({
+          userName: friend.userName,
+          avatar: friend.avatar,
+          userRef: friend.id
+        }))
+      )
+
+      return Promise.map(friendsUserNamePromiseArray, (friendObj) =>
+        friendObj
+      )
     }
-    const friendsUserNamePromiseArray = user.friendList.map((friendId) =>
-      Profile.findById(friendId, projectionQuery)
-      .then((friend) => ({
-        userName: friend.userName,
-        avatar: friend.avatar,
-        userRef: friend.id
-      }))
-    )
 
-    return Promise.map(friendsUserNamePromiseArray, (friendObj) =>
-      friendObj
-    )
-
+    return EMPTY_FRIEND_LIST
   }
 
   const _findUserText = (friends, searchField) =>
