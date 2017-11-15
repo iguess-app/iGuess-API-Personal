@@ -15,7 +15,7 @@ module.exports = (app) => {
   }
 
   const singIn = (request, reply) => {
-    signInService.singIn(request.query, request.headers)
+    signInService.singIn(request.payload, request.headers)
       .then((singInResponse) => {
         reply(singInResponse)
       })

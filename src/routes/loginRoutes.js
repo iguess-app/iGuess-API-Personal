@@ -27,13 +27,13 @@ module.exports = (app) => {
 
   server.route({
     path: '/login/singin',
-    method: 'GET',
+    method: 'POST',
     config: {
       handler: (request, reply) => {
         loginController.singIn(request, reply)
       },
       validate: {
-        query: loginSchemas.signInSchemas.request,
+        payload: loginSchemas.signInSchemas.request,
         headers: defaultHeaderSchema
       },
       response: {

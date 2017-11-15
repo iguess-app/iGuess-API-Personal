@@ -7,7 +7,7 @@ module.exports = (app) => {
   const getUserById = (userId) => {
 
     const searchQuery = {
-      '_id': userId
+      _id: userId
     }
 
     return Profile.findOne(searchQuery)
