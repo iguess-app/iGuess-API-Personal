@@ -14,7 +14,7 @@ const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
 const statusCode = coincidents.Utils.statusUtils
 
-lab.experiment.only('Integrated Test ==> Add Friends', () => {
+lab.experiment('Integrated Test ==> Add Friends', () => {
 
   lab.before((done) => {
     undoFriendShipBeforeTests()

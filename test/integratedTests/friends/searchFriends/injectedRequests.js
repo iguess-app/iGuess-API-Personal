@@ -1,3 +1,5 @@
+'use strict'
+
 const happyPath = {
   method: 'GET',
   url: '/friends/search?userName=gabrielJesus&searchField=ney'
