@@ -28,10 +28,10 @@ module.exports = (app) => {
       'confirmedEmail': 0,
       'invitedFriendList': 0,
       'updatedAt': 0,
-      'created_at': 0,
+      'createdAt': 0,
+      'lastSignInAt': 0,
       'password': 0,
-      'email': 0,
-      '_id': 0
+      'email': 0
     }
 
     return Profile.find(searchQuery, projectionQuery)
