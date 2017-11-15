@@ -4,8 +4,8 @@ const happyPath = {
   method: 'PUT',
   url: '/friends/undo',
   payload: {
-    userName: 'xavi',
-    friendUserName: 'sergioRamos'
+    userName: 'fernandinho',
+    friendUserName: 'kunAguero'
   }
 }
 

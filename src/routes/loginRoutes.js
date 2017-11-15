@@ -1,12 +1,11 @@
-'use strict';
+'use strict'
 
-const Joi = require('joi')
 const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
 const loginSchemas = require('./schemas/login')
 
 module.exports = (app) => {
-  const loginController = app.src.controllers.loginController;
-  const server = app.configServer;
+  const loginController = app.src.controllers.loginController
+  const server = app.configServer
 
   server.route({
     path: '/login/singup',

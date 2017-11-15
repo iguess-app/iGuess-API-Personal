@@ -37,10 +37,10 @@ module.exports = (app) => {
 
   const _checkRestricts = (payload, dictionary) => {
     if (PasswordUtils.checkPasswordRestrict(payload.password) !== true) {
-      throw Boom.notAcceptable(`${dictionary.passwordAlert}.`);
+      throw Boom.notAcceptable(dictionary.passwordAlert);
     }
     if (ProfileUtils.isEmail(payload.email) !== true) {
-      throw Boom.notAcceptable(`${dictionary.notAEmail}.`);
+      throw Boom.notAcceptable(dictionary.notAEmail);
     }
 
     return payload;
