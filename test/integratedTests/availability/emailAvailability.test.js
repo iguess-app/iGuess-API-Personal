@@ -15,7 +15,7 @@ const statusCode = coincidents.Utils.statusUtils
 
 lab.experiment('Integrated Test ==> email availability', () => {
 
-  lab.test('email availability - happyPath Available', (done) => {
+  lab.test('[IO] email availability - happyPath Available', (done) => {
     server.inject(injectedRequests.emailHappyPathAvailable)
       .then((response) => {
         const result = response.result
@@ -28,7 +28,7 @@ lab.experiment('Integrated Test ==> email availability', () => {
       })
   })
 
-  lab.test('email availability - happyPath unavailable', (done) => {
+  lab.test('[IO] email availability - happyPath unavailable', (done) => {
     server.inject(injectedRequests.emailHappyPathUnavailable)
       .then((response) => {
         const result = response.result

@@ -58,7 +58,7 @@ lab.experiment('Integrated Test ==> Sign Up', () => {
       })
   })
 
-  lab.test('[IO] Sign Up - not a Email', (done) => {
+  lab.test('Sign Up - not a Email', (done) => {
     server.inject(injectedRequests.notAemail)
       .then((response) => {
         const result = response.result

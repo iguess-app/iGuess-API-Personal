@@ -12,7 +12,7 @@ const expect = Lab.expect
 
 lab.experiment('Integrated Test ==> userName availability', () => {
 
-  lab.test('userName availability - happyPath Available', (done) => {
+  lab.test('[IO] userName availability - happyPath Available', (done) => {
     server.inject(injectedRequests.userNamehappyPathAvailable)
       .then((response) => {
         const result = response.result
@@ -25,7 +25,7 @@ lab.experiment('Integrated Test ==> userName availability', () => {
       })
   })
 
-  lab.test('userName availability - happyPath unavailable', (done) => {
+  lab.test('[IO] userName availability - happyPath unavailable', (done) => {
     server.inject(injectedRequests.userNamehappyPathUnavailable)
       .then((response) => {
         const result = response.result
