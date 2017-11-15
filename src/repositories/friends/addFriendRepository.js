@@ -14,11 +14,11 @@ module.exports = (app) => {
     const getInvitedPromise = _getUser(request.invitedUserName, dictionary);
 
     return Promise.all([getInvitatorPromise, getInvitedPromise])
-      .spread((invitatorUser, invitedUser) => _updateDate(invitatorUser, invitedUser, dictionary))
-      .spread((invitatorResult, invitedResult) => _checkResponse(invitatorResult, invitedResult))
+      .spread((invitatorUser, invitedUser) => _updateData(invitatorUser, invitedUser, dictionary))
+      .spread((invitatorResult, invitedResult) => _buildResponse(invitatorResult, invitedResult))
   }
 
-  const _updateDate = (invitatorUser, invitedUser, dictionary) => {
+  const _updateData = (invitatorUser, invitedUser, dictionary) => {
     const alreadyFriends = invitatorUser.friendList.find((invitatorFriendId) => invitatorFriendId === invitedUser.id)
     if (alreadyFriends) {
       throw Boom.notAcceptable(dictionary.alreadyFriends)
@@ -29,7 +29,7 @@ module.exports = (app) => {
     return Promise.all([saveInvitatorPromise, updateInvitedPromise])
   }
 
-  const _checkResponse = (invitatorResult, invitedResult) => {
+  const _buildResponse = (invitatorResult, invitedResult) => {
     const responseObj = {
       invitedSent: false
     }
