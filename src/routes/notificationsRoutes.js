@@ -88,7 +88,6 @@ module.exports = (app) => {
     }
   })
 
-
   server.route({
     path: '/notifications/setGuessLeagueNotifications',
     method: 'PUT',
