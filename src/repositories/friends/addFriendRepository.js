@@ -41,16 +41,15 @@ module.exports = (app) => {
   }
 
   const _getUser = (userName, dictionary) =>
-    Profile.findOne({
-      userName
-    }).then((user) => {
-      if (!user) {
-        const errMsg = dictionary.userNotFound.replace('{{userName}}', userName)
-        throw Boom.notFound(errMsg)
-      }
+    Profile.findOne({ userName })
+      .then((user) => {
+        if (!user) {
+          const errMsg = dictionary.userNotFound.replace('{{userName}}', userName)
+          throw Boom.notFound(errMsg)
+        }
 
-      return user;
-    })
+        return user;
+      })
 
   const _updateInvitedUserNotifications = (invitatorUser, invitedUser, dictionary) => {
     const searchQuery = {

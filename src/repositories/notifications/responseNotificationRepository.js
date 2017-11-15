@@ -123,3 +123,6 @@ module.exports = (app) => {
     responseNotification
   }
 }
+
+
+/*eslint max-statements: 0*/
