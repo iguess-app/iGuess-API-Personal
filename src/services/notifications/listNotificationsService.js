@@ -42,21 +42,21 @@ module.exports = (app) => {
     const championshipHumanName = `${notification.championship.championship} ${notification.championship.season}`
 
     return Promise.all([getUserPromise, notification.id])
-      .spread((userData, notificationId) => ({
+      .spread((userData, notificationRef) => ({
           message: message.replace('{{userName}}', userData.userName).replace('{{championshipName}}', championshipHumanName),
           profile: userData.userName,
           avatar: userData.avatar,
-          notificationId
+          notificationRef
         }))
   }
 
   const _buildFriendshipReqText = (notification, message) => 
    Promise.all([getUserByIdRepository.getUserById(notification.messageUserRef), notification.id])
-    .spread((userData, notificationId) => ({
+    .spread((userData, notificationRef) => ({
         message: message.replace('{{userName}}', userData.userName),
         profile: userData.userName,
         avatar: userData.avatar,
-        notificationId
+        notificationRef
       }))
 
   return {

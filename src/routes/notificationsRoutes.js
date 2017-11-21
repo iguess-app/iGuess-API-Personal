@@ -1,10 +1,12 @@
-'use strict';
+'use strict'
 
-const Joi = require('joi');
+const Joi = require('joi')
+const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
+const schemas = require('./schemas/notifications')
 
 module.exports = (app) => {
-  const notificationsController = app.src.controllers.notificationsController;
-  const server = app.configServer;
+  const notificationsController = app.src.controllers.notificationsController
+  const server = app.configServer
 
   server.route({
     path: '/notifications/list',
@@ -14,23 +16,11 @@ module.exports = (app) => {
         notificationsController.listNotifications(request, reply)
       },
       validate: {
-        query: Joi.object({
-          userRef: Joi.string().required()
-        }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        query: schemas.listNotificationSchemas.request,
+        headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.array().items(Joi.object({
-          notificationId: Joi.string(),
-          message: Joi.string().required(),
-          guessLeague: Joi.string(),
-          profile: Joi.string(),
-          avatar: Joi.string()
-        })).meta({
-          className: 'Response'
-        })
+        schema: schemas.listNotificationSchemas.response
       }
     }
   })
@@ -43,19 +33,11 @@ module.exports = (app) => {
         notificationsController.putNotificationsSaw(request, reply)
       },
       validate: {
-        payload: Joi.object({
-          userRef: Joi.string().required()
-        }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        payload: schemas.putNotificationsSawSchemas.request,
+        headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.object({
-          profileModified: Joi.bool().required()
-        }).meta({
-          className: 'Response'
-        })
+        schema: schemas.putNotificationsSawSchemas.response
       }
     }
   })
@@ -68,22 +50,11 @@ module.exports = (app) => {
         notificationsController.responseNotification(request, reply)
       },
       validate: {
-        payload: Joi.object({
-          userRef: Joi.string().required(),
-          notificationId: Joi.string().required(),
-          accepted: Joi.bool().required()
-        }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        payload: schemas.responseNotificationSchemas.request,
+        headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.object({
-          notificationRemoved: Joi.bool().required(),
-          notificationDataSetted: Joi.bool().required()
-        }).meta({
-          className: 'Response'
-        })
+        schema: schemas.responseNotificationSchemas.response
       }
     }
   })
@@ -99,9 +70,7 @@ module.exports = (app) => {
         payload: Joi.object({
           inviteads: Joi.array()
         }).unknown(),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        headers: defaultHeaderSchema
       }
     }
   })
