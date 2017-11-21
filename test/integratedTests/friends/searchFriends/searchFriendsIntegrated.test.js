@@ -12,7 +12,7 @@ const expect = Lab.expect
 
 lab.experiment('Integrated Test ==> Search Friends', () => {
 
-  lab.test('Search Friends - happyPath', (done) => {
+  lab.test('[IO] Search Friends - happyPath', (done) => {
     server.inject(injectedRequests.happyPath)
       .then((response) => {
         const result = response.result
@@ -24,7 +24,7 @@ lab.experiment('Integrated Test ==> Search Friends', () => {
       })
   })
 
-  lab.test('Search Friends - user nonexistent', (done) => {
+  lab.test('[IO] Search Friends - user nonexistent', (done) => {
     server.inject(injectedRequests.userNonexistent)
       .then((response) => {
         const result = response.result

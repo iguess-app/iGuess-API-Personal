@@ -12,7 +12,7 @@ const expect = Lab.expect
 
 lab.experiment('Integrated Test ==> List Friends', () => {
 
-  lab.test('List Friends - happyPath', (done) => {
+  lab.test('[IO] List Friends - happyPath', (done) => {
     server.inject(injectedRequests.happyPath)
       .then((response) => {
         const result = response.result
