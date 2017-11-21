@@ -25,7 +25,7 @@ module.exports = (app) => {
   }
 
   const _buildProfileObject = (userFound) => {
-    Reflect.set(userFound, 'userId', userFound._id.toString())
+    Reflect.set(userFound, 'userRef', userFound._id.toString())
     Reflect.set(userFound, 'numberOfFriends', userFound.friendList.length)
     Reflect.deleteProperty(userFound, '_id');
     Reflect.deleteProperty(userFound, 'friendList');

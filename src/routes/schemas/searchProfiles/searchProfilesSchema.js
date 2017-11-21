@@ -2,44 +2,20 @@
 
 const Joi = require('joi')
 
-module.exports = (app) => {
-  const Config = app.coincidents.Config
-  const ID_SIZE = Config.mongo.idStringSize
+const request = Joi.object({
+  searchField: Joi.string().required()
+})
 
-  const request = Joi.alternatives().try(
-    Joi.object({
-      userName: Joi.string().required()
-    }),
-    Joi.object({
-      userRef: Joi.string().length(ID_SIZE).required()
-    })
-  ).meta({
-    className: 'Request'
-  })
-
-  const response = Joi.object({
+const response = Joi.array().items(
+  Joi.object({
+    _id: Joi.object(),
+    avatar: Joi.string().empty(''),
     userName: Joi.string().required(),
-    email: Joi.string().required(),
-    description: Joi.string(),
-    name: Joi.string(),
-    avatar: Joi.string(),
-    userId: Joi.string().required(),
-    updatedAt: Joi.date(),
-    createdAt: Joi.date(),
-    lastSignInAt: Joi.date(),
-    footballSupportedTeams: Joi.object({
-      appreciatedTeams: Joi.array(),
-      supportedTeam: Joi.object()
-    }).required(),
-    numberOfFriends: Joi.number().required()
-  }).meta({
-    className: 'Response'
+    name: Joi.string()
   })
+)
 
-  return {
+module.exports = {
     request,
     response
-  }
 }
-
-/*eslint global-require: 0*/

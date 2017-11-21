@@ -35,12 +35,8 @@ module.exports = (app) => {
     }
 
     return Profile.find(searchQuery, projectionQuery)
-      .then((usersFound) =>
-        usersFound.map((userFound) => QueryUtils.makeObject(userFound))
-      )
-      .catch((err) =>
-        err
-      )
+      .then((usersFound) => usersFound.map((userFound) => QueryUtils.makeObject(userFound)))
+      .catch((err) => err)
   }
 
 

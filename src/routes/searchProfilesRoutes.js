@@ -2,11 +2,11 @@
 
 const Joi = require('joi')
 const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
+const schemas = require('./schemas/searchProfiles')
 
 module.exports = (app) => {
   const searchProfilesController = app.src.controllers.searchProfilesController
   const server = app.configServer
-  const schemas = app.src.routes.schemas
   
   server.route({
     path: '/profiles/search',
@@ -16,10 +16,11 @@ module.exports = (app) => {
         searchProfilesController.search(request, reply)
       },
       validate: {
-        query: Joi.object({
-          searchField: Joi.string().required()
-        }),
+        query: schemas.searchProfilesSchema.request,
         headers: defaultHeaderSchema
+      },
+      response: {
+        schema: schemas.searchProfilesSchema.response
       }
     }
   })
@@ -32,11 +33,11 @@ module.exports = (app) => {
         searchProfilesController.getProfile(request, reply)
       },
       validate: {
-        query: schemas.searchProfiles.searchProfilesSchema.request,
+        query: schemas.getProfileSchemas.request,
         headers: defaultHeaderSchema
       },
       response: {
-        schema: schemas.searchProfiles.searchProfilesSchema.response
+        schema: schemas.getProfileSchemas.response
       }
     }
   })
