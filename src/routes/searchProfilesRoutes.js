@@ -1,6 +1,5 @@
-'use strict';
+'use strict'
 
-const Joi = require('joi')
 const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
 const schemas = require('./schemas/searchProfiles')
 
@@ -41,4 +40,4 @@ module.exports = (app) => {
       }
     }
   })
-};
+}

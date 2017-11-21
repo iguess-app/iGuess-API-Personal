@@ -1,6 +1,7 @@
 'use strict';
 
-const Joi = require('joi');
+const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
+const schemas = require('./schemas/token')
 
 module.exports = (app) => {
   const tokenController = app.src.controllers.tokenController;
@@ -14,19 +15,11 @@ module.exports = (app) => {
         tokenController.verify(request, reply)
       },
       validate: {
-        query: Joi.object({
-          token: Joi.string()
-        }),
-        headers: Joi.object({
-          language: Joi.string().default('en-us')
-        }).unknown()
+        query: schemas.tokenSchemas.request,
+        headers: defaultHeaderSchema
       },
       response: {
-        schema: Joi.object({
-          valid: Joi.bool()
-        }).meta({
-          className: 'Response'
-        })
+        schema: schemas.tokenSchemas.response
       }
     }
   })
