@@ -8,7 +8,7 @@ const request = Joi.object({
 
 const response = Joi.array().items(
   Joi.object({
-    notificationRef: Joi.string(),
+    notificationRef: Joi.string().required(),
     message: Joi.string().required(),
     guessLeague: Joi.string(),
     profile: Joi.string(),
