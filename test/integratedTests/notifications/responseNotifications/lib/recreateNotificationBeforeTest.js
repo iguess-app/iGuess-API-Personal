@@ -31,11 +31,6 @@ const _removeFromFriendList = (user, userFriendRef) => {
   if (indexFriendList >= 0) {
     user.friendList.splice(indexFriendList, 1)
   }
-
-  const indexInvitedList = user.invitedFriendList.indexOf(userFriendRef)
-  if (indexInvitedList >= 0) {
-    user.invitedFriendList.splice(indexInvitedList, 1)
-  }
 }
 
 module.exports = beforeTests

@@ -29,7 +29,7 @@ const happyPathFalse = {
   url: '/notifications/response',
   payload: {
     'userRef': '5a189e34d7b55e03544887f8',
-    'notificationId': '59c9bf289f427d52cc772eea',
+    'notificationId': 'SET DYNAMICALLY',
     'accepted': false
   }
 }
