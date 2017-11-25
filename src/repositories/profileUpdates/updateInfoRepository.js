@@ -61,7 +61,7 @@ module.exports = (app) => {
     }
     if (payload.email) {
       if (ProfileUtils.isEmail(payload.email) === Errors.userErrors.notEmail) {
-        throw Boom.notAcceptable(`${dictionary.notAEmail}.`);
+        throw Boom.notAcceptable(dictionary.notAEmail);
       }
       updateObject.email = payload.email;
       updateObject.confirmedEmail = false;
