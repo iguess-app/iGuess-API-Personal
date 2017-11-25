@@ -14,7 +14,7 @@ const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
 const statusCode = coincidents.Utils.statusUtils
 
-lab.experiment.only('Integrated Test ==> Update Info Profile', () => {
+lab.experiment('Integrated Test ==> Update Info Profile', () => {
 
   lab.test('[IO] Update Info Profile - update Name', (done) => {
     injectedRequests.updateName.payload.name = generateString(8)
