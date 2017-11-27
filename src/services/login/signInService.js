@@ -1,19 +1,23 @@
 'use strict'
 
-const Promise = require('bluebird');
+const Promise = require('bluebird')
+const coincidents = require('iguess-api-coincidents')
+
+const cacheManager = coincidents.Managers.cacheManager
+const SESSION_TIME = coincidents.Config.redis.sessionTime
 
 module.exports = (app) => {
   const signInRepository = app.src.repositories.login.signInRepository;
   const listNotificationsRepository = app.src.repositories.notifications.listNotificationsRepository;
   const friendsNumberRepository = app.src.repositories.friends.friendsNumberRepository;
-  const CacheManager = app.coincidents.Managers.cacheManager;
 
   const singIn = (query, headers) => signInRepository.singIn(query, headers)
     .then((singInObj) => {
       const notificationsPromise = listNotificationsRepository.getNotifications(singInObj.user.id)
       const friendListSizePromise = friendsNumberRepository.getNumberOfFriends(singInObj.user.userName)
+      const createSessionPromise = cacheManager.set(singInObj.token, singInObj.user, SESSION_TIME)
 
-      return Promise.all([singInObj, notificationsPromise, friendListSizePromise])
+      return Promise.all([singInObj, notificationsPromise, friendListSizePromise, createSessionPromise])
         .spread((userObj, notificationsObj, numberOfFriends) => {
           userObj.user.numberOfFriends = numberOfFriends;
           userObj.user.unreadableNotification = false;
@@ -29,7 +33,7 @@ module.exports = (app) => {
   const _setNotificationsOnCache = (userName, notificationsObj) => {
     const ONE_MINUTE = 60;
     const notificationsCacheKey = `${userName}'s Notifications`
-    CacheManager.set(notificationsCacheKey, notificationsObj, ONE_MINUTE)
+    cacheManager.set(notificationsCacheKey, notificationsObj, ONE_MINUTE)
   }
 
   return {
