@@ -1,6 +1,6 @@
 'use strict'
 
-const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
+const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
 const schemas = require('./schemas/searchProfiles')
 
 module.exports = (app) => {

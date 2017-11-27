@@ -1,7 +1,7 @@
 'use strict';
 
 const schemas = require('./schemas/friends')
-const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
+const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
 
 module.exports = (app) => {
   const friendsController = app.src.controllers.friendsController

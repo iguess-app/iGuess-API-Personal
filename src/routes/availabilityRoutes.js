@@ -1,7 +1,7 @@
 'use strict';
 
 const schema = require('./schemas/availability')
-const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
+const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
 
 module.exports = (app) => {
   const availabilityController = app.src.controllers.availabilityController;

@@ -1,7 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
-const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
+const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
 const schemas = require('./schemas/notifications')
 
 module.exports = (app) => {

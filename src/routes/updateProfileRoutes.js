@@ -1,7 +1,7 @@
 'use strict'
 
 const schemas = require('./schemas/updateProfile')
-const defaultHeaderSchema = require('./schemas/defaultHeaderSchema')
+const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
 
 module.exports = (app) => {
   const updateProfileController = app.src.controllers.updateProfileController
