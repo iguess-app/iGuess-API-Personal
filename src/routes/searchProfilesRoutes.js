@@ -1,5 +1,6 @@
 'use strict'
 
+const defaultSessionHeaderSchema = require('./schemas/headers').defaultSessionHeaderSchema
 const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
 const schemas = require('./schemas/searchProfiles')
 
@@ -16,7 +17,7 @@ module.exports = (app) => {
       },
       validate: {
         query: schemas.searchProfilesSchema.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.searchProfilesSchema.response
