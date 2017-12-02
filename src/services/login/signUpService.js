@@ -2,13 +2,10 @@
 
 const Boom = require('boom')
 const coincidents = require('iguess-api-coincidents')
+const sessionManager = require('../../managers/sessionManager')
 
-const cacheManager = coincidents.Managers.cacheManager
 const PasswordUtils = coincidents.Utils.passwordUtils
 const ProfileUtils = coincidents.Utils.profileUtils
-const SESSION_TIME = coincidents.Config.redis.sessionTime
-
-const _createSession = (singUpObj) => cacheManager.set(singUpObj.token, singUpObj.user, SESSION_TIME)
 
 module.exports = (app) => {
   const signUpRepository = app.src.repositories.login.signUpRepository
@@ -26,7 +23,7 @@ module.exports = (app) => {
   }
 
   const _createSessionAndBuildResponseObj = (singUpObj) => 
-    Promise.all([_createSession(singUpObj), _structureUserObj(singUpObj)])
+    Promise.all([sessionManager.createSession(singUpObj), _structureUserObj(singUpObj)])
       .then((sessionAndResponse) => sessionAndResponse[1])
 
   const _structureUserObj = (singUpObj) => 

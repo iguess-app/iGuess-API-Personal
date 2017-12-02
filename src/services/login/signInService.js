@@ -2,9 +2,9 @@
 
 const Promise = require('bluebird')
 const coincidents = require('iguess-api-coincidents')
+const sessionManager = require('../../managers/sessionManager')
 
 const cacheManager = coincidents.Managers.cacheManager
-const SESSION_TIME = coincidents.Config.redis.sessionTime
 
 module.exports = (app) => {
   const signInRepository = app.src.repositories.login.signInRepository;
@@ -15,7 +15,7 @@ module.exports = (app) => {
     .then((singInObj) => {
       const notificationsPromise = listNotificationsRepository.getNotifications(singInObj.user.id)
       const friendListSizePromise = friendsNumberRepository.getNumberOfFriends(singInObj.user.userName)
-      const createSessionPromise = cacheManager.set(singInObj.token, singInObj.user, SESSION_TIME)
+      const createSessionPromise = sessionManager.createSession(singInObj)
 
       return Promise.all([singInObj, notificationsPromise, friendListSizePromise, createSessionPromise])
         .spread((userObj, notificationsObj, numberOfFriends) => {
