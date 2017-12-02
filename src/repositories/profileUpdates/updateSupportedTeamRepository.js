@@ -2,9 +2,10 @@
 
 const Boom = require('boom')
 
+const Team = require('../../models/holiDB/teamModel')
+
 module.exports = (app) => {
   const Profile = app.src.models.profileModel;
-  const Team = app.src.models.teamSchema;
 
   const updateSupportedTeam = (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
@@ -51,3 +52,5 @@ module.exports = (app) => {
     updateSupportedTeam
   }
 }
+
+/*eslint max-statements: 0*/

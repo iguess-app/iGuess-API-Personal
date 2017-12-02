@@ -3,8 +3,7 @@
 const Joi = require('joi')
 
 const request = Joi.object({
-  avatarFile: Joi.string().required(),
-  userName: Joi.string()
+  avatarFile: Joi.string().required()
 })
 
 const response = Joi.object({

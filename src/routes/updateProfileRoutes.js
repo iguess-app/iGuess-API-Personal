@@ -51,7 +51,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: schemas.updateAvatarSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.updateAvatarSchemas.response
@@ -68,7 +68,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: schemas.updateTeamsSchemas.supportedTeamRequest,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.updateTeamsSchemas.response
@@ -85,7 +85,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: schemas.updateTeamsSchemas.appreciatedTeamsRequest,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.updateTeamsSchemas.response

@@ -3,13 +3,14 @@
 const Boom = require('boom')
 const Promise = require('bluebird')
 
+const Team = require('../../models/holiDB/teamModel')
+
 const POSITION_ZERO = 0
 const POSITION_ONE = 1
 const NOT_SENT_BY_USER = []
 
 module.exports = (app) => {
   const Profile = app.src.models.profileModel;
-  const Team = app.src.models.teamSchema;
 
   const updateAppreciatedTeams = (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
@@ -80,3 +81,5 @@ module.exports = (app) => {
     updateAppreciatedTeams
   }
 }
+
+/*eslint max-statements: 0 */

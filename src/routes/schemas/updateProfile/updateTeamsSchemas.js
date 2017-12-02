@@ -6,13 +6,11 @@ const coincidents = require('iguess-api-coincidents')
 const maxTeamToAppreciateAllowed = coincidents.Config.profile.maxTeamToAppreciateAllowed
 
 const supportedTeamRequest = Joi.object({
-  supportedTeamId: Joi.string().required(),
-  userName: Joi.string()
+  supportedTeamId: Joi.string().required()
 })
 
 const appreciatedTeamsRequest = Joi.object({
-  appreciatedTeamsId: Joi.array().required().max(maxTeamToAppreciateAllowed),
-  userName: Joi.string()
+  appreciatedTeamsId: Joi.array().required().max(maxTeamToAppreciateAllowed)
 })
 
 const response = Joi.object({
