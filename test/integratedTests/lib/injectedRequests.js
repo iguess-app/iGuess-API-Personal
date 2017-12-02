@@ -9,6 +9,16 @@ const loginWithEmail = {
   }
 }
 
+const loginWithProfileToUpdate = {
+  method: 'POST',
+  url: '/login/singin',
+  payload: {
+    login: 'profileToUpdate',
+    password: 'profileToUpdate'
+  }
+}
+
 module.exports = {
-  loginWithEmail
+  loginWithEmail,
+  loginWithProfileToUpdate
 }

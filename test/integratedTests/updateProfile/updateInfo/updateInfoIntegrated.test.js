@@ -8,16 +8,27 @@ const injectedRequests = require('./injectedRequests')
 const server = require('../../../../app').configServer
 const schemaValidate = require('../../../../src/routes/schemas/updateProfile').updateInfoSchemas.response
 const generateString = require('./lib/generateString')
+const signInProfileUpdateBeforeTests = require('../../lib/getTokenWithSignInBeforeTests').signInProfileUpdateBeforeTests
 
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
 const statusCode = coincidents.Utils.statusUtils
+let token = ''
 
 lab.experiment('Integrated Test ==> Update Info Profile', () => {
 
-  lab.test('[IO] Update Info Profile - update Name', (done) => {
+  lab.before((done) => {
+    signInProfileUpdateBeforeTests()
+      .then((tokenResponse) => {
+        token = tokenResponse
+        done()
+      })
+  })
+
+  lab.test('[MONGO] [REDIS] Update Info Profile - update Name', (done) => {
     injectedRequests.updateName.payload.name = generateString(8)
+    injectedRequests.updateName.headers.token = token
     server.inject(injectedRequests.updateName)
       .then((response) => {
         const result = response.result
@@ -29,8 +40,9 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
       })
   })
 
-  lab.test('[IO] Update Info Profile - update Description', (done) => {
+  lab.test('[MONGO] [REDIS] Update Info Profile - update Description', (done) => {
     injectedRequests.updateDescription.payload.description = generateString(20)
+    injectedRequests.updateDescription.headers.token = token
     server.inject(injectedRequests.updateDescription)
       .then((response) => {
         const result = response.result
@@ -42,8 +54,9 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
       })
   })
 
-  lab.test('[IO] Update Info Profile - update Email', (done) => {
+  lab.test('[MONGO] [REDIS] Update Info Profile - update Email', (done) => {
     injectedRequests.updateEmail.payload.email = `${generateString(4)}@gmail.com`
+    injectedRequests.updateEmail.headers.token = token
     server.inject(injectedRequests.updateEmail)
       .then((response) => {
         const result = response.result
@@ -55,8 +68,9 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
       })
   })
 
-  lab.test('Update Info Profile - too long Name', (done) => {
+  lab.test('[REDIS] Update Info Profile - too long Name', (done) => {
     injectedRequests.updateName.payload.name = generateString(21)
+    injectedRequests.updateName.headers.token = token    
     server.inject(injectedRequests.updateName)
       .then((response) => {
         const result = response.result
@@ -66,7 +80,8 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
       })
   })
 
-  lab.test('Update Info Profile - too long userName', (done) => {
+  lab.test('[REDIS] Update Info Profile - too long userName', (done) => {
+    injectedRequests.tooLongUserName.headers.token = token        
     server.inject(injectedRequests.tooLongUserName)
       .then((response) => {
         const result = response.result
@@ -76,8 +91,9 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
       })
   })
 
-  lab.test('Update Info Profile - too long Description', (done) => {
+  lab.test('[REDIS] Update Info Profile - too long Description', (done) => {
     injectedRequests.updateDescription.payload.description = generateString(101)
+    injectedRequests.updateDescription.headers.token = token            
     server.inject(injectedRequests.updateDescription)
       .then((response) => {
         const result = response.result
@@ -87,7 +103,8 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
       })
   })
 
-  lab.test('Update Info Profile - not Valid Email', (done) => {
+  lab.test('[REDIS] Update Info Profile - not Valid Email', (done) => {
+    injectedRequests.invalidEmail.headers.token = token                
     server.inject(injectedRequests.invalidEmail)
       .then((response) => {
         const result = response.result
@@ -97,7 +114,8 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
       })
   })
 
-  lab.test('[IO] Update Info Profile - userName Alredy In Use', (done) => {
+  lab.test('[MONGO] [REDIS] Update Info Profile - userName Alredy In Use', (done) => {
+    injectedRequests.userNameAlredyInUse.headers.token = token                    
     server.inject(injectedRequests.userNameAlredyInUse)
       .then((response) => {
         const result = response.result

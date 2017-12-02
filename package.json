@@ -5,9 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "set MONGO_DB=personalDB&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set REDIS_KEY=wAMK4Hig&& node app.js",
-    "test": "set MONGO_DB=personalDBtest&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&& lab -v",
-    "test-cov": "set MONGO_DB=personalDBtest&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&lab -v -t 70",
-    "test-cov-html": "set MONGO_DB=personalDBtest&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&lab -r html -o test/coverage.html"
+    "test": "set MONGO_DB=personalDBtest&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&& lab -v",
+    "test-cov": "set MONGO_DB=personalDBtest&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&&lab -v -t 70",
+    "test-cov-html": "set MONGO_DB=personalDBtest&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&&lab -r html -o test/coverage.html"
   },
   "engines": {
     "node": "8.2.1"
@@ -20,7 +20,7 @@
     "boom": "4.2.0",
     "consign": "0.1.2",
     "google-cloud": "^0.56.0",
-    "hapi": "16.6.0",
+    "hapi": "16.1.0",
     "iguess-api-coincidents": "git+https://github.com/LuhalvesBR/iGuess-API-Coincidents.git",
     "joi": "10.1.0",
     "jsonwebtoken": "7.2.1",

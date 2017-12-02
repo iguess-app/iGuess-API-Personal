@@ -1,6 +1,7 @@
 'use strict'
 
 const schemas = require('./schemas/updateProfile')
+const defaultSessionHeaderSchema = require('./schemas/headers').defaultSessionHeaderSchema
 const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
 
 module.exports = (app) => {
@@ -16,7 +17,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: schemas.updateInfoSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.updateInfoSchemas.response

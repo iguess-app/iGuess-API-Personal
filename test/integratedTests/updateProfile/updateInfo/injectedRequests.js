@@ -4,54 +4,54 @@ const updateName = {
   method: 'PATCH',
   url: '/profile/updateInfo',
   payload: {
-    'userName': 'profileToUpdate',
     'name': 'DYNAMICALLY GENERATED'
-  }
+  },
+  headers: {}
 }
 
 const updateDescription = {
   method: 'PATCH',
   url: '/profile/updateInfo',
   payload: {
-    'userName': 'profileToUpdate',
     'description': 'DYNAMICALLY GENERATED'
-  }
+  },
+  headers: {}
 }
 
 const updateEmail = {
   method: 'PATCH',
   url: '/profile/updateInfo',
   payload: {
-    'userName': 'profileToUpdate',
     'email': 'DYNAMICALLY GENERATED'
-  }
+  },
+  headers: {}
 }
 
 const tooLongUserName = {
   method: 'PATCH',
   url: '/profile/updateInfo',
   payload: {
-    'userName': 'profileToUpdate',
     'newUserName': 'tooLongUserNametooLongUserNametooLongUserNametooLongUserName'
-  }
+  },
+  headers: {}
 }
 
 const invalidEmail = {
   method: 'PATCH',
   url: '/profile/updateInfo',
   payload: {
-    'userName': 'profileToUpdate',
     'email': 'notAValidEmail'
-  }
+  },
+  headers: {}
 }
 
 const userNameAlredyInUse = {
   method: 'PATCH',
   url: '/profile/updateInfo',
   payload: {
-    'userName': 'profileToUpdate',
     'newUserName': 'sergioRamos'
-  }
+  },
+  headers: {}
 }
 
 module.exports = {

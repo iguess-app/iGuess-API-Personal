@@ -7,4 +7,12 @@ const getTokenWithSignInBeforeTests = () =>
   server.inject(injectedRequests.loginWithEmail)
     .then((signInResponse) => signInResponse.result.token)
 
-module.exports = getTokenWithSignInBeforeTests
+const signInProfileUpdateBeforeTests = () => 
+  server.inject(injectedRequests.loginWithProfileToUpdate)
+    .then((signInResponse) => signInResponse.result.token)
+  
+
+module.exports = {
+  getTokenWithSignInBeforeTests,
+  signInProfileUpdateBeforeTests
+}

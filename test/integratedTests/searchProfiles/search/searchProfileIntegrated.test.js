@@ -6,7 +6,7 @@ const Lab = require('lab')
 const injectedRequests = require('./injectedRequests')
 const server = require('../../../../app').configServer
 const schemaValidate = require('../../../../src/routes/schemas/searchProfiles').searchProfilesSchema.response
-const getTokenWithSignInBeforeTests = require('../../lib/getTokenWithSignInBeforeTests')
+const getTokenWithSignInBeforeTests = require('../../lib/getTokenWithSignInBeforeTests').getTokenWithSignInBeforeTests
 
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
