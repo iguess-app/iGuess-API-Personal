@@ -3,7 +3,6 @@
 const Joi = require('joi')
 
 const request = Joi.object({
-  userName: Joi.string().required(),
   newUserName: Joi.string(),
   name: Joi.string(),
   description: Joi.string().allow(''),
