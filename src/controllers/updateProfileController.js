@@ -1,19 +1,19 @@
 'use strict'
 
 module.exports = (app) => {
-  const profilesServices = app.src.services.profileUpdates;
-  const updateInfoService = profilesServices.updateInfoService;
-  const updatePasswordService = profilesServices.updatePasswordService;
-  const updateAvatarService = profilesServices.updateAvatarService;
-  const updateSupportedTeamService = profilesServices.updateSupportedTeamService;
-  const updateAppreciatedTeamsService = profilesServices.updateAppreciatedTeamsService;
+  const profilesServices = app.src.services.profileUpdates
+  const updateInfoService = profilesServices.updateInfoService
+  const updatePasswordService = profilesServices.updatePasswordService
+  const updateAvatarService = profilesServices.updateAvatarService
+  const updateSupportedTeamService = profilesServices.updateSupportedTeamService
+  const updateAppreciatedTeamsService = profilesServices.updateAppreciatedTeamsService
 
   const updateInfo = (request, reply) => {
     updateInfoService.updateInfo(request.payload, request.headers)
       .then((updateResponse) => {
         reply(updateResponse)
       })
-      .catch((err) => reply(err));
+      .catch((err) => reply(err))
   }
 
   const updatePassword = (request, reply) => {
@@ -23,7 +23,7 @@ module.exports = (app) => {
       })
       .catch((err) =>
         reply(err)
-      );
+      )
   }
 
   const updateAvatar = (request, reply) => {
@@ -33,7 +33,7 @@ module.exports = (app) => {
       })
       .catch((err) =>
         reply(err)
-      );
+      )
   }
    
   const updateSupportedTeam = (request, reply) => {
@@ -43,7 +43,7 @@ module.exports = (app) => {
       })
       .catch((err) =>
         reply(err)
-      );
+      )
   }
 
   const updateAppreciatedTeams = (request, reply) => {
@@ -53,7 +53,7 @@ module.exports = (app) => {
       })
       .catch((err) =>
         reply(err)
-      );
+      )
   }
 
 
@@ -65,3 +65,5 @@ module.exports = (app) => {
     updateAppreciatedTeams
   }
 }
+
+/*eslint max-statements: 0*/
