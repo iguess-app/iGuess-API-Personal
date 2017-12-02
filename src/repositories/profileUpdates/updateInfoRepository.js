@@ -30,7 +30,8 @@ module.exports = (app) => {
         }
 
         return {
-          profileModified: modified
+          profileModified: modified,
+          modifiedData: userData
         };
       })
       .catch((err) => {
@@ -65,7 +66,7 @@ module.exports = (app) => {
       }
       updateObject.email = payload.email;
       updateObject.confirmedEmail = false;
-      //TODO add flag to verify is email was really changed, if yes: call the code to send a confirmation email
+      //TODO: add flag to verify is email was really changed, if yes: call the code to send a confirmation email
     }
 
     return updateObject;
@@ -75,3 +76,5 @@ module.exports = (app) => {
     updateInfo
   }
 }
+
+/*eslint max-statements: 0*/
