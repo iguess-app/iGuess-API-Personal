@@ -3,15 +3,19 @@
 const Boom = require('boom');
 const Promise = require('bluebird');
 
+const sessionManager = require('../../managers/sessionManager')
+
 module.exports = (app) => {
   const updatePasswordRepository = app.src.repositories.profileUpdates.updatePasswordRepository;
   const PasswordUtis = app.coincidents.Utils.passwordUtils;
   const ErrorUtils = app.coincidents.Utils.errorUtils;
   const CacheManager = app.coincidents.Managers.cacheManager;
 
-  const updatePassword = (payload, headers) => {
+  const updatePassword = async (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
-
+    const session = await sessionManager.getSession(headers.token, dictionary)
+    payload.userName = session.userName
+    
     const cacheKey = `${payload.userName}'s WrongAttemptsNumbers`
 
     if (!PasswordUtis.checkPasswordRestrict(payload.newPassword)) {

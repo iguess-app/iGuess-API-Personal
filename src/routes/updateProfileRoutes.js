@@ -34,7 +34,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: schemas.updatePasswordSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.updatePasswordSchemas.response

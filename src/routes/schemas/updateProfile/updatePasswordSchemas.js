@@ -4,8 +4,7 @@ const Joi = require('joi')
 
 const request = Joi.object({
   oldPassword: Joi.string().required(),
-  newPassword: Joi.string().required(),
-  userName: Joi.string()
+  newPassword: Joi.string().required()
 })
 
 const response = Joi.object({
