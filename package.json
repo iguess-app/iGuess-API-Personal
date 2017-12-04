@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "set MONGO_DB=personalDB&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set REDIS_KEY=wAMK4Hig&& node app.js",
+    "start": "set MONGO_DB=personalDB&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set SESSION_REDIS_EXPIRE_TIME=900&&set REDIS_KEY=wAMK4Hig&& node app.js",
     "test": "set MONGO_DB=personalDBtest&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&& lab -v",
     "test-cov": "set MONGO_DB=personalDBtest&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&&lab -v -t 70",
     "test-cov-html": "set MONGO_DB=personalDBtest&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&&lab -r html -o test/coverage.html"
