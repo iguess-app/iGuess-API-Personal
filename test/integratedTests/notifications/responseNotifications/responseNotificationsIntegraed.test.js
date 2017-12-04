@@ -9,25 +9,31 @@ const server = require('../../../../app').configServer
 const schemaValidate = require('../../../../src/routes/schemas/notifications').responseNotificationSchemas.response
 const recreateNotificationBeforeTest = require('./lib/recreateNotificationBeforeTest')
 
-
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
 const statusCode = coincidents.Utils.statusUtils
+let tokenUser = ''
 
 lab.experiment('Integrated Test ==> Response Notifications', () => {
-
+ 
+  /**
+   *  To this tests go well is necessary addFriends service and listNotification working well
+   *  To this tests go well the userName: userNotifi2 and userName: userNotifi must exist at DB
+   */
+  
    lab.beforeEach((done) => {
-      
       recreateNotificationBeforeTest()
-        .then((list) => {
-          injectedRequests.happyPathTrue.payload.notificationId = list.result[0].notificationRef
-          injectedRequests.happyPathFalse.payload.notificationId = list.result[0].notificationRef
+        .then((listAndToken) => {
+          injectedRequests.happyPathTrue.payload.notificationId = listAndToken[0].result[0].notificationRef
+          injectedRequests.happyPathFalse.payload.notificationId = listAndToken[0].result[0].notificationRef
+          tokenUser = listAndToken[1]
           done()
         })
   })
- 
+
   lab.test('[IO] Response Notifications - happyPath', (done) => {
+    injectedRequests.happyPathTrue.headers.token = tokenUser
     server.inject(injectedRequests.happyPathTrue)
       .then((response) => {
         const result = response.result
@@ -41,6 +47,7 @@ lab.experiment('Integrated Test ==> Response Notifications', () => {
   })
 
   lab.test('[IO] Response Notifications - happyPath', (done) => {
+    injectedRequests.happyPathFalse.headers.token = tokenUser
     server.inject(injectedRequests.happyPathFalse)
       .then((response) => {
         const result = response.result
@@ -54,6 +61,7 @@ lab.experiment('Integrated Test ==> Response Notifications', () => {
   })
 
   lab.test('[IO] Response Notifications - Not Found', (done) => {
+    injectedRequests.notFoundNotification.headers.token = tokenUser    
     server.inject(injectedRequests.notFoundNotification)
       .then((response) => {
         const result = response.result

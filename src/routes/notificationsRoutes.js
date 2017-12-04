@@ -51,7 +51,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: schemas.responseNotificationSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.responseNotificationSchemas.response

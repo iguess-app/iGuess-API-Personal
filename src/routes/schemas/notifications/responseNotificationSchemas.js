@@ -3,7 +3,6 @@
 const Joi = require('joi')
 
 const request = Joi.object({
-  userRef: Joi.string().required(),
   notificationId: Joi.string().required(),
   accepted: Joi.bool().required()
 })

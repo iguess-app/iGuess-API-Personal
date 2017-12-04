@@ -32,7 +32,10 @@ const beforeTests = () =>
   .then((token) => {
     injectedRequests.listNotificationBeforeTest.headers.token = token
 
-    return server.inject(injectedRequests.listNotificationBeforeTest)
+    return Promise.all([
+      server.inject(injectedRequests.listNotificationBeforeTest),
+      token
+    ])
   })
 
 const _removeFromFriendList = (user, userFriendRef) => {
