@@ -34,7 +34,7 @@ module.exports = (app) => {
       },
       validate: {
         query: schemas.listFriendsSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.listFriendsSchemas.response
@@ -51,7 +51,7 @@ module.exports = (app) => {
       },
       validate: {
         query: schemas.searchFriendsSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.searchFriendsSchemas.response

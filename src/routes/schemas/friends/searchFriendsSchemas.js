@@ -3,7 +3,6 @@
 const Joi = require('joi')
 
 const request = Joi.object({
-  userName: Joi.string(),
   searchField: Joi.string()
 })
 
@@ -17,5 +16,3 @@ module.exports = {
   request,
   response
 }
-
-//TODO: usar userRef ao invés de userId

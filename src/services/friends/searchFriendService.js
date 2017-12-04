@@ -1,18 +1,24 @@
 'use strict'
 
+const sessionManager = require('../../managers/sessionManager')
+
 module.exports = (app) => {
   const searchFriendRepository = app.src.repositories.friends.searchFriendRepository
 
-  const search = (request, headers) => {
+  const search = async (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
-
-    return searchFriendRepository.search(request, dictionary)
+    const session = await sessionManager.getSession(headers.token, dictionary)
+    payload.userName = session.userName
+    
+    return searchFriendRepository.search(payload, dictionary)
   }
 
-  const list = (request, headers) => {
+  const list = async (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
-
-    return searchFriendRepository.list(request, dictionary)
+    const session = await sessionManager.getSession(headers.token, dictionary)
+    payload.userName = session.userName
+    
+    return searchFriendRepository.list(payload, dictionary)
   }
 
   return {

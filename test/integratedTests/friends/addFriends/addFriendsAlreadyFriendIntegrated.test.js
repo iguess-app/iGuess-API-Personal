@@ -15,13 +15,13 @@ let tokenUser = ''
 
 lab.experiment('Integrated Test ==> Add Friends (Already Friends Scenario)', () => {
   
-    lab.before((done) => {
-      getTokenWithSignInBeforeTests()
-        .then((tokenSession) => {
-          tokenUser = tokenSession
-          done()
-        })
-    })
+  lab.before((done) => {
+    getTokenWithSignInBeforeTests()
+      .then((tokenSession) => {
+        tokenUser = tokenSession
+        done()
+      })
+  })
   
   /**
    * This test need to userName: sergioRamos and userName: cristianoRonaldo to be friends at DB

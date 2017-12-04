@@ -1,6 +1,7 @@
 const happyPath = {
   method: 'GET',
-  url: '/friends/list?userName=gabrielJesus'
+  url: '/friends/list',
+  headers: {}
 }
 
 module.exports = {
