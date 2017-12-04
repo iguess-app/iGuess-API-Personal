@@ -17,7 +17,8 @@ const getSession = async (token, dictionary) => {
 
 const createSession = (singUpObj) => {
   const sessionObj = {
-    userName: singUpObj.user.userName
+    userName: singUpObj.user.userName,
+    userRef: singUpObj.user.userRef
   }
   //TODO: Added a hardwareFingerPrint to session too
 

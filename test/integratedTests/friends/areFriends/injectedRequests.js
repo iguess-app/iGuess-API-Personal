@@ -2,12 +2,14 @@
 
 const happyPathFriends = {
   method: 'GET',
-  url: '/friends/areFriends?userRef=59bddea6e7c8a12658c0c08a&userRefFriend=59b54e44a7631d433470fee7'
+  url: '/friends/areFriends?userRefFriend=591e5c2fa8634f1f9880e8b6',
+  headers: {}
 }
 
 const happyPathNotFriends = {
   method: 'GET',
-  url: '/friends/areFriends?userRef=59bddea6e7c8a12658c0c08a&userRefFriend=59b54e44a7631d433470fee8'
+  url: '/friends/areFriends?userRefFriend=591e5c2fa8634f1f9880e8b7',
+  headers: {}
 }
 
 

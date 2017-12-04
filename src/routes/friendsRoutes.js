@@ -85,7 +85,7 @@ module.exports = (app) => {
       },
       validate: {
         query: schemas.areFriendsSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.areFriendsSchemas.response

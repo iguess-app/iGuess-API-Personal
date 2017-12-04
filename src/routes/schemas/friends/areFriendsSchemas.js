@@ -7,7 +7,6 @@ const Config = coincidents.Config
 const ID_SIZE = Config.mongo.idStringSize
 
 const request = Joi.object({
-  userRef: Joi.string().required().length(ID_SIZE),
   userRefFriend: Joi.string().required().length(ID_SIZE)
 })
 
