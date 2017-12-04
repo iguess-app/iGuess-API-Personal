@@ -2,6 +2,7 @@
 
 const schemas = require('./schemas/friends')
 const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
+const defaultSessionHeaderSchema = require('./schemas/headers').defaultSessionHeaderSchema
 
 module.exports = (app) => {
   const friendsController = app.src.controllers.friendsController
@@ -16,7 +17,7 @@ module.exports = (app) => {
       },
       validate: {
         payload: schemas.addFriendsSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.addFriendsSchemas.response

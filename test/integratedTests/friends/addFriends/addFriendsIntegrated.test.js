@@ -8,23 +8,28 @@ const injectedRequests = require('./injectedRequests')
 const server = require('../../../../app').configServer
 const schemaValidate = require('../../../../src/routes/schemas/friends/').addFriendsSchemas.response
 const undoFriendShipBeforeTests = require('./lib/undoFriendShipBeforeTests')
+const signInAddFriendsBeforeTests = require('../../lib/getTokenWithSignInBeforeTests').signInAddFriendsBeforeTests
 
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
 const statusCode = coincidents.Utils.statusUtils
+let tokenUser = ''
 
 lab.experiment('Integrated Test ==> Add Friends', () => {
 
   lab.before((done) => {
-    undoFriendShipBeforeTests()
+    signInAddFriendsBeforeTests()
+      .then((tokenSession) => tokenUser = tokenSession)
+      .then(() => undoFriendShipBeforeTests())
       .then(() => done())
   })
 
   /**
    * This tests need to userName: tioValmir and userName: gabrielJesus be at DB
    */
-  lab.test('[IO] Add Friends - happyPath', (done) => {
+  lab.test('[MONGO] [REDIS] Add Friends - happyPath', (done) => {
+    injectedRequests.happyPath.headers.token = tokenUser
     server.inject(injectedRequests.happyPath)
       .then((response) => {
         const result = response.result
@@ -35,7 +40,8 @@ lab.experiment('Integrated Test ==> Add Friends', () => {
       })
   })
 
-   lab.test('[IO] Add Friends - user Not Found', (done) => {
+   lab.test('[MONGO] [REDIS] Add Friends - user Not Found', (done) => {
+    injectedRequests.userNotFound.headers.token = tokenUser
     server.inject(injectedRequests.userNotFound)
       .then((response) => {
         expect(response.statusCode).to.be.equal(statusCode.notFound)
@@ -43,7 +49,8 @@ lab.experiment('Integrated Test ==> Add Friends', () => {
       })
   })
 
-  lab.test('[IO] Add Friends - notification already sent', (done) => {
+  lab.test('[MONGO] [REDIS] Add Friends - notification already sent', (done) => {
+    injectedRequests.notificationAlreadySent.headers.token = tokenUser
     server.inject(injectedRequests.notificationAlreadySent)
       .then((response) => {
         const result = response.result
@@ -53,16 +60,6 @@ lab.experiment('Integrated Test ==> Add Friends', () => {
       })
   }) 
 
-  /**
-   * This test need to userName: sergioRamos and userName: cristianoRonaldo to be friends at DB
-   */
-  lab.test('[IO] Add Friends - already friends', (done) => {
-    server.inject(injectedRequests.alreadyFriends)
-      .then((response) => {
-        const result = response.result
-        expect(result.message).to.be.equal(dictionary.alreadyFriends)
-        expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
-        done()
-      })
-  }) 
 })
+
+/*eslint no-return-assign: 0 */

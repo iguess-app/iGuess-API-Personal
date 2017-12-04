@@ -15,7 +15,7 @@ const beforeTests = () =>
     )
 
 const _getUserProfiles = () => {
-  const invitatorProfile = _getProfile(injectedRequests.happyPath.payload.userName)
+  const invitatorProfile = _getProfile('tioValmir')
   const invitedProfile = _getProfile(injectedRequests.happyPath.payload.invitedUserName)
 
   return Promise.all([invitatorProfile, invitedProfile])

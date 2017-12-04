@@ -4,14 +4,14 @@ const Promise = require('bluebird')
 const Boom = require('boom')
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
-  const Notifications = app.src.models.notificationsModel;
-  const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest;
+  const Profile = app.src.models.profileModel
+  const Notifications = app.src.models.notificationsModel
+  const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest
 
   const addFriend = (request, headers) => {
-    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
-    const getInvitatorPromise = _getUser(request.userName, dictionary);
-    const getInvitedPromise = _getUser(request.invitedUserName, dictionary);
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
+    const getInvitatorPromise = _getUser(request.userName, dictionary)
+    const getInvitedPromise = _getUser(request.invitedUserName, dictionary)
 
     return Promise.all([getInvitatorPromise, getInvitedPromise])
       .spread((invitatorUser, invitedUser) => _updateData(invitatorUser, invitedUser, dictionary))
@@ -34,7 +34,7 @@ module.exports = (app) => {
       invitedSent: false
     }
     if (invitatorResult.nModified && invitedResult) {
-      responseObj.invitedSent = true;
+      responseObj.invitedSent = true
     }
 
     return responseObj
@@ -48,7 +48,7 @@ module.exports = (app) => {
           throw Boom.notFound(errMsg)
         }
 
-        return user;
+        return user
       })
 
   const _updateInvitedUserNotifications = (invitatorUser, invitedUser, dictionary) => {
@@ -77,7 +77,7 @@ module.exports = (app) => {
 
   const _saveInvitatorUserProfile = (invitatorUser, invitedUser) => {
     if (!Array.isArray(invitatorUser.invitedFriendList)) {
-      invitatorUser.invitedFriendList = [];
+      invitatorUser.invitedFriendList = []
     }
 
     const searchQuery = {

@@ -18,7 +18,17 @@ const loginWithProfileToUpdate = {
   }
 }
 
+const loginWithTioValmir = {
+  method: 'POST',
+  url: '/login/singin',
+  payload: {
+    login: 'tioValmir',
+    password: 'tioValmir'
+  }
+}
+
 module.exports = {
   loginWithEmail,
-  loginWithProfileToUpdate
+  loginWithProfileToUpdate,
+  loginWithTioValmir
 }

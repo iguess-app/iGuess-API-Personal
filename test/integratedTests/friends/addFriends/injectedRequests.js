@@ -4,36 +4,36 @@ const happyPath = {
   method: 'POST',
   url: '/friends/add',
   payload: {
-    'userName': 'tioValmir',
     'invitedUserName': 'gabrielJesus'
-  }
+  },
+  headers: {}
 }
 
 const userNotFound = {
   method: 'POST',
   url: '/friends/add',
   payload: {
-    'userName': 'tioValmir',
     'invitedUserName': 'userThatNeverSignUp'
-  }
+  },
+  headers: {}
 }
 
 const notificationAlreadySent = {
   method: 'POST',
   url: '/friends/add',
   payload: {
-    'userName': 'tioValmir',
     'invitedUserName': 'gabrielJesus'
-  }
+  },
+  headers: {}
 }
 
 const alreadyFriends = {
   method: 'POST',
   url: '/friends/add',
   payload: {
-    'userName': 'sergioRamos',
     'invitedUserName': 'cristianoRonaldo'
-  }
+  },
+  headers: {}
 }
 
 module.exports = {

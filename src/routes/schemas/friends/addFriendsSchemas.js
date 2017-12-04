@@ -3,7 +3,6 @@
 const Joi = require('joi')
 
 const request = Joi.object({
-  userName: Joi.string(),
   invitedUserName: Joi.string()
 })
 
