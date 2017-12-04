@@ -61,14 +61,14 @@ module.exports = (app) => {
 
   server.route({
     path: '/friends/undo',
-    method: 'PUT',
+    method: 'DELETE',
     config: {
       handler: (request, reply) => {
         friendsController.undoFriendship(request, reply)
       },
       validate: {
         payload: schemas.undoFriendshipSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.undoFriendshipSchemas.response

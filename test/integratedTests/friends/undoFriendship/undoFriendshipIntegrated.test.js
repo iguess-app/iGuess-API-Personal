@@ -8,23 +8,31 @@ const injectedRequests = require('./injectedRequests')
 const server = require('../../../../app').configServer
 const schemaValidate = require('../../../../src/routes/schemas/friends/').undoFriendshipSchemas.response
 const doAFriendshipBeforeTests = require('./lib/doAFriendshipBeforeTests')
+const getTokenWithSignInBeforeTests = require('../../lib/getTokenWithSignInBeforeTests').getTokenWithSignInBeforeTests
 
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
 const statusCode = coincidents.Utils.statusUtils
+let tokenUser = ''
 
 lab.experiment('Integrated Test ==> Undo Friendship', () => {
 
   lab.before((done) => {
+    
     doAFriendshipBeforeTests()
-      .then(() => done())
+      .then(() => getTokenWithSignInBeforeTests())
+      .then((tokenSession) => {
+        tokenUser = tokenSession
+        done()
+      })
   })
 
   /**
-   * This test need to userName: xavi and userName: sergioRamos friends
+   * This test need to userName: sergioRamos and userName: fernandoTorres friends
    */
   lab.test('[IO] Undo Friendship - happyPath', (done) => {
+    injectedRequests.happyPath.headers.token = tokenUser
     server.inject(injectedRequests.happyPath)
       .then((response) => {
         const result = response.result
@@ -36,9 +44,10 @@ lab.experiment('Integrated Test ==> Undo Friendship', () => {
   })
 
   /**
-   * This test need to userName: xavi and userName: sergioRamos not friends
+   * This test need to userName: sergioRamos and userName: messi not friends
    */
   lab.test('[IO] Undo Friendship - users Not Friends', (done) => {
+    injectedRequests.usersNotFriends.headers.token = tokenUser
     server.inject(injectedRequests.usersNotFriends)
       .then((response) => {
         const result = response.result

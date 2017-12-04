@@ -10,7 +10,7 @@ const beforeTests = () =>
 
 
 const _getUserProfiles = () => {
-  const invitatorProfile = _getProfile(injectedRequests.happyPath.payload.userName)
+  const invitatorProfile = _getProfile('sergioRamos')
   const invitedProfile = _getProfile(injectedRequests.happyPath.payload.friendUserName)
 
   return Promise.all([invitatorProfile, invitedProfile])

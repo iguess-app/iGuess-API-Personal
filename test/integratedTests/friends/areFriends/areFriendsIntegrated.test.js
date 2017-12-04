@@ -22,6 +22,9 @@ lab.experiment('Integrated Test ==> Are Friends', () => {
       })
   })
 
+  /**
+   * This test need to userName: sergioRamos and userRef: 591e5bbba8634f1f9880e8aa friends
+   */
   lab.test('[IO] Are Friends - happyPath (friends)', (done) => {
     injectedRequests.happyPathFriends.headers.token = tokenUser
     server.inject(injectedRequests.happyPathFriends)

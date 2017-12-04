@@ -1,12 +1,16 @@
 'use strict'
 
+const sessionManager = require('../../managers/sessionManager')
+
 module.exports = (app) => {
-  const undoFriendShipRepository = app.src.repositories.friends.undoFriendShipRepository;
+  const undoFriendShipRepository = app.src.repositories.friends.undoFriendShipRepository
 
-  const undoFriendship = (request, headers) => {
-    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
+  const undoFriendship = async (payload, headers) => {
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
+    const session = await sessionManager.getSession(headers.token, dictionary)
+    payload.userName = session.userName
 
-    return undoFriendShipRepository.undoFriendship(request, dictionary)
+    return undoFriendShipRepository.undoFriendship(payload, dictionary)
   }
 
   return {

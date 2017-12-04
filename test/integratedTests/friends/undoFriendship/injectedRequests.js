@@ -1,21 +1,21 @@
 'use strict'
 
 const happyPath = {
-  method: 'PUT',
+  method: 'DELETE',
   url: '/friends/undo',
   payload: {
-    userName: 'fernandinho',
-    friendUserName: 'kunAguero'
-  }
+    friendUserName: 'fernandoTorres'
+  },
+  headers: {}
 }
 
 const usersNotFriends = {
-  method: 'PUT',
+  method: 'DELETE',
   url: '/friends/undo',
   payload: {
-    userName: 'messi',
-    friendUserName: 'sergioRamos'
-  }
+    friendUserName: 'messi'
+  },
+  headers: {}
 }
 
 
