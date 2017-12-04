@@ -2,9 +2,7 @@
 
 const Joi = require('joi')
 
-const request = Joi.object({
-  userRef: Joi.string().required()
-})
+const request = Joi.empty()
 
 const response = Joi.object({
   profileModified: Joi.bool().required()

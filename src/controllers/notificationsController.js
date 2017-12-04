@@ -16,7 +16,7 @@ module.exports = (app) => {
   }
 
   const putNotificationsSaw = (request, reply) => {
-    putNotificationsSawService.putNotificationsSaw(request.payload, request.headers)
+    putNotificationsSawService.putNotificationsSaw(request.headers)
       .then((response) => {
         reply(response)
       })
