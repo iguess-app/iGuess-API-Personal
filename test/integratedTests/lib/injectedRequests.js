@@ -27,8 +27,18 @@ const loginWithTioValmir = {
   }
 }
 
+const loginWithuserNotifi = {
+  method: 'POST',
+  url: '/login/singin',
+  payload: {
+    login: 'userNotifi',
+    password: 'userNotifi'
+  }
+}
+
 module.exports = {
   loginWithEmail,
   loginWithProfileToUpdate,
-  loginWithTioValmir
+  loginWithTioValmir,
+  loginWithuserNotifi
 }

@@ -4,9 +4,9 @@ const sendNotificationBeforeTest = {
   method: 'POST',
   url: '/friends/add',
   payload: {
-    'userName': 'userNotifi',
     'invitedUserName': 'userNotifi2'
-  }
+  },
+  headers: {}
 }
 
 const listNotificationBeforeTest = {

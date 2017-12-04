@@ -14,10 +14,15 @@ const signInProfileUpdateBeforeTests = () =>
 const signInAddFriendsBeforeTests = () => 
   server.inject(injectedRequests.loginWithTioValmir)
     .then((signInResponse) => signInResponse.result.token)
+
+const signInAddFriendsToResponseNotificationBeforeTests = () => 
+  server.inject(injectedRequests.loginWithuserNotifi)
+    .then((signInResponse) => signInResponse.result.token)
   
 
 module.exports = {
   getTokenWithSignInBeforeTests,
   signInProfileUpdateBeforeTests,
-  signInAddFriendsBeforeTests
+  signInAddFriendsBeforeTests,
+  signInAddFriendsToResponseNotificationBeforeTests
 }
