@@ -19,10 +19,14 @@ const signInAddFriendsToResponseNotificationBeforeTests = () =>
   server.inject(injectedRequests.loginWithuserNotifi)
     .then((signInResponse) => signInResponse.result.token)
   
+const signInToResponseNotificationBeforeTests = () => 
+  server.inject(injectedRequests.loginWithuserNotifi2)
+    .then((signInResponse) => signInResponse.result.token)
 
 module.exports = {
   getTokenWithSignInBeforeTests,
   signInProfileUpdateBeforeTests,
   signInAddFriendsBeforeTests,
-  signInAddFriendsToResponseNotificationBeforeTests
+  signInAddFriendsToResponseNotificationBeforeTests,
+  signInToResponseNotificationBeforeTests
 }

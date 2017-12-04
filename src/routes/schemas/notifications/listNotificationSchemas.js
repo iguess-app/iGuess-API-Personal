@@ -2,10 +2,6 @@
 
 const Joi = require('joi')
 
-const request = Joi.object({
-  userRef: Joi.string().required()
-})
-
 const response = Joi.array().items(
   Joi.object({
     notificationRef: Joi.string().required(),
@@ -17,6 +13,5 @@ const response = Joi.array().items(
 )
 
 module.exports = {
-  request,
   response
 }

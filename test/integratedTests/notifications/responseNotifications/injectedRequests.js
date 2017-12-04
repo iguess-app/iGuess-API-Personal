@@ -11,7 +11,8 @@ const sendNotificationBeforeTest = {
 
 const listNotificationBeforeTest = {
   method: 'GET',
-  url: '/notifications/list?userRef=5a189e34d7b55e03544887f8'
+  url: '/notifications/list',
+  headers: {}
 }
 
 const happyPathTrue = {
@@ -21,7 +22,8 @@ const happyPathTrue = {
     'userRef': '5a189e34d7b55e03544887f8',
     'notificationId': 'SET DYNAMICALLY',
     'accepted': true
-  }
+  },
+  headers: {}
 }
 
 const happyPathFalse = {
@@ -31,7 +33,8 @@ const happyPathFalse = {
     'userRef': '5a189e34d7b55e03544887f8',
     'notificationId': 'SET DYNAMICALLY',
     'accepted': false
-  }
+  },
+  headers: {}
 }
 
 const notFoundNotification = {
@@ -41,7 +44,8 @@ const notFoundNotification = {
     'userRef': '591df6c78d1fdc0bb4eba371',
     'notificationId': '59c9bf289f427d52cc772eea',
     'accepted': false
-  }
+  },
+  headers: {}
 }
 
 module.exports = {

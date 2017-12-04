@@ -8,7 +8,6 @@ const injectedRequests = require('./injectedRequests')
 const server = require('../../../../app').configServer
 const schemaValidate = require('../../../../src/routes/schemas/notifications').responseNotificationSchemas.response
 const recreateNotificationBeforeTest = require('./lib/recreateNotificationBeforeTest')
-const signInAddFriendsToResponseNotificationBeforeTests = require('../../lib/getTokenWithSignInBeforeTests').signInAddFriendsToResponseNotificationBeforeTests
 
 
 const lab = exports.lab = Lab.script()
@@ -20,8 +19,7 @@ lab.experiment('Integrated Test ==> Response Notifications', () => {
 
    lab.beforeEach((done) => {
       
-    signInAddFriendsToResponseNotificationBeforeTests()
-    .then((token) => recreateNotificationBeforeTest(token))
+      recreateNotificationBeforeTest()
         .then((list) => {
           injectedRequests.happyPathTrue.payload.notificationId = list.result[0].notificationRef
           injectedRequests.happyPathFalse.payload.notificationId = list.result[0].notificationRef

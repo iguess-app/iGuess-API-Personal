@@ -36,9 +36,19 @@ const loginWithuserNotifi = {
   }
 }
 
+const loginWithuserNotifi2 = {
+  method: 'POST',
+  url: '/login/singin',
+  payload: {
+    login: 'userNotifi2',
+    password: 'userNotifi2'
+  }
+}
+
 module.exports = {
   loginWithEmail,
   loginWithProfileToUpdate,
   loginWithTioValmir,
-  loginWithuserNotifi
+  loginWithuserNotifi,
+  loginWithuserNotifi2
 }

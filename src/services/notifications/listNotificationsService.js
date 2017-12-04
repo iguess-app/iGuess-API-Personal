@@ -1,22 +1,25 @@
 'use strict'
 
-const Boom = require('boom');
+const Boom = require('boom')
 const Promise = require('bluebird')
 
-module.exports = (app) => {
-  const listNotificationsRepository = app.src.repositories.notifications.listNotificationsRepository;
-  const getUserByIdRepository = app.src.repositories.getById.getUserByIdRepository;
-  const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest;
-  const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest;
+const sessionManager = require('../../managers/sessionManager')
 
-  const listNotifications = (request, headers) => {
-    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
-    const userRef = request.userRef;
+module.exports = (app) => {
+  const listNotificationsRepository = app.src.repositories.notifications.listNotificationsRepository
+  const getUserByIdRepository = app.src.repositories.getById.getUserByIdRepository
+  const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest
+  const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest
+
+  const listNotifications = async (request, headers) => {
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
+    const session = await sessionManager.getSession(headers.token, dictionary)
+    const userRef = session.userRef
 
     return listNotificationsRepository.getNotifications(userRef, headers)
       .then((listOfNotifications) => {
         if (!listOfNotifications) {
-          return [];
+          return []
         }
         const notificationsPromisesArray = listOfNotifications.notifications.map((notification) =>
           _getNotificationFullMessage(notification, dictionary))
@@ -32,12 +35,12 @@ module.exports = (app) => {
       case GUESSLEAGUE_TYPE:
         return _buildGuessLeagueReqText(notification, dictionary.guessLeagueRequest)
       default:
-        throw Boom.notImplemented();
+        throw Boom.notImplemented()
     }
   }
 
   const _buildGuessLeagueReqText = (notification, message) => {
-    const getUserPromise = getUserByIdRepository.getUserById(notification.messageUserRef);
+    const getUserPromise = getUserByIdRepository.getUserById(notification.messageUserRef)
 
     const championshipHumanName = `${notification.championship.championship} ${notification.championship.season}`
 
@@ -62,4 +65,4 @@ module.exports = (app) => {
   return {
     listNotifications
   }
-};
+}

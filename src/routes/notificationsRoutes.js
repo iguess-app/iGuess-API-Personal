@@ -2,6 +2,7 @@
 
 const Joi = require('joi')
 const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
+const defaultSessionHeaderSchema = require('./schemas/headers').defaultSessionHeaderSchema
 const schemas = require('./schemas/notifications')
 
 module.exports = (app) => {
@@ -16,8 +17,7 @@ module.exports = (app) => {
         notificationsController.listNotifications(request, reply)
       },
       validate: {
-        query: schemas.listNotificationSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.listNotificationSchemas.response
