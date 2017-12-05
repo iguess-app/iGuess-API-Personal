@@ -12,7 +12,7 @@ const getSession = async (token, dictionary) => {
     return session
   }
 
-  return Promise.reject(Boom.notAcceptable(dictionary.sessionExpired))
+  return Promise.reject(Boom.unauthorized(dictionary.sessionExpired))
 }
 
 const createSession = (singUpObj) => {
