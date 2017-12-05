@@ -17,7 +17,6 @@ module.exports = (app) => {
   const championshipSchema = new Schema({
     championshipRef: {
       type: String,
-      unique: true,
       required: true,
       validate: [mongo.checkObjectId, String(serverErrors.notMongoIdValid)]
     },

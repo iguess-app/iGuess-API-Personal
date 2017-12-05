@@ -1,9 +1,12 @@
 'use strict'
 
+const coincidents = require('iguess-api-coincidents')
+const log = coincidents.Managers.logManager
+const TokenManager = coincidents.Managers.tokenManager
+
 module.exports = (app) => {
   const Profile = app.src.models.profileModel;
   const Notifications = app.src.models.notificationsModel;
-  const TokenManager = app.coincidents.Managers.tokenManager;
   const QueryUtils = app.coincidents.Utils.queryUtils;
 
   const singUp = (dataToDB) =>
@@ -48,7 +51,7 @@ module.exports = (app) => {
       notifications: []
     }
     Notifications.create(notificationObj)
-    .catch((err) => new Error(err));
+      .catch((err) => log.error(err));
   }
 
   return {

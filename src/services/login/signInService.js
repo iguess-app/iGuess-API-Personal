@@ -13,7 +13,7 @@ module.exports = (app) => {
 
   const singIn = (query, headers) => signInRepository.singIn(query, headers)
     .then((singInObj) => {
-      const notificationsPromise = listNotificationsRepository.getNotifications(singInObj.user.id)
+      const notificationsPromise = listNotificationsRepository.getNotifications(singInObj.user.userRef)
       const friendListSizePromise = friendsNumberRepository.getNumberOfFriends(singInObj.user.userName)
       const createSessionPromise = sessionManager.createSession(singInObj)
 
