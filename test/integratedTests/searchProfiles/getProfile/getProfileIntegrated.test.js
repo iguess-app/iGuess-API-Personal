@@ -48,6 +48,18 @@ lab.experiment('Integrated Test ==> Get Profile', () => {
       })
   })
 
+  lab.test('[MONGO] [REDIS] Get Profile - happyPath with self', (done) => {
+    injectedRequests.happyPathWithSelf.headers.token = token
+    server.inject(injectedRequests.happyPathWithSelf)
+      .then((response) => {
+        const result = response.result
+        Joi.validate(result, schemaValidate, (err) => {
+          expect(err).to.be.equal(null)
+          done()
+        })
+      })
+  })
+
   lab.test('[MONGO] [REDIS] Get Profile - not found', (done) => {
     injectedRequests.notFound.headers.token = token
     server.inject(injectedRequests.notFound)

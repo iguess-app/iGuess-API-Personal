@@ -14,7 +14,11 @@ const schemaRequestWithUserName = Joi.object({
   userName: Joi.string().required()
 })
 
-const request = Joi.alternatives().try(schemaRequestWithUserRef, schemaRequestWithUserName)
+const schemaRequestSelfSearch = Joi.object({
+  self: Joi.bool().only([true]).required()
+})
+
+const request = Joi.alternatives().try(schemaRequestWithUserRef, schemaRequestWithUserName, schemaRequestSelfSearch)
 
 const response = Joi.object({
   userName: Joi.string().required(),

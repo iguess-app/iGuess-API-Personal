@@ -7,7 +7,10 @@ module.exports = (app) => {
 
   const getProfile = async (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
-    await sessionManager.getSession(headers.token, dictionary)
+    const session = await sessionManager.getSession(headers.token, dictionary)
+    if (payload.self) {
+      payload.userRef = session.userRef
+    }
 
     return getProfileRepository.getProfile(payload, dictionary)
   }
