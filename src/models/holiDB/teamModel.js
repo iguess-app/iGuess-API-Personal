@@ -26,7 +26,7 @@ const teamSchema = new Schema({
   },
   logo: {
     type: String,
-    required: true
+    default: ''
   }
 }, optionsSchemas.versionKeyDisable)
 

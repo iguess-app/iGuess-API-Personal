@@ -46,7 +46,7 @@ module.exports = (app) => {
     },
     logo: {
       type: String,
-      required: true
+      default: ''
     }
   }, optionsSchemas._idAndVersionKeyDisable)
 
