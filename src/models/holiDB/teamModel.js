@@ -10,6 +10,21 @@ const Schema = mongoose.Schema
 const mongo = coincidents.Config.mongo
 const serverErrors = coincidents.Utils.errorUtils.serverErrors
 
+const logoSchema = new Schema({
+  mini: {
+    type: String,
+    required: true
+  },
+  small: {
+    type: String,
+    required: true
+  },
+  normal: {
+    type: String,
+    required: true
+  }
+})
+
 const teamSchema = new Schema({
   league: {
     type: String,
@@ -25,7 +40,7 @@ const teamSchema = new Schema({
     required: true
   },
   logo: {
-    type: String,
+    type: logoSchema,
     default: ''
   }
 }, optionsSchemas.versionKeyDisable)
