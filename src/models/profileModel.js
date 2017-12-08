@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 
 const optionsSchemas = require('./optionsSchemas/optionsSchemas')
+const logoSchema = require('./subValidations/logo')
 
 module.exports = (app) => {
   const Managers = app.coincidents.Managers
@@ -45,8 +46,7 @@ module.exports = (app) => {
       required: true
     },
     logo: {
-      type: String,
-      default: ''
+      type: logoSchema
     }
   }, optionsSchemas._idAndVersionKeyDisable)
 

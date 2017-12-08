@@ -17,14 +17,22 @@
           "teamId": "5872a51a4db3fb378bc7ee15",
           "fullName": "Clube Atlético Mineiro",
           "shortName": "Atlético-MG",
-          "logo": "nothing =(",
+          "logo": {
+              "mini" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_mini/real_madrid.png",
+              "small" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_small/real_madrid.png",
+              "normal" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_normal/real_madrid.png"            
+          },
           "league": "5872467bed1b02314e08828a"
         },
         {
           "teamId": "5872420ded1b02314e088289",
           "fullName": "Santos Futebol Clube",
           "shortName": "Santos",
-          "logo": "nothing =(",
+          "logo": {
+              "mini" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_mini/real_madrid.png",
+              "small" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_small/real_madrid.png",
+              "normal" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_normal/real_madrid.png"            
+          },
           "league": "5872467bed1b02314e08828a"
         }
       ],
@@ -32,7 +40,11 @@
         "teamId": "587261c5ed1b02314e08828c",
         "fullName": "Real Madrid Club de Fútbol",
         "shortName": "Real Madrid",
-        "logo": "nothing =[",
+        "logo": {
+              "mini" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_mini/real_madrid.png",
+              "small" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_small/real_madrid.png",
+              "normal" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_normal/real_madrid.png"          
+        },
         "league": "58726176ed1b02314e08828b"
       }
     },
@@ -58,14 +70,22 @@
           "teamId": "5872a51a4db3fb378bc7ee15",
           "fullName": "Clube Atlético Mineiro",
           "shortName": "Atlético-MG",
-          "logo": "nothing =(",
+          "logo": {
+              "mini" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_mini/real_madrid.png",
+              "small" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_small/real_madrid.png",
+              "normal" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_normal/real_madrid.png"            
+          },
           "league": "5872467bed1b02314e08828a"
         },
         {
           "teamId": "5872420ded1b02314e088289",
           "fullName": "Santos Futebol Clube",
           "shortName": "Santos",
-          "logo": "nothing =(",
+          "logo": {
+              "mini" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_mini/real_madrid.png",
+              "small" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_small/real_madrid.png",
+              "normal" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_normal/real_madrid.png"            
+          },
           "league": "5872467bed1b02314e08828a"
         },
         {
@@ -73,14 +93,22 @@
           "league": "5872467bed1b02314e08828a",
           "fullName": "Cruzeiro Esporte Clube",
           "shortName": "Cruzeiro",
-          "logo": "nothing =("
+          "logo": {
+              "mini" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_mini/real_madrid.png",
+              "small" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_small/real_madrid.png",
+              "normal" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_normal/real_madrid.png"            
+          }
         }
       ],
       "supportedTeam": {
         "teamId": "587261c5ed1b02314e08828c",
         "fullName": "Real Madrid Club de Fútbol",
         "shortName": "Real Madrid",
-        "logo": "nothing =[",
+        "logo": {
+              "mini" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_mini/real_madrid.png",
+              "small" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_small/real_madrid.png",
+              "normal" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_normal/real_madrid.png"          
+        },
         "league": "58726176ed1b02314e08828b"
       }
     },
@@ -103,14 +131,22 @@
           "teamId": "5872a51a4db3fb378bc7ee15",
           "fullName": "Clube Atlético Mineiro",
           "shortName": "Atlético-MG",
-          "logo": "nothing =(",
+          "logo": {
+              "mini" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_mini/real_madrid.png",
+              "small" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_small/real_madrid.png",
+              "normal" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_normal/real_madrid.png"            
+          },
           "league": "5872467bed1b02314e08828a"
         },
         {
           "teamId": "5872420ded1b02314e088289",
           "fullName": "Santos Futebol Clube",
           "shortName": "Santos",
-          "logo": "nothing =(",
+          "logo": {
+              "mini" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_mini/real_madrid.png",
+              "small" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_small/real_madrid.png",
+              "normal" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_normal/real_madrid.png"            
+          },
           "league": "5872467bed1b02314e08828a"
         }
       ],
@@ -118,7 +154,11 @@
         "teamId": "587261c5ed1b02314e08828c",
         "fullName": "Real Madrid Club de Fútbol",
         "shortName": "Real Madrid",
-        "logo": "nothing =[",
+        "logo": {
+              "mini" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_mini/real_madrid.png",
+              "small" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_small/real_madrid.png",
+              "normal" : "https://storage.googleapis.com/iguess-static-files/uefa/la_liga_normal/real_madrid.png"          
+        },
         "league": "58726176ed1b02314e08828b"
       }
     },

@@ -6,7 +6,11 @@ const teamSchema = Joi.object({
   teamId: Joi.string().required(),
   fullName: Joi.string().required(),
   shortName: Joi.string().required(),
-  logo: Joi.string().allow(''),
+  logo: Joi.object({
+    mini: Joi.string(),
+    small: Joi.string(),
+    normal: Joi.string()
+  }),
   league: Joi.string().required()
 })
 

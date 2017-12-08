@@ -4,26 +4,12 @@ const mongoose = require('mongoose')
 const coincidents = require('iguess-api-coincidents')
 
 const optionsSchemas = require('../optionsSchemas/optionsSchemas')
+const logoSchema = require('../subValidations/logo')
 const db = require('./connect')
 
 const Schema = mongoose.Schema
 const mongo = coincidents.Config.mongo
 const serverErrors = coincidents.Utils.errorUtils.serverErrors
-
-const logoSchema = new Schema({
-  mini: {
-    type: String,
-    required: true
-  },
-  small: {
-    type: String,
-    required: true
-  },
-  normal: {
-    type: String,
-    required: true
-  }
-})
 
 const teamSchema = new Schema({
   league: {
