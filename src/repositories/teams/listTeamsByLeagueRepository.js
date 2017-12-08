@@ -11,7 +11,11 @@ module.exports = () => {
       league: request.leagueRef
     }
 
-    return Team.find(searchQuery)
+    const sortQuery = {
+      shortName: 1
+    }
+
+    return Team.find(searchQuery).sort(sortQuery)
       .then((teams) => _checkErrors(teams, dictionary))
       .then((teams) => _filteringResponse(teams))
   }

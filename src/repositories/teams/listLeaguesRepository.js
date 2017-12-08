@@ -9,7 +9,11 @@ module.exports = () => {
       continental: false
     }
 
-    return League.find(searchQuery)
+    const sortQuery = {
+      country: 1
+    }
+
+    return League.find(searchQuery).sort(sortQuery)
       .then((leagues) => _filteringResponse(leagues))
   }
 
