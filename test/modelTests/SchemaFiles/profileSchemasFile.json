@@ -14,7 +14,7 @@
     ],
     "footballSupportedTeams": {
       "appreciatedTeams": [{
-          "teamId": "5872a51a4db3fb378bc7ee15",
+          "teamRef": "5872a51a4db3fb378bc7ee15",
           "fullName": "Clube Atlético Mineiro",
           "shortName": "Atlético-MG",
           "logo": {
@@ -25,7 +25,7 @@
           "league": "5872467bed1b02314e08828a"
         },
         {
-          "teamId": "5872420ded1b02314e088289",
+          "teamRef": "5872420ded1b02314e088289",
           "fullName": "Santos Futebol Clube",
           "shortName": "Santos",
           "logo": {
@@ -37,7 +37,7 @@
         }
       ],
       "supportedTeam": {
-        "teamId": "587261c5ed1b02314e08828c",
+        "teamRef": "587261c5ed1b02314e08828c",
         "fullName": "Real Madrid Club de Fútbol",
         "shortName": "Real Madrid",
         "logo": {
@@ -67,7 +67,7 @@
     ],
     "footballSupportedTeams": {
       "appreciatedTeams": [{
-          "teamId": "5872a51a4db3fb378bc7ee15",
+          "teamRef": "5872a51a4db3fb378bc7ee15",
           "fullName": "Clube Atlético Mineiro",
           "shortName": "Atlético-MG",
           "logo": {
@@ -78,7 +78,7 @@
           "league": "5872467bed1b02314e08828a"
         },
         {
-          "teamId": "5872420ded1b02314e088289",
+          "teamRef": "5872420ded1b02314e088289",
           "fullName": "Santos Futebol Clube",
           "shortName": "Santos",
           "logo": {
@@ -89,7 +89,7 @@
           "league": "5872467bed1b02314e08828a"
         },
         {
-          "teamId": "5872a51a4db3fb378bc7ee1c",
+          "teamRef": "5872a51a4db3fb378bc7ee1c",
           "league": "5872467bed1b02314e08828a",
           "fullName": "Cruzeiro Esporte Clube",
           "shortName": "Cruzeiro",
@@ -101,7 +101,7 @@
         }
       ],
       "supportedTeam": {
-        "teamId": "587261c5ed1b02314e08828c",
+        "teamRef": "587261c5ed1b02314e08828c",
         "fullName": "Real Madrid Club de Fútbol",
         "shortName": "Real Madrid",
         "logo": {
@@ -128,7 +128,7 @@
     ],
     "footballSupportedTeams": {
       "appreciatedTeams": [{
-          "teamId": "5872a51a4db3fb378bc7ee15",
+          "teamRef": "5872a51a4db3fb378bc7ee15",
           "fullName": "Clube Atlético Mineiro",
           "shortName": "Atlético-MG",
           "logo": {
@@ -139,7 +139,7 @@
           "league": "5872467bed1b02314e08828a"
         },
         {
-          "teamId": "5872420ded1b02314e088289",
+          "teamRef": "5872420ded1b02314e088289",
           "fullName": "Santos Futebol Clube",
           "shortName": "Santos",
           "logo": {
@@ -151,7 +151,7 @@
         }
       ],
       "supportedTeam": {
-        "teamId": "587261c5ed1b02314e08828c",
+        "teamRef": "587261c5ed1b02314e08828c",
         "fullName": "Real Madrid Club de Fútbol",
         "shortName": "Real Madrid",
         "logo": {

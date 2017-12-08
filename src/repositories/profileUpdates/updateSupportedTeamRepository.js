@@ -29,11 +29,11 @@ module.exports = (app) => {
               profileModified: false
             }
             const footballSupportedTeams = userFound.footballSupportedTeams;
-            if (footballSupportedTeams.supportedTeam && footballSupportedTeams.supportedTeam.teamId === teamChosen.id) {
+            if (footballSupportedTeams.supportedTeam && footballSupportedTeams.supportedTeam.teamRef === teamChosen.id) {
               return responseObj;
             }
             userFound.footballSupportedTeams.supportedTeam = {
-              teamId: teamChosen.id,
+              teamRef: teamChosen.id,
               fullName: teamChosen.fullName,
               shortName: teamChosen.shortName,
               logo: teamChosen.logo,

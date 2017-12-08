@@ -63,14 +63,14 @@ module.exports = (app) => {
   }
 
   const _isTheSameAppreciatedTeamsAtDataBase = (appreciatedTeams, firstAppreciatedTeamId, secondAppreciatedTeamId) =>
-    appreciatedTeams[POSITION_ZERO] && appreciatedTeams[POSITION_ZERO].teamId === firstAppreciatedTeamId &&
-    appreciatedTeams[POSITION_ONE] && appreciatedTeams[POSITION_ONE].teamId === secondAppreciatedTeamId
+    appreciatedTeams[POSITION_ZERO] && appreciatedTeams[POSITION_ZERO].teamRef === firstAppreciatedTeamId &&
+    appreciatedTeams[POSITION_ONE] && appreciatedTeams[POSITION_ONE].teamRef === secondAppreciatedTeamId
 
   const _theSupportedTeamIsEqualToAppreciatedTeam = (supportedTeam, firstAppreciatedTeamId, secondAppreciatedTeamId) =>
-    supportedTeam && (supportedTeam.teamId === firstAppreciatedTeamId || supportedTeam.teamId === secondAppreciatedTeamId)
+    supportedTeam && (supportedTeam.teamRef === firstAppreciatedTeamId || supportedTeam.teamRef === secondAppreciatedTeamId)
 
   const _getTeamObj = (team) => ({
-    teamId: team.id,
+    teamRef: team.id,
     fullName: team.fullName,
     shortName: team.shortName,
     logo: team.logo,

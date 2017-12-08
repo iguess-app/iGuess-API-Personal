@@ -27,7 +27,7 @@ module.exports = (app) => {
   const checkAppreciatedTeamsArraySize = (array) => array.length <= TEAM_TO_APPRECIATE_MAX_SIZE
 
   const teamSchema = new Schema({
-    teamId: {
+    teamRef: {
       type: String,
       required: true,
       validate: [mongo.checkObjectId, String(serverErrors.notMongoIdValid)]
