@@ -20,7 +20,7 @@ const createSession = (singUpObj) => {
     userName: singUpObj.user.userName,
     userRef: singUpObj.user.userRef
   }
-  //TODO: Added a hardwareFingerPrint to session too
+  //TODO: Added a hardwareFingerPrint to session too, when a frontEnd web application use this API, refactoring this validation. (Cuz there is no hardwareFingerPrint to a browser)
 
   return cacheManager.set(singUpObj.token, sessionObj, SESSION_TIME)
 }
