@@ -27,7 +27,6 @@ lab.experiment('Integrated Test ==> Get Teams', () => {
     server.inject(injectedRequests.happyPath)
       .then((response) => {
         const result = response.result
-        console.log(result)
         Joi.validate(result, schemaValidate, (err) => {
           expect(err).to.be.equal(null)
           done()
