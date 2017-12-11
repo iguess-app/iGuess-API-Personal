@@ -7,8 +7,8 @@ const happyPath = {
     userRef: '591df6c78d1fdc0bb4eba371'
   },
   headers: {
-    request_id: 'postmanRequest',
-    hardware_fingerprint: 'postmanRequest',
+    request_id: 'integratedTest',
+    hardware_fingerprint: 'integratedTest',
     platform: 'Android',
     os_version: '7.0.1',
     app_version: '1.0.0',
