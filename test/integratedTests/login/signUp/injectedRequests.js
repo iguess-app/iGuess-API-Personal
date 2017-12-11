@@ -1,5 +1,15 @@
 'use strict'
 
+const headers = {
+  request_id: 'postmanRequest',
+  hardware_fingerprint: 'postmanRequest',
+  platform: 'Android',
+  os_version: '7.0.1',
+  app_version: '1.0.0',
+  phone_model: 'XT-1792',
+  phone_fabricator: 'Motorola'
+}
+
 const happyPath = {
   method: 'POST',
   url: '/login/signup',
@@ -7,7 +17,8 @@ const happyPath = {
     'userName': 'ancelotti',
     'password': 'ancelotti',
     'email': 'ancelotti@gmail.com'
-  }
+  },
+  headers
 }
 
 const emailAlreadyExists = {
@@ -17,7 +28,8 @@ const emailAlreadyExists = {
     'userName': 'mcRodolfinho',
     'password': 'mcRodolfinho',
     'email': 'mcRodolfinho@gmail.com'
-  }
+  },
+  headers
 }
 
 const userNameAlreadyExists = {
@@ -27,7 +39,8 @@ const userNameAlreadyExists = {
     'userName': 'mcRodolfinh',
     'password': 'mcRodolfinho',
     'email': 'mcRodolfinho@gmail.com'
-  }
+  },
+  headers
 }
 
 const notAemail = {
@@ -37,7 +50,8 @@ const notAemail = {
     'userName': 'mcRodolfinho',
     'password': 'mcRodolfinho',
     'email': 'mcRodolfinho@gmailcom'
-  }
+  },
+  headers
 }
 
 const passwordTooWeak = {
@@ -47,7 +61,8 @@ const passwordTooWeak = {
     'userName': 'mcRodolfinho',
     'password': 'mcRodolfinho',
     'email': 'mcRodolfinho@gmail.com'
-  }
+  },
+  headers
 }
 
 module.exports = {
@@ -57,3 +72,5 @@ module.exports = {
   passwordTooWeak,
   notAemail
 }
+
+/*eslint camelcase:0 */

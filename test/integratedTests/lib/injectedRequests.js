@@ -1,12 +1,23 @@
 'use strict'
 
+const headers = {
+  request_id: 'postmanRequest',
+  hardware_fingerprint: 'postmanRequest',
+  platform: 'Android',
+  os_version: '7.0.1',
+  app_version: '1.0.0',
+  phone_model: 'XT-1792',
+  phone_fabricator: 'Motorola'
+}
+
 const loginWithEmail = {
   method: 'POST',
   url: '/login/signin',
   payload: {
     login: 'sr4@madrid.com',
     password: 'sergioRamos'
-  }
+  },
+  headers
 }
 
 const loginWithProfileToUpdate = {
@@ -15,7 +26,8 @@ const loginWithProfileToUpdate = {
   payload: {
     login: 'profileToUpdate',
     password: 'profileToUpdate'
-  }
+  },
+  headers
 }
 
 const loginWithTioValmir = {
@@ -24,7 +36,8 @@ const loginWithTioValmir = {
   payload: {
     login: 'tioValmir',
     password: 'tioValmir'
-  }
+  },
+  headers
 }
 
 const loginWithuserNotifi = {
@@ -33,7 +46,8 @@ const loginWithuserNotifi = {
   payload: {
     login: 'userNotifi',
     password: 'userNotifi'
-  }
+  },
+  headers
 }
 
 const loginWithuserNotifi2 = {
@@ -42,7 +56,8 @@ const loginWithuserNotifi2 = {
   payload: {
     login: 'userNotifi2',
     password: 'userNotifi2'
-  }
+  },
+  headers
 }
 
 module.exports = {
@@ -52,3 +67,5 @@ module.exports = {
   loginWithuserNotifi,
   loginWithuserNotifi2
 }
+
+/*eslint camelcase:0 */

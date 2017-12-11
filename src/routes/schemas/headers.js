@@ -2,16 +2,24 @@
 
 const Joi = require('joi')
 
-const defaultHeaderSchema = Joi.object({
-  language: Joi.string().default('en-us')
-}).unknown()
-
-const defaultSessionHeaderSchema = Joi.object({
+const headerSchema = {
   language: Joi.string().default('en-us'),
-  token: Joi.string().required()
-}).unknown()
+  request_id: Joi.string().required(),
+  hardware_fingerprint: Joi.string().required(),
+  platform: Joi.string().required(),
+  os_version: Joi.string().required(),
+  app_version: Joi.string().required(),
+  phone_model: Joi.string().required(),
+  phone_fabricator: Joi.string().required()
+}
+const defaultHeaderSchema = Joi.object(headerSchema).unknown()
+
+const headerSessionSchema = Object.assign(headerSchema, {token: Joi.string().required()})
+const defaultSessionHeaderSchema = Joi.object(headerSessionSchema).unknown()
 
 module.exports = {
   defaultHeaderSchema,
   defaultSessionHeaderSchema
 }
+
+/*eslint camelcase:0 */

@@ -6,7 +6,15 @@ const happyPath = {
   payload: {
     'invitedUserName': 'gabrielJesus'
   },
-  headers: {}
+  headers: {
+    request_id: 'postmanRequest',
+    hardware_fingerprint: 'postmanRequest',
+    platform: 'Android',
+    os_version: '7.0.1',
+    app_version: '1.0.0',
+    phone_model: 'XT-1792',
+    phone_fabricator: 'Motorola'
+  }
 }
 
 const userNotFound = {
@@ -15,7 +23,15 @@ const userNotFound = {
   payload: {
     'invitedUserName': 'userThatNeverSignUp'
   },
-  headers: {}
+  headers: {
+    request_id: 'postmanRequest',
+    hardware_fingerprint: 'postmanRequest',
+    platform: 'Android',
+    os_version: '7.0.1',
+    app_version: '1.0.0',
+    phone_model: 'XT-1792',
+    phone_fabricator: 'Motorola'
+  }
 }
 
 const notificationAlreadySent = {
@@ -24,7 +40,15 @@ const notificationAlreadySent = {
   payload: {
     'invitedUserName': 'gabrielJesus'
   },
-  headers: {}
+  headers: {
+    request_id: 'postmanRequest',
+    hardware_fingerprint: 'postmanRequest',
+    platform: 'Android',
+    os_version: '7.0.1',
+    app_version: '1.0.0',
+    phone_model: 'XT-1792',
+    phone_fabricator: 'Motorola'
+  }
 }
 
 const alreadyFriends = {
@@ -33,7 +57,15 @@ const alreadyFriends = {
   payload: {
     'invitedUserName': 'cristianoRonaldo'
   },
-  headers: {}
+  headers: {
+    request_id: 'postmanRequest',
+    hardware_fingerprint: 'postmanRequest',
+    platform: 'Android',
+    os_version: '7.0.1',
+    app_version: '1.0.0',
+    phone_model: 'XT-1792',
+    phone_fabricator: 'Motorola'
+  }
 }
 
 module.exports = {
@@ -42,3 +74,5 @@ module.exports = {
   notificationAlreadySent,
   alreadyFriends
 }
+
+/*eslint camelcase:0 */

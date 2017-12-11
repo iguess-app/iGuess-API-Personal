@@ -1,12 +1,23 @@
 'use strict'
 
+const headers = {
+  request_id: 'postmanRequest',
+  hardware_fingerprint: 'postmanRequest',
+  platform: 'Android',
+  os_version: '7.0.1',
+  app_version: '1.0.0',
+  phone_model: 'XT-1792',
+  phone_fabricator: 'Motorola'
+}
+
 const loginWithEmail = {
   method: 'POST',
   url: '/login/signin',
   payload: {
     login: 'sr4@madrid.com',
     password: 'sergioRamos'
-  }
+  },
+  headers
 }
 
 const loginWithUserName = {
@@ -15,7 +26,8 @@ const loginWithUserName = {
   payload: {
     login: 'toniKross',
     password: 'toniKross'
-  }
+  },
+  headers
 }
 
 const invalidLogin = {
@@ -24,7 +36,8 @@ const invalidLogin = {
   payload: {
     login: 'homeeeeee',
     password: 'invalidPass'
-  }
+  },
+  headers
 }
 
 module.exports = {
@@ -32,3 +45,5 @@ module.exports = {
   loginWithUserName,
   invalidLogin
 }
+
+/*eslint camelcase:0 */

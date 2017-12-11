@@ -1,18 +1,28 @@
 'use strict'
 
+const headers = {
+  request_id: 'postmanRequest',
+  hardware_fingerprint: 'postmanRequest',
+  platform: 'Android',
+  os_version: '7.0.1',
+  app_version: '1.0.0',
+  phone_model: 'XT-1792',
+  phone_fabricator: 'Motorola'
+}
+
 const sendNotificationBeforeTest = {
   method: 'POST',
   url: '/friends/add',
   payload: {
     'invitedUserName': 'userNotifi2'
   },
-  headers: {}
+  headers
 }
 
 const listNotificationBeforeTest = {
   method: 'GET',
   url: '/notifications/list',
-  headers: {}
+  headers
 }
 
 const happyPathTrue = {
@@ -22,7 +32,7 @@ const happyPathTrue = {
     'notificationId': 'SET DYNAMICALLY',
     'accepted': true
   },
-  headers: {}
+  headers
 }
 
 const happyPathFalse = {
@@ -32,7 +42,7 @@ const happyPathFalse = {
     'notificationId': 'SET DYNAMICALLY',
     'accepted': false
   },
-  headers: {}
+  headers
 }
 
 const notFoundNotification = {
@@ -42,7 +52,7 @@ const notFoundNotification = {
     'notificationId': '59c9bf289f427d52cc772eea',
     'accepted': false
   },
-  headers: {}
+  headers
 }
 
 module.exports = {
@@ -52,3 +62,5 @@ module.exports = {
   happyPathFalse,
   notFoundNotification
 }
+
+/*eslint camelcase:0 */

@@ -1,12 +1,22 @@
 'use strict'
 
+const headers = {
+  request_id: 'postmanRequest',
+  hardware_fingerprint: 'postmanRequest',
+  platform: 'Android',
+  os_version: '7.0.1',
+  app_version: '1.0.0',
+  phone_model: 'XT-1792',
+  phone_fabricator: 'Motorola'
+}
+
 const updateName = {
   method: 'PATCH',
   url: '/profile/updateInfo',
   payload: {
     'name': 'DYNAMICALLY GENERATED'
   },
-  headers: {}
+  headers
 }
 
 const updateDescription = {
@@ -15,7 +25,7 @@ const updateDescription = {
   payload: {
     'description': 'DYNAMICALLY GENERATED'
   },
-  headers: {}
+  headers
 }
 
 const updateEmail = {
@@ -24,7 +34,7 @@ const updateEmail = {
   payload: {
     'email': 'DYNAMICALLY GENERATED'
   },
-  headers: {}
+  headers
 }
 
 const tooLongUserName = {
@@ -33,7 +43,7 @@ const tooLongUserName = {
   payload: {
     'newUserName': 'tooLongUserNametooLongUserNametooLongUserNametooLongUserName'
   },
-  headers: {}
+  headers
 }
 
 const invalidEmail = {
@@ -42,7 +52,7 @@ const invalidEmail = {
   payload: {
     'email': 'notAValidEmail'
   },
-  headers: {}
+  headers
 }
 
 const userNameAlredyInUse = {
@@ -51,7 +61,7 @@ const userNameAlredyInUse = {
   payload: {
     'newUserName': 'sergioRamos'
   },
-  headers: {}
+  headers
 }
 
 module.exports = {
@@ -62,3 +72,5 @@ module.exports = {
   invalidEmail,
   userNameAlredyInUse
 }
+
+/*eslint camelcase:0 */
