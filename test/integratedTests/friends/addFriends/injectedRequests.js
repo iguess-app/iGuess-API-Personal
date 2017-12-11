@@ -1,20 +1,22 @@
 'use strict'
 
+const headers = {
+  request_id: 'postmanRequest',
+  hardware_fingerprint: 'postmanRequest',
+  platform: 'Android',
+  os_version: '7.0.1',
+  app_version: '1.0.0',
+  phone_model: 'XT-1792',
+  phone_fabricator: 'Motorola'
+}
+
 const happyPath = {
   method: 'POST',
   url: '/friends/add',
   payload: {
     'invitedUserName': 'gabrielJesus'
   },
-  headers: {
-    request_id: 'postmanRequest',
-    hardware_fingerprint: 'postmanRequest',
-    platform: 'Android',
-    os_version: '7.0.1',
-    app_version: '1.0.0',
-    phone_model: 'XT-1792',
-    phone_fabricator: 'Motorola'
-  }
+  headers
 }
 
 const userNotFound = {
@@ -23,15 +25,7 @@ const userNotFound = {
   payload: {
     'invitedUserName': 'userThatNeverSignUp'
   },
-  headers: {
-    request_id: 'postmanRequest',
-    hardware_fingerprint: 'postmanRequest',
-    platform: 'Android',
-    os_version: '7.0.1',
-    app_version: '1.0.0',
-    phone_model: 'XT-1792',
-    phone_fabricator: 'Motorola'
-  }
+  headers
 }
 
 const notificationAlreadySent = {
@@ -40,15 +34,7 @@ const notificationAlreadySent = {
   payload: {
     'invitedUserName': 'gabrielJesus'
   },
-  headers: {
-    request_id: 'postmanRequest',
-    hardware_fingerprint: 'postmanRequest',
-    platform: 'Android',
-    os_version: '7.0.1',
-    app_version: '1.0.0',
-    phone_model: 'XT-1792',
-    phone_fabricator: 'Motorola'
-  }
+  headers
 }
 
 const alreadyFriends = {
@@ -57,15 +43,7 @@ const alreadyFriends = {
   payload: {
     'invitedUserName': 'cristianoRonaldo'
   },
-  headers: {
-    request_id: 'postmanRequest',
-    hardware_fingerprint: 'postmanRequest',
-    platform: 'Android',
-    os_version: '7.0.1',
-    app_version: '1.0.0',
-    phone_model: 'XT-1792',
-    phone_fabricator: 'Motorola'
-  }
+  headers
 }
 
 module.exports = {
