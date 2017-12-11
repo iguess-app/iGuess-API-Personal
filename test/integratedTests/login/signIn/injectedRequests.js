@@ -2,7 +2,7 @@
 
 const loginWithEmail = {
   method: 'POST',
-  url: '/login/singin',
+  url: '/login/signin',
   payload: {
     login: 'sr4@madrid.com',
     password: 'sergioRamos'
@@ -11,7 +11,7 @@ const loginWithEmail = {
 
 const loginWithUserName = {
   method: 'POST',
-  url: '/login/singin',
+  url: '/login/signin',
   payload: {
     login: 'toniKross',
     password: 'toniKross'
@@ -20,7 +20,7 @@ const loginWithUserName = {
 
 const invalidLogin = {
   method: 'POST',
-  url: '/login/singin',
+  url: '/login/signin',
   payload: {
     login: 'homeeeeee',
     password: 'invalidPass'

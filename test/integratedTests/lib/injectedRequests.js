@@ -2,7 +2,7 @@
 
 const loginWithEmail = {
   method: 'POST',
-  url: '/login/singin',
+  url: '/login/signin',
   payload: {
     login: 'sr4@madrid.com',
     password: 'sergioRamos'
@@ -11,7 +11,7 @@ const loginWithEmail = {
 
 const loginWithProfileToUpdate = {
   method: 'POST',
-  url: '/login/singin',
+  url: '/login/signin',
   payload: {
     login: 'profileToUpdate',
     password: 'profileToUpdate'
@@ -20,7 +20,7 @@ const loginWithProfileToUpdate = {
 
 const loginWithTioValmir = {
   method: 'POST',
-  url: '/login/singin',
+  url: '/login/signin',
   payload: {
     login: 'tioValmir',
     password: 'tioValmir'
@@ -29,7 +29,7 @@ const loginWithTioValmir = {
 
 const loginWithuserNotifi = {
   method: 'POST',
-  url: '/login/singin',
+  url: '/login/signin',
   payload: {
     login: 'userNotifi',
     password: 'userNotifi'
@@ -38,7 +38,7 @@ const loginWithuserNotifi = {
 
 const loginWithuserNotifi2 = {
   method: 'POST',
-  url: '/login/singin',
+  url: '/login/signin',
   payload: {
     login: 'userNotifi2',
     password: 'userNotifi2'

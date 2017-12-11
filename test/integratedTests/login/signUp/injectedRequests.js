@@ -2,7 +2,7 @@
 
 const happyPath = {
   method: 'POST',
-  url: '/login/singup',
+  url: '/login/signup',
   payload: {
     'userName': 'ancelotti',
     'password': 'ancelotti',
@@ -12,7 +12,7 @@ const happyPath = {
 
 const emailAlreadyExists = {
   method: 'POST',
-  url: '/login/singup',
+  url: '/login/signup',
   payload: {
     'userName': 'mcRodolfinho',
     'password': 'mcRodolfinho',
@@ -22,7 +22,7 @@ const emailAlreadyExists = {
 
 const userNameAlreadyExists = {
   method: 'POST',
-  url: '/login/singup',
+  url: '/login/signup',
   payload: {
     'userName': 'mcRodolfinh',
     'password': 'mcRodolfinho',
@@ -32,7 +32,7 @@ const userNameAlreadyExists = {
 
 const notAemail = {
   method: 'POST',
-  url: '/login/singup',
+  url: '/login/signup',
   payload: {
     'userName': 'mcRodolfinho',
     'password': 'mcRodolfinho',
@@ -42,7 +42,7 @@ const notAemail = {
 
 const passwordTooWeak = {
   method: 'POST',
-  url: '/login/singup',
+  url: '/login/signup',
   payload: {
     'userName': 'mcRodolfinho',
     'password': 'mcRodolfinho',

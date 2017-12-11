@@ -8,7 +8,7 @@ module.exports = (app) => {
   const server = app.configServer
 
   server.route({
-    path: '/login/singup',
+    path: '/login/signup',
     method: 'POST',
     config: {
       handler: (request, reply) => {
@@ -25,7 +25,7 @@ module.exports = (app) => {
   })
 
   server.route({
-    path: '/login/singin',
+    path: '/login/signin',
     method: 'POST',
     config: {
       handler: (request, reply) => {
