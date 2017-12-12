@@ -16,6 +16,7 @@ module.exports = (app) => {
 
     return Promise.all([getUserNamePromise, getFriendUserNamePromise])
       .spread((userName, friendUserName) => _updateUsersProfiles(userName, friendUserName, dictionary))
+      .then(() => _returnSuccess())
   }
 
   const _getUser = (userName, dictionary) =>
@@ -39,15 +40,17 @@ module.exports = (app) => {
     }
 
     userName.friendList.splice(userPosition, SPLICE_NUMBER)
-    userName.save();
-
     friendUserName.friendList.splice(userPosition, SPLICE_NUMBER)
-    friendUserName.save();
-
-    return {
-      friendshipUndone: true
-    }
+    
+    return Promise.all([
+      friendUserName.save(),
+      userName.save()
+    ])
   }
+
+  const _returnSuccess = () => ({
+    friendshipUndone: true
+  })
 
   return {
     undoFriendship
