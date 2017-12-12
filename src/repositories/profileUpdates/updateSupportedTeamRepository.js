@@ -13,7 +13,7 @@ module.exports = (app) => {
     return Team.findById(payload.supportedTeamId)
       .then((teamChosen) => {
         if (!teamChosen) {
-          Boom.notFound(dictionary.teamNotFound)
+          throw Boom.notFound(dictionary.teamNotFound)
         }
         const searchQuery = {
           userName: payload.userName
