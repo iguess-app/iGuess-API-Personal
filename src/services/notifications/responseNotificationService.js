@@ -10,7 +10,7 @@ module.exports = (app) => {
     const session = await sessionManager.getSession(headers.token, dictionary)
     request.userRef = session.userRef
 
-    return responseNotificationRepository.responseNotification(request, dictionary)
+    return responseNotificationRepository.responseNotification(request, dictionary, headers)
   }
 
   return {

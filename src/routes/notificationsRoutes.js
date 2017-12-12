@@ -67,10 +67,11 @@ module.exports = (app) => {
         notificationsController.setGuessLeagueNotifications(request, reply)
       },
       validate: {
-        payload: Joi.object({
-          inviteads: Joi.array()
-        }).unknown(),
-        headers: defaultHeaderSchema
+        payload: schemas.setGuessLeagueNotificationsSchema.request,
+        headers: defaultSessionHeaderSchema
+      },
+      response: {
+        schema: schemas.setGuessLeagueNotificationsSchema.response
       }
     }
   })

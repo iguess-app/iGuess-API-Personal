@@ -8,11 +8,10 @@ const inviteResponseRepository = require('../guess/inviteResponseRepository')
 module.exports = (app) => {
   const Notifications = app.src.models.notificationsModel;
   const Profile = app.src.models.profileModel;
-  const GuessesLeagues = app.src.models.guessesLeaguesSchema;
   const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest;
   const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest;
 
-  const responseNotification = (userResponse, dictionary) => {
+  const responseNotification = (userResponse, dictionary, headers) => {
     const searchQuery = {
       userRef: userResponse.userRef,
       'notifications._id': userResponse.notificationId
@@ -28,7 +27,7 @@ module.exports = (app) => {
 
         const notification = _getNotification(userNotifications.notifications, userResponse.notificationId)
 
-        return _updateUsersInfos(notification, userResponse)
+        return _updateUsersInfos(notification, userResponse, headers)
         .then(() => _removeNotification(userResponse, searchQuery))
         .then((removeNotificationResponse) => {
           responseObj.notificationRemoved = removeNotificationResponse
@@ -44,7 +43,7 @@ module.exports = (app) => {
     }
   }
 
-  const _updateUsersInfos = (notification, userResponse) => {
+  const _updateUsersInfos = (notification, userResponse, headers) => {
     if (notification.messageType === FRIENDSHIP_TYPE) {
       if (userResponse.accepted === true) {
         return _findUserProfiles(notification.messageUserRef, userResponse.userRef)
@@ -58,12 +57,11 @@ module.exports = (app) => {
     }
     if (notification.messageType === GUESSLEAGUE_TYPE) {
       const requestObj = {
-        userRef: userResponse.userRef,
         guessLeagueRef: notification.messageGuessLeagueRef,
         championshipRef: notification.championship.championshipRef,
         response: userResponse.accepted
       }
-      return inviteResponseRepository.inviteReponse(requestObj)
+      return inviteResponseRepository.inviteReponse(requestObj, headers)
     }
     throw Boom.notImplemented('No messageType found')
   }

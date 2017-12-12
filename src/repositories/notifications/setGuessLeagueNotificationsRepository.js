@@ -12,7 +12,7 @@ module.exports = (app) => {
     const newGuessLineNotificationObj = {
       messageType: GUESSLEAGUE_TYPE,
       messageUserRef: request.invitatorUserRef,
-      messageGuessLeagueRef: request._id,
+      messageGuessLeagueRef: request.guessLeagueRef,
       saw: false,
       championship: request.championship
     }
@@ -21,11 +21,13 @@ module.exports = (app) => {
       const searchQuery = {
         userRef: invitedUserRef
       }
+
       return Notifications.findOne(searchQuery)
         .then((userNotifications) => {
           _checkErrors(userNotifications, dictionary)
           userNotifications.notifications.unshift(newGuessLineNotificationObj)
-          return userNotifications.save() 
+
+          return userNotifications.save()
         })
     })
 
