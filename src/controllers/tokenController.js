@@ -5,7 +5,7 @@ module.exports = (app) => {
   const tokenService = app.src.services.tokenService;
 
   const verify = (request, reply) => {
-    tokenService.verify(request.query, request.headers)
+    tokenService.verify(request.headers)
       .then((verifyResponse) => {
         reply(verifyResponse)
       })

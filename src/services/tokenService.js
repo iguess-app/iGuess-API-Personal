@@ -1,18 +1,24 @@
 'use strict'
 
-module.exports = (app) => {
-  const TokenManager = app.coincidents.Managers.tokenManager;
+const coincidents = require('iguess-api-coincidents')
+const cacheManager = coincidents.Managers.cacheManager
 
-  const verify = (data) => TokenManager.isValid(data.token)
-    .then((tokenValid) => {
-      Reflect.deleteProperty(tokenValid, 'exp');
-      Reflect.deleteProperty(tokenValid, 'iat');
+module.exports = () => {
 
-      return tokenValid
-    })
-    .catch(() => ({
+  const verify = (headers) => {
+    const returnObj = {
       valid: false
-    }))
+    }
+
+    return cacheManager.get(headers.token)
+      .then((session) => {
+        if (session) {
+          returnObj.valid = true
+        }
+
+        return returnObj
+      })
+  }
 
   return {
     verify

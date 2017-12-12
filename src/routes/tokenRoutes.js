@@ -1,6 +1,6 @@
 'use strict';
 
-const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
+const defaultSessionHeaderSchema = require('./schemas/headers').defaultSessionHeaderSchema
 const schemas = require('./schemas/token')
 
 module.exports = (app) => {
@@ -16,7 +16,7 @@ module.exports = (app) => {
       },
       validate: {
         query: schemas.tokenSchemas.request,
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: schemas.tokenSchemas.response
