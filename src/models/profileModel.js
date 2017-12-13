@@ -4,14 +4,13 @@ const mongoose = require('mongoose');
 
 const optionsSchemas = require('./optionsSchemas/optionsSchemas')
 const logoSchema = require('./subValidations/logo')
+const db = require('./connect')
 
 module.exports = (app) => {
-  const Managers = app.coincidents.Managers
   const Utils = app.coincidents.Utils
   const Config = app.coincidents.Config
   const mongo = Config.mongo
 
-  const db = Managers.mongoManager()
   const Schema = mongoose.Schema
   const serverErrors = Utils.errorUtils.serverErrors
   const userErrors = Utils.errorUtils.userErrors

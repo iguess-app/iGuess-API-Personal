@@ -3,13 +3,12 @@
 const mongoose = require('mongoose');
 
 const optionsSchemas = require('./optionsSchemas/optionsSchemas')
+const db = require('./connect')
 
 module.exports = (app) => {
-  const Managers = app.coincidents.Managers
   const Utils = app.coincidents.Utils
   const mongo = app.coincidents.Config.mongo
 
-  const db = Managers.mongoManager()
   const Schema = mongoose.Schema
   const serverErrors = Utils.errorUtils.serverErrors
 
