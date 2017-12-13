@@ -18,12 +18,12 @@ module.exports = (app) => {
     return PasswordUtils.cryptPassword(payload.password)
       .then((cryptedPassword) => _buildNewUserObj(payload, cryptedPassword))
       .then((userToDB) => signUpRepository.singUp(userToDB))
-      .then((singUpObj) => _createSessionAndBuildResponseObj(singUpObj))
+      .then((singUpObj) => _createSessionAndBuildResponseObj(singUpObj, headers))
       .catch((err) => ProfileUtils.treatErrors(err, dictionary))
   }
 
-  const _createSessionAndBuildResponseObj = (singUpObj) => 
-    Promise.all([sessionManager.createSession(singUpObj), _structureUserObj(singUpObj)])
+  const _createSessionAndBuildResponseObj = (singUpObj, headers) => 
+    Promise.all([sessionManager.createSession(singUpObj, headers), _structureUserObj(singUpObj)])
       .then((sessionAndResponse) => sessionAndResponse[1])
 
   const _structureUserObj = (singUpObj) => 

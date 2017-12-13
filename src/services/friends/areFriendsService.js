@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   const areFriends = async (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
-    const session = await sessionManager.getSession(headers.token, dictionary)
+    const session = await sessionManager.getSession(headers, dictionary)
     payload.userRef = session.userRef
 
     return areFriendsRepository(payload, dictionary)

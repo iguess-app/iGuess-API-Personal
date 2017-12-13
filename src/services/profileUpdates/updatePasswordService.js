@@ -13,7 +13,7 @@ module.exports = (app) => {
 
   const updatePassword = async (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
-    const session = await sessionManager.getSession(headers.token, dictionary)
+    const session = await sessionManager.getSession(headers, dictionary)
     payload.userName = session.userName
     
     const cacheKey = `${payload.userName}'s WrongAttemptsNumbers`

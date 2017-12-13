@@ -9,7 +9,7 @@ module.exports = () => {
 
   const listLeagues = async (payload, headers) => {
     const dictionary = coincidents.Translate.gate.selectLanguage(headers.language)
-    await sessionManager.getSession(headers.token, dictionary)
+    await sessionManager.getSession(headers, dictionary)
 
     return listLeaguesRepository.listLeagues(payload, dictionary)
   }

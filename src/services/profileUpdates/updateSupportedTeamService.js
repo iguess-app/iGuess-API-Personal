@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   const updateSupportedTeam = async (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
-    const session = await sessionManager.getSession(headers.token, dictionary)
+    const session = await sessionManager.getSession(headers, dictionary)
     payload.userName = session.userName
     
     return updateSupportedTeamRepository.updateSupportedTeam(payload, headers)

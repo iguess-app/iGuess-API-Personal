@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   const search = async (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
-    const session = await sessionManager.getSession(headers.token, dictionary)
+    const session = await sessionManager.getSession(headers, dictionary)
     payload.userName = session.userName
     
     return searchFriendRepository.search(payload, dictionary)
@@ -15,7 +15,7 @@ module.exports = (app) => {
 
   const list = async (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
-    const session = await sessionManager.getSession(headers.token, dictionary)
+    const session = await sessionManager.getSession(headers, dictionary)
     payload.userName = session.userName
     
     return searchFriendRepository.list(payload, dictionary)

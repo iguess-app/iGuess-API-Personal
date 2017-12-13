@@ -11,7 +11,7 @@ module.exports = (app) => {
 
   const search = async (request, headers) => {
     const dictionary = translate.selectLanguage(headers.language)
-    await sessionManager.getSession(headers.token, dictionary)
+    await sessionManager.getSession(headers, dictionary)
     
     return searchProfilesRepository.search(request, headers)
   }

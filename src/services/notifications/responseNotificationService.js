@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   const responseNotification = async (request, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
-    const session = await sessionManager.getSession(headers.token, dictionary)
+    const session = await sessionManager.getSession(headers, dictionary)
     request.userRef = session.userRef
 
     return responseNotificationRepository.responseNotification(request, dictionary, headers)
