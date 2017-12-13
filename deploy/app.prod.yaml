@@ -3,15 +3,3 @@ runtime: nodejs
 env: flex
 env_variables:
   ENV: production
-  SALT: $2a$10$5PMJupkGGUJ22DxQC4UoUe
-  TOKEN_SEED: asdawUGDQ&@ET*@&GUGDASU89yHdausdg231
-  TOKEN_EXPIRATION_TIME: 3600
-  REDIS_KEY: wAMK4Hig
-  REDIS_HOST: 130.211.171.212
-  REDIS_PORT: 6379
-  REDIS_EXPIRE_TIME: 60
-  MONGO_ATLAS: true
-  MONGO_USER: luhalvesbr
-  MONGO_DB: iguess
-  MONGO_ADDRESS: zerocluster-shard-00-00-mfooh.mongodb.net:27017,zerocluster-shard-00-01-mfooh.mongodb.net:27017,zerocluster-shard-00-02-mfooh.mongodb.net:27017
-  MONGO_KEY: xSxotVAFrlegS2yJ
