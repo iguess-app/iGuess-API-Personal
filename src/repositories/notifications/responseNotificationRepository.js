@@ -28,13 +28,22 @@ module.exports = (app) => {
         const notification = _getNotification(userNotifications.notifications, userResponse.notificationId)
 
         return _updateUsersInfos(notification, userResponse, headers)
-        .then(() => _removeNotification(userResponse, searchQuery))
-        .then((removeNotificationResponse) => {
-          responseObj.notificationRemoved = removeNotificationResponse
-          responseObj.notificationDataSetted = userResponse.accepted
+        .then((guessResponse) => _removeNotification(userResponse, searchQuery, guessResponse))
+        .then((notificationResponseInfo) => {
+          responseObj.notificationRemoved = notificationResponseInfo.notificationRemoved
+          responseObj.notificationDataSetted = _checkGuessResponse(notificationResponseInfo, userResponse.accepted)
+
           return responseObj
         })
       })
+  }
+
+  const _checkGuessResponse = (notificationResponseInfo, booleanUserResponse) => {
+    if (notificationResponseInfo.guessResponse.isBoom) {
+      return false
+    }
+    
+    return booleanUserResponse
   }
 
   const _checkErrors = (userNotifications,dictionary) => {
@@ -53,6 +62,7 @@ module.exports = (app) => {
             return _updateFriendListsProfiles(invitatorUser, invitedUser)
           })
       }
+
       return Promise.resolve(false)
     }
     if (notification.messageType === GUESSLEAGUE_TYPE) {
@@ -61,6 +71,7 @@ module.exports = (app) => {
         championshipRef: notification.championship.championshipRef,
         response: userResponse.accepted
       }
+
       return inviteResponseRepository.inviteReponse(requestObj, headers)
     }
     throw Boom.notImplemented('No messageType found')
@@ -69,7 +80,7 @@ module.exports = (app) => {
   const _getNotification = (notifications, notificationId) =>
     notifications.find((notification) => notification.id === notificationId)
 
-  const _removeNotification = (userResponse, searchQuery) => {
+  const _removeNotification = (userResponse, searchQuery, guessResponse) => {
     const updateQuery = {
       userRef: userResponse.userRef,
       '$pull': {
@@ -85,10 +96,16 @@ module.exports = (app) => {
     return Notifications.update(searchQuery, updateQuery, optionsQuery)
       .then((removed) => {
         if (removed.nModified) {
-          return true
+          return {
+            guessResponse,
+            notificationRemoved: true
+          }
         }
 
-        return false
+        return {
+          guessResponse,
+          notificationRemoved: false
+        }
       })
   }
 

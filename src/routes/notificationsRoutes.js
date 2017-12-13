@@ -69,9 +69,6 @@ module.exports = (app) => {
       validate: {
         payload: schemas.setGuessLeagueNotificationsSchema.request,
         headers: defaultSessionHeaderSchema
-      },
-      response: {
-        schema: schemas.setGuessLeagueNotificationsSchema.response
       }
     }
   })

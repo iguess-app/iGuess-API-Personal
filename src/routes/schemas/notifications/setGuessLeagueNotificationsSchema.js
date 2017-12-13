@@ -16,12 +16,6 @@ const request = Joi.object({
   guessLeagueRef: Joi.string().required().length(ID_SIZE)
 })
 
-const response = Joi.object({
-  usersInviteads: Joi.bool().required(),
-  alertMessage: Joi.string()
-})
-
 module.exports = {
-  request,
-  response
+  request
 }
