@@ -2,7 +2,7 @@
 
 const app = require('../../../../../app')
 const injectedRequests = require('../injectedRequests')
-const Notifications = require('../../../../../src/models/notificationsModel')(app)
+const Notifications = app.src.models.notificationsModel
 
 const beforeTests = () => {
   const searchQuery = {

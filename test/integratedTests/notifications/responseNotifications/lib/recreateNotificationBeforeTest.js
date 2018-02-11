@@ -2,7 +2,7 @@
 
 const app = require('../../../../../app')
 const injectedRequests = require('../injectedRequests')
-const Profile = require('../../../../../src/models/profileModel')(app)
+const Profile = app.src.models.profileModel
 const signInAddFriendsToResponseNotificationBeforeTests = require('../../../lib/getTokenWithSignInBeforeTests').signInAddFriendsToResponseNotificationBeforeTests
 const signInToResponseNotificationBeforeTests = require('../../../lib/getTokenWithSignInBeforeTests').signInToResponseNotificationBeforeTests
 

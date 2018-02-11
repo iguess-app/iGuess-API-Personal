@@ -1,7 +1,7 @@
 'use strict'
 
 const app = require('../../../../../app')
-const Profile = require('../../../../../src/models/profileModel')(app)
+const Profile = app.src.models.profileModel
 const injectedRequests = require('../injectedRequests')
 
 const beforeTests = () =>

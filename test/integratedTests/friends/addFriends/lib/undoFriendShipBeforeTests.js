@@ -2,8 +2,8 @@
 
 const app = require('../../../../../app')
 
-const Profile = require('../../../../../src/models/profileModel')(app)
-const Notifications = require('../../../../../src/models/notificationsModel')(app)
+const Profile = app.src.models.profileModel
+const Notifications = app.src.models.notificationsModel
 const injectedRequests = require('../injectedRequests')
 
 const beforeTests = () =>
