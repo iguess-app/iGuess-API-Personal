@@ -21,9 +21,9 @@ module.exports = (app) => {
         return Promise.all([singInObj, notificationsPromise, friendListSizePromise, createSessionPromise])
           .spread((userObj, notificationsObj, numberOfFriends) => {
             userObj.user.numberOfFriends = numberOfFriends;
-            userObj.user.unreadableNotification = false;
+            userObj.user.unreadNotification = false;
             if (notificationsObj) {
-              userObj.user.unreadableNotification = notificationsObj.notifications.some((notification) => notification.saw === false)
+              userObj.user.unreadNotification = notificationsObj.notifications.some((notification) => notification.saw === false)
               _setNotificationsOnCache(userObj.user.userName, notificationsObj)
             }
 

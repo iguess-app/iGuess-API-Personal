@@ -6,6 +6,7 @@ const sessionManager = require('../../managers/sessionManager')
 
 const PasswordUtils = coincidents.Utils.passwordUtils
 const ProfileUtils = coincidents.Utils.profileUtils
+const PROMISE_INDEX = 1
 
 module.exports = (app) => {
   const signUpRepository = app.src.repositories.login.signUpRepository
@@ -24,12 +25,12 @@ module.exports = (app) => {
 
   const _createSessionAndBuildResponseObj = (singUpObj, headers) => 
     Promise.all([sessionManager.createSession(singUpObj, headers), _structureUserObj(singUpObj)])
-      .then((sessionAndResponse) => sessionAndResponse[1])
+      .then((sessionAndResponse) => sessionAndResponse[PROMISE_INDEX])
 
   const _structureUserObj = (singUpObj) => 
     friendsNumberRepository.getNumberOfFriends(singUpObj.user.userName)
       .then((numberOfFriends) => {
-        singUpObj.user.unreadableNotification = false
+        singUpObj.user.unreadNotification = false
         singUpObj.user.numberOfFriends = numberOfFriends
 
         return singUpObj

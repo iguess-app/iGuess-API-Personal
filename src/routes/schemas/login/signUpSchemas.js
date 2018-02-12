@@ -26,7 +26,7 @@ const response = Joi.object({
     userName: Joi.string().required(),
     notifications: Joi.array(),
     numberOfFriends: Joi.number().required(),
-    unreadableNotification: Joi.bool().required(),
+    unreadNotification: Joi.bool().required(),
     userRef: Joi.string().required()
   })
 })
