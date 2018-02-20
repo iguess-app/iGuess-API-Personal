@@ -7,7 +7,7 @@ module.exports = (app) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
     
     return sessionManager.destroySession(headers, dictionary)
-    .then((sessionDeleted) => _buildResponse(sessionDeleted))
+      .then((sessionDeleted) => _buildResponse(sessionDeleted))
   }
 
   const _buildResponse = (sessionDeleted) => ({

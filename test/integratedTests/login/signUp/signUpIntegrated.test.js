@@ -68,8 +68,7 @@ lab.experiment('Integrated Test ==> Sign Up', () => {
       })
   })
 
-  /* 
-  //TODO: 
+  /*//TODO: 
   lab.test('[IO] Sign Up - password Too Weak', (done) => {
     server.inject(injectedRequests.passwordTooWeak)
       .then((response) => {

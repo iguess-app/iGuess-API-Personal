@@ -60,12 +60,23 @@ const loginWithuserNotifi2 = {
   headers
 }
 
+const signInToDoLogout = {
+  method: 'POST',
+  url: '/login/signin',
+  payload: {
+    login: 'sr4@madrid.com',
+    password: 'sergioRamos'
+  },
+  headers
+}
+
 module.exports = {
   loginWithEmail,
   loginWithProfileToUpdate,
   loginWithTioValmir,
   loginWithuserNotifi,
-  loginWithuserNotifi2
+  loginWithuserNotifi2,
+  signInToDoLogout
 }
 
 /*eslint camelcase:0 */
