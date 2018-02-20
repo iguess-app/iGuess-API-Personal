@@ -41,4 +41,19 @@ module.exports = (app) => {
     }
   })
 
+  server.route({
+    path: '/login/logout',
+    method: 'DELETE',
+    config: {
+      handler: (request, reply) => {
+        loginController.logout(request, reply)
+      },
+      validate: {
+        headers: defaultHeaderSchema
+      },
+      response: {
+        schema: loginSchemas.logoutSchemas.response
+      }
+    }
+  })
 }

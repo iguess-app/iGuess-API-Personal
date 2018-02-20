@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "gg": "set SALT=$2a$10$5PMJupkGGUJ22DxQC4UoUe&&set TOKEN_SEED=asdawUGDQ&@ET*@&GUGDASU89yHdausdg231&&set MONGO_DB=personalDB&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set SESSION_REDIS_EXPIRE_TIME=900&&set REDIS_KEY=wAMK4Hig&& node app.js",
-    "test": "set SALT=$2a$10$5PMJupkGGUJ22DxQC4UoUe&&set TOKEN_SEED=asdawUGDQ&@ET*@&GUGDASU89yHdausdg231&&set MONGO_DB=personalDBtest&&set HOLI_DB=holiDBtest&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&& lab -v",
-    "test-cov": "set SALT=$2a$10$5PMJupkGGUJ22DxQC4UoUe&&set TOKEN_SEED=asdawUGDQ&@ET*@&GUGDASU89yHdausdg231&&set MONGO_DB=personalDBtest&&set HOLI_DB=holiDBtest&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&&lab -v -t 70",
-    "test-cov-html": "set SALT=$2a$10$5PMJupkGGUJ22DxQC4UoUe&&set TOKEN_SEED=asdawUGDQ&@ET*@&GUGDASU89yHdausdg231&&set MONGO_DB=personalDBtest&&set HOLI_DB=holiDBtest&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&&lab -r html -o test/coverage.html"
+    "gg": "set SALT=$2a$10$5PMJupkGGUJ22DxQC4UoUe&&set TOKEN_SEED=GUGDASU89yHdausdg231&&set MONGO_DB=personalDB&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set SESSION_REDIS_EXPIRE_TIME=900&&set REDIS_KEY=wAMK4Hig&& node app.js",
+    "test": "set SALT=$2a$10$5PMJupkGGUJ22DxQC4UoUe&&set TOKEN_SEED=GUGDASU89yHdausdg231&&set MONGO_DB=personalDBtest&&set HOLI_DB=holiDBtest&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&& lab -v",
+    "test-cov": "set SALT=$2a$10$5PMJupkGGUJ22DxQC4UoUe&&set TOKEN_SEED=GUGDASU89yHdausdg231&&set MONGO_DB=personalDBtest&&set HOLI_DB=holiDBtest&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&&lab -v -t 70",
+    "test-cov-html": "set SALT=$2a$10$5PMJupkGGUJ22DxQC4UoUe&&set TOKEN_SEED=GUGDASU89yHdausdg231&&set MONGO_DB=personalDBtest&&set HOLI_DB=holiDBtest&&set SERVER_PORT=9002&&set REDIS_HOST=35.199.64.70&&set ENV=test&&set SESSION_REDIS_EXPIRE_TIME=60&&set REDIS_KEY=wAMK4Hig&&lab -r html -o test/coverage.html"
   },
   "engines": {
     "node": "8.2.0"
