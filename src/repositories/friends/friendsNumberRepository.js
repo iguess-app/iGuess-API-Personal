@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
+  const Profile = app.src.models.profileModel
 
   const getNumberOfFriends = (userName) => {
 

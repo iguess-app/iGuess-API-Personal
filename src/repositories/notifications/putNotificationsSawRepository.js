@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = (app) => {
-  const Notifications = app.src.models.notificationsModel;
+  const Notifications = app.src.models.notificationsModel
 
   const putNotificationsSaw = (user) => {
 
@@ -29,7 +29,7 @@ module.exports = (app) => {
     })
 
     return userNotifications.save().then(() => {
-      responseObj.profileModified = true;
+      responseObj.profileModified = true
 
       return responseObj
     })

@@ -7,9 +7,9 @@ const sessionManager = require('../../managers/sessionManager')
 const cacheManager = coincidents.Managers.cacheManager
 
 module.exports = (app) => {
-  const signInRepository = app.src.repositories.login.signInRepository;
-  const listNotificationsRepository = app.src.repositories.notifications.listNotificationsRepository;
-  const friendsNumberRepository = app.src.repositories.friends.friendsNumberRepository;
+  const signInRepository = app.src.repositories.login.signInRepository
+  const listNotificationsRepository = app.src.repositories.notifications.listNotificationsRepository
+  const friendsNumberRepository = app.src.repositories.friends.friendsNumberRepository
 
   const singIn = (query, headers) => 
     signInRepository.singIn(query, headers)
@@ -20,8 +20,8 @@ module.exports = (app) => {
 
         return Promise.all([singInObj, notificationsPromise, friendListSizePromise, createSessionPromise])
           .spread((userObj, notificationsObj, numberOfFriends) => {
-            userObj.user.numberOfFriends = numberOfFriends;
-            userObj.user.unreadNotification = false;
+            userObj.user.numberOfFriends = numberOfFriends
+            userObj.user.unreadNotification = false
             if (notificationsObj) {
               userObj.user.unreadNotification = notificationsObj.notifications.some((notification) => notification.saw === false)
               _setNotificationsOnCache(userObj.user.userName, notificationsObj)
@@ -32,7 +32,7 @@ module.exports = (app) => {
       })
 
   const _setNotificationsOnCache = (userName, notificationsObj) => {
-    const ONE_MINUTE = 60;
+    const ONE_MINUTE = 60
     const notificationsCacheKey = `${userName}'s Notifications`
     cacheManager.set(notificationsCacheKey, notificationsObj, ONE_MINUTE)
   }
@@ -40,4 +40,4 @@ module.exports = (app) => {
   return {
     singIn
   }
-};
+}

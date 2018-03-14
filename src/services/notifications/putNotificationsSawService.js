@@ -3,7 +3,7 @@
 const sessionManager = require('../../managers/sessionManager')
 
 module.exports = (app) => {
-  const putNotificationsSawRepository = app.src.repositories.notifications.putNotificationsSawRepository;
+  const putNotificationsSawRepository = app.src.repositories.notifications.putNotificationsSawRepository
 
   const putNotificationsSaw = async (headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
@@ -15,4 +15,4 @@ module.exports = (app) => {
   return {
     putNotificationsSaw
   }
-};
+}

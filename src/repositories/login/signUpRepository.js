@@ -5,9 +5,9 @@ const { log } = coincidents.Managers
 const TokenManager = coincidents.Managers.tokenManager
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
-  const Notifications = app.src.models.notificationsModel;
-  const QueryUtils = app.coincidents.Utils.queryUtils;
+  const Profile = app.src.models.profileModel
+  const Notifications = app.src.models.notificationsModel
+  const QueryUtils = app.coincidents.Utils.queryUtils
 
   const singUp = (dataToDB) =>
     _insertUserOnDB(dataToDB)
@@ -15,9 +15,9 @@ module.exports = (app) => {
   const _insertUserOnDB = (userData) =>
     Profile.create(userData)
     .then((info) => {
-      _createNotificationDocument(info);
-      const token = TokenManager.generate();
-      const user = _structureUserObj(QueryUtils.makeObject(info));
+      _createNotificationDocument(info)
+      const token = TokenManager.generate()
+      const user = _structureUserObj(QueryUtils.makeObject(info))
 
       return {
         token,
@@ -36,11 +36,11 @@ module.exports = (app) => {
     })
 
   const _structureUserObj = (user) => {
-    Reflect.deleteProperty(user, 'password');
-    Reflect.deleteProperty(user, 'friendList');
-    Reflect.deleteProperty(user, 'invitedFriendList');
+    Reflect.deleteProperty(user, 'password')
+    Reflect.deleteProperty(user, 'friendList')
+    Reflect.deleteProperty(user, 'invitedFriendList')
     Reflect.set(user, 'userRef', user._id.toString())
-    Reflect.deleteProperty(user, '_id');
+    Reflect.deleteProperty(user, '_id')
 
     return user
   }
@@ -51,7 +51,7 @@ module.exports = (app) => {
       notifications: []
     }
     Notifications.create(notificationObj)
-      .catch((err) => log.error(err));
+      .catch((err) => log.error(err))
   }
 
   return {

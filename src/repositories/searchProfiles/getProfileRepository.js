@@ -5,8 +5,8 @@ const Mongoose = require('mongoose')
 const objectId = Mongoose.Types.ObjectId
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
-  const QueryUtils = app.coincidents.Utils.queryUtils;
+  const Profile = app.src.models.profileModel
+  const QueryUtils = app.coincidents.Utils.queryUtils
 
   const getProfile = (payload, dictionary) => {
 
@@ -27,11 +27,11 @@ module.exports = (app) => {
   const _buildProfileObject = (userFound) => {
     Reflect.set(userFound, 'userRef', userFound._id.toString())
     Reflect.set(userFound, 'numberOfFriends', userFound.friendList.length)
-    Reflect.deleteProperty(userFound, '_id');
-    Reflect.deleteProperty(userFound, 'friendList');
-    Reflect.deleteProperty(userFound, 'invitedFriendList');
-    Reflect.deleteProperty(userFound, 'password');
-    Reflect.deleteProperty(userFound, 'confirmedEmail');
+    Reflect.deleteProperty(userFound, '_id')
+    Reflect.deleteProperty(userFound, 'friendList')
+    Reflect.deleteProperty(userFound, 'invitedFriendList')
+    Reflect.deleteProperty(userFound, 'password')
+    Reflect.deleteProperty(userFound, 'confirmedEmail')
 
     return userFound
   }

@@ -7,7 +7,7 @@ const sessionManager = require('../../managers/sessionManager')
 const translate = coincidents.Translate.gate
 
 module.exports = (app) => {
-  const searchProfilesRepository = app.src.repositories.searchProfiles.searchProfilesRepository;
+  const searchProfilesRepository = app.src.repositories.searchProfiles.searchProfilesRepository
 
   const search = async (request, headers) => {
     const dictionary = translate.selectLanguage(headers.language)

@@ -3,7 +3,7 @@
 const sessionManager = require('../../managers/sessionManager')
 
 module.exports = (app) => {
-  const updateSupportedTeamRepository = app.src.repositories.profileUpdates.updateSupportedTeamRepository;
+  const updateSupportedTeamRepository = app.src.repositories.profileUpdates.updateSupportedTeamRepository
 
   const updateSupportedTeam = async (payload, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)

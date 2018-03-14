@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
+  const Profile = app.src.models.profileModel
 
   const userNameAvailability = (request) => _checkIfUserExists(request.userName)
 
@@ -13,14 +13,14 @@ module.exports = (app) => {
 
     return Profile.findOne(searchQuery)
       .then((userFound) => {
-        let available = true;
+        let available = true
         if (userFound) {
-          available = false;
+          available = false
         }
 
         return {
           available
-        };
+        }
       })
       .catch((err) =>
         err

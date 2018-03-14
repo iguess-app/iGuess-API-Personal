@@ -3,16 +3,16 @@
 const Promise = require('bluebird')
 const Boom = require('boom')
 
-const SPLICE_NUMBER = 1;
-const NOT_FOUND_FRIEND = -1;
+const SPLICE_NUMBER = 1
+const NOT_FOUND_FRIEND = -1
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
+  const Profile = app.src.models.profileModel
 
   const undoFriendship = (request, dictionary) => {
 
-    const getUserNamePromise = _getUser(request.userName, dictionary);
-    const getFriendUserNamePromise = _getUser(request.friendUserName, dictionary);
+    const getUserNamePromise = _getUser(request.userName, dictionary)
+    const getFriendUserNamePromise = _getUser(request.friendUserName, dictionary)
 
     return Promise.all([getUserNamePromise, getFriendUserNamePromise])
       .spread((userName, friendUserName) => _updateUsersProfiles(userName, friendUserName, dictionary))
@@ -28,7 +28,7 @@ module.exports = (app) => {
         throw Boom.notFound(errMsg)
       }
 
-      return user;
+      return user
     })
 
   const _updateUsersProfiles = (userName, friendUserName, dictionary) => {

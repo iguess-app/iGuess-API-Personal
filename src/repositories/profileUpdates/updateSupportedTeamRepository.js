@@ -5,10 +5,10 @@ const Boom = require('boom')
 const Team = require('../../models/holiDB/teamModel')
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
+  const Profile = app.src.models.profileModel
 
   const updateSupportedTeam = (payload, headers) => {
-    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
 
     return Team.findById(payload.supportedTeamId)
       .then((teamChosen) => {
@@ -28,9 +28,9 @@ module.exports = (app) => {
             const responseObj = {
               profileModified: false
             }
-            const footballSupportedTeams = userFound.footballSupportedTeams;
+            const footballSupportedTeams = userFound.footballSupportedTeams
             if (footballSupportedTeams.supportedTeam && footballSupportedTeams.supportedTeam.teamRef === teamChosen.id) {
-              return responseObj;
+              return responseObj
             }
             userFound.footballSupportedTeams.supportedTeam = {
               teamRef: teamChosen.id,

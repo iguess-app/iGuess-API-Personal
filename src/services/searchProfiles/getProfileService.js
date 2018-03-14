@@ -18,4 +18,4 @@ module.exports = (app) => {
   return {
     getProfile
   }
-};
+}

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const schemas = require('./schemas/friends')
 const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema

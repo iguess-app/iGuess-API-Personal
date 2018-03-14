@@ -1,8 +1,8 @@
 'use strict'
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
-  const ErrorUtils = app.coincidents.Utils.errorUtils;
+  const Profile = app.src.models.profileModel
+  const ErrorUtils = app.coincidents.Utils.errorUtils
 
   const updatePassword = (payload) => {
     const searchQuery = {
@@ -18,20 +18,20 @@ module.exports = (app) => {
       .findOne(searchQuery)
       .then((userFound) => {
         if (userFound && userFound.password !== payload.oldPassword) {
-          throw new Error(ErrorUtils.userErrors.passwordInvalid);
+          throw new Error(ErrorUtils.userErrors.passwordInvalid)
         }
 
         return Profile
           .update(searchQuery, updateQuery)
           .then((queryResult) => {
-            let modified = false;
+            let modified = false
             if (queryResult.nModified) {
-              modified = true;
+              modified = true
             }
 
             return {
               profileModified: modified
-            };
+            }
           })
       })
   }

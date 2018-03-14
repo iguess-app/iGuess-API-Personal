@@ -1,18 +1,18 @@
 'use strict'
 
-const Boom = require('boom');
-const Promise = require('bluebird');
+const Boom = require('boom')
+const Promise = require('bluebird')
 
 const sessionManager = require('../../managers/sessionManager')
 
 module.exports = (app) => {
-  const updatePasswordRepository = app.src.repositories.profileUpdates.updatePasswordRepository;
-  const PasswordUtis = app.coincidents.Utils.passwordUtils;
-  const ErrorUtils = app.coincidents.Utils.errorUtils;
-  const CacheManager = app.coincidents.Managers.cacheManager;
+  const updatePasswordRepository = app.src.repositories.profileUpdates.updatePasswordRepository
+  const PasswordUtis = app.coincidents.Utils.passwordUtils
+  const ErrorUtils = app.coincidents.Utils.errorUtils
+  const CacheManager = app.coincidents.Managers.cacheManager
 
   const updatePassword = async (payload, headers) => {
-    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
     const session = await sessionManager.getSession(headers, dictionary)
     payload.userName = session.userName
     
@@ -27,8 +27,8 @@ module.exports = (app) => {
     return _checkWrongAttemptsNumbers(cacheKey)
       .then(() => Promise.all([cryptNewPasswordPromise, cryptOldPasswordPromise])
         .spread((newCryptedPassword, oldCryptedPassword) => {
-          payload.newPassword = newCryptedPassword;
-          payload.oldPassword = oldCryptedPassword;
+          payload.newPassword = newCryptedPassword
+          payload.oldPassword = oldCryptedPassword
 
           return updatePasswordRepository.updatePassword(payload, headers)
         }))
@@ -47,17 +47,17 @@ module.exports = (app) => {
   }
 
   const _checkWrongAttemptsNumbers = (cacheKey) => {
-    const MAXIMUM_NUMBER_ERRORS_IN_ONE_HOUR = 10;
+    const MAXIMUM_NUMBER_ERRORS_IN_ONE_HOUR = 10
 
     return CacheManager.get(cacheKey).then((cacheResponse) => {
       if (cacheResponse && cacheResponse.wrongAttempts > MAXIMUM_NUMBER_ERRORS_IN_ONE_HOUR) {
-        throw new Error(ErrorUtils.userErrors.tooManyPasswordsWrong);
+        throw new Error(ErrorUtils.userErrors.tooManyPasswordsWrong)
       }
     })
   }
 
   const _setErrorTriedOnCache = (cacheKey) => {
-    const ONE_HOUR_IN_SECONDS = 3600;
+    const ONE_HOUR_IN_SECONDS = 3600
     CacheManager.get(cacheKey).then((cacheResponse) => {
 
       if (!cacheResponse) {
@@ -67,7 +67,7 @@ module.exports = (app) => {
 
         return CacheManager.set(cacheKey, newWrongAttempt, ONE_HOUR_IN_SECONDS)
       }
-      cacheResponse.wrongAttempts += 1;
+      cacheResponse.wrongAttempts += 1
 
       return CacheManager.set(cacheKey, cacheResponse, ONE_HOUR_IN_SECONDS)
     })

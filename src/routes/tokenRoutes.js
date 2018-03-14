@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 
 const defaultSessionHeaderSchema = require('./schemas/headers').defaultSessionHeaderSchema
 const schemas = require('./schemas/token')
 
 module.exports = (app) => {
-  const tokenController = app.src.controllers.tokenController;
-  const server = app.configServer;
+  const tokenController = app.src.controllers.tokenController
+  const server = app.configServer
 
   server.route({
     path: '/token/verify',

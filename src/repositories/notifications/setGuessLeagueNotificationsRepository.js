@@ -5,7 +5,7 @@ const Promise = require('bluebird')
 
 module.exports = (app) => {
   const Notifications = app.src.models.notificationsModel
-  const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest;
+  const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest
 
   const setGuessLeagueNotifications = (request, dictionary) => {
 

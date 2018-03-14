@@ -1,8 +1,8 @@
 'use strict'
 
 const consign = require('consign')
-const app = {}
-app.coincidents = require('iguess-api-coincidents')
+const coincidents = require('iguess-api-coincidents')
+const app = { coincidents }
 
 consign()
   .include('configServer.js')

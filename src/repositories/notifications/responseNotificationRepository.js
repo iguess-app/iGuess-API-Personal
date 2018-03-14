@@ -6,10 +6,10 @@ const Boom = require('boom')
 const inviteResponseRepository = require('../guess/inviteResponseRepository')
 
 module.exports = (app) => {
-  const Notifications = app.src.models.notificationsModel;
-  const Profile = app.src.models.profileModel;
-  const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest;
-  const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest;
+  const Notifications = app.src.models.notificationsModel
+  const Profile = app.src.models.profileModel
+  const FRIENDSHIP_TYPE = app.coincidents.Config.notificationTypes.friendShipRequest
+  const GUESSLEAGUE_TYPE = app.coincidents.Config.notificationTypes.guessLeagueRequest
 
   const responseNotification = (userResponse, dictionary, headers) => {
     const searchQuery = {
@@ -112,10 +112,10 @@ module.exports = (app) => {
   const _removeFromInvitedFriendList = (invitatorUserId, invitedUserId) => {
     Profile.findById(invitatorUserId)
       .then((invitatorUser) => {
-        const SPLICE_NUMBER = 1;
+        const SPLICE_NUMBER = 1
         const position = invitatorUser.invitedFriendList.indexOf(invitedUserId)
         invitatorUser.invitedFriendList.splice(position, SPLICE_NUMBER)
-        invitatorUser.save();
+        invitatorUser.save()
       })
   }
 

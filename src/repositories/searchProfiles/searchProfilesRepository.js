@@ -1,18 +1,18 @@
 'use strict'
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
-  const QueryUtils = app.coincidents.Utils.queryUtils;
+  const Profile = app.src.models.profileModel
+  const QueryUtils = app.coincidents.Utils.queryUtils
 
   const search = (request) => {
-    const searchField = request.searchField;
+    const searchField = request.searchField
 
     return _searchUser(searchField)
   }
 
   const _searchUser = (searchField) => {
 
-    const usrRegex = new RegExp(searchField);
+    const usrRegex = new RegExp(searchField)
     const searchQuery = {
       'userName': {
         '$regex': usrRegex,

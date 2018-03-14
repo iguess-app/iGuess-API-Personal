@@ -1,8 +1,8 @@
 'use strict'
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
-  const QueryUtils = app.coincidents.Utils.queryUtils;
+  const Profile = app.src.models.profileModel
+  const QueryUtils = app.coincidents.Utils.queryUtils
 
   const getUserById = (userId) => {
 

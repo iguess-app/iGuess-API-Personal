@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 
 const schema = require('./schemas/availability')
 const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
 
 module.exports = (app) => {
-  const availabilityController = app.src.controllers.availabilityController;
-  const server = app.configServer;
+  const availabilityController = app.src.controllers.availabilityController
+  const server = app.configServer
 
   server.route({
     path: '/availability/userName',
@@ -40,4 +40,4 @@ module.exports = (app) => {
       }
     }
   })
-};
+}

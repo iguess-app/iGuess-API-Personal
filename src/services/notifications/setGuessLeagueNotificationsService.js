@@ -3,7 +3,7 @@
 const sessionManager = require('../../managers/sessionManager')
 
 module.exports = (app) => {
-  const setGuessLeagueNotificationsRepository = app.src.repositories.notifications.setGuessLeagueNotificationsRepository;
+  const setGuessLeagueNotificationsRepository = app.src.repositories.notifications.setGuessLeagueNotificationsRepository
 
   const setGuessLeagueNotifications = async (request, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
@@ -16,4 +16,4 @@ module.exports = (app) => {
   return {
     setGuessLeagueNotifications
   }
-};
+}

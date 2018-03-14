@@ -10,13 +10,13 @@ const POSITION_ONE = 1
 const NOT_SENT_BY_USER = []
 
 module.exports = (app) => {
-  const Profile = app.src.models.profileModel;
+  const Profile = app.src.models.profileModel
 
   const updateAppreciatedTeams = (payload, headers) => {
-    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language);
+    const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
 
     const firstAppreciatedTeamPromise = Team.findById(payload.firstAppreciatedTeam)
-    let secondAppreciatedTeamPromise = NOT_SENT_BY_USER;
+    let secondAppreciatedTeamPromise = NOT_SENT_BY_USER
     if (payload.secondAppreciatedTeam) {
       secondAppreciatedTeamPromise = Team.findById(payload.secondAppreciatedTeam)
     }
@@ -39,13 +39,13 @@ module.exports = (app) => {
             const responseObj = {
               profileModified: false
             }
-            const footballSupportedTeams = userFound.footballSupportedTeams;
+            const footballSupportedTeams = userFound.footballSupportedTeams
             if (_theSupportedTeamIsEqualToAppreciatedTeam(footballSupportedTeams.supportedTeam, firstAppreciatedTeam.id, secondAppreciatedTeam.id)) {
               throw Boom.notAcceptable(dictionary.sameTeams)
             }
 
             if (_isTheSameAppreciatedTeamsAtDataBase(footballSupportedTeams.appreciatedTeams, firstAppreciatedTeam.id, secondAppreciatedTeam.id)) {
-              return responseObj;
+              return responseObj
             }
 
             if (secondAppreciatedTeam === NOT_SENT_BY_USER) {

@@ -1,6 +1,6 @@
 'use strict'
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const optionsSchemas = require('./optionsSchemas/optionsSchemas')
 const logoSchema = require('./subValidations/logo')

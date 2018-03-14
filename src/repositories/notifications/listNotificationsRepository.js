@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = (app) => {
-  const Notifications = app.src.models.notificationsModel;
+  const Notifications = app.src.models.notificationsModel
 
   const getNotifications = (userRef) => {
     const searchQuery = {
