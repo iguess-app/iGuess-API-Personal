@@ -1,8 +1,6 @@
 'use strict'
 
-const coincidents = require('iguess-api-coincidents')
-const { log } = coincidents.Managers
-const TokenManager = coincidents.Managers.tokenManager
+const { log, tokenManager } = require('iguess-api-coincidents').Managers
 
 module.exports = (app) => {
   const Profile = app.src.models.profileModel
@@ -16,7 +14,7 @@ module.exports = (app) => {
     Profile.create(userData)
     .then((info) => {
       _createNotificationDocument(info)
-      const token = TokenManager.generate()
+      const token = tokenManager.generate()
       const user = _structureUserObj(QueryUtils.makeObject(info))
 
       return {

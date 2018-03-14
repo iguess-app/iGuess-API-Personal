@@ -5,9 +5,8 @@ const Boom = require('boom')
 module.exports = (app) => {
   const Profile = app.src.models.profileModel
 
-  const areFriends = (request, dictionary) => {
-
-    return Profile.findById(request.userRef)
+  const areFriends = (request, dictionary) => 
+    Profile.findById(request.userRef)
       .then((userFound) => {
         _checkErrors(userFound, dictionary)
 
@@ -15,7 +14,6 @@ module.exports = (app) => {
           areFriends: userFound.friendList.includes(request.userRefFriend)
         }
       })
-  }
 
   return areFriends
 }
