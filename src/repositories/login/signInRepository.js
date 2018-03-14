@@ -1,13 +1,10 @@
 'use strict'
 
 const Boom = require('boom')
-const moment = require('moment')
 
 module.exports = (app) => {
-  const PasswordUtils = app.coincidents.Utils.passwordUtils
-  const ProfileUtils = app.coincidents.Utils.profileUtils
-  const QueryUtils = app.coincidents.Utils.queryUtils
-  const TokenManager = app.coincidents.Managers.tokenManager
+  const { passwordUtils, profileUtils, queryUtils } = app.coincidents.Utils
+  const { tokenManager, dateManager } = app.coincidents.Managers
   const Profile = app.src.models.profileModel
 
   const singIn = (data, headers) => {
@@ -18,7 +15,7 @@ module.exports = (app) => {
       'invitedFriendList': 0
     }
 
-    if (ProfileUtils.isEmail(data.login) === true) {
+    if (profileUtils.isEmail(data.login) === true) {
       searchQuery = {
         email: data.login
       }
@@ -34,11 +31,11 @@ module.exports = (app) => {
   }
 
   const _singInJobs = (data, userFound, dictionary) =>
-    PasswordUtils.checkPassword(data.password, userFound.password)
+    passwordUtils.checkPassword(data.password, userFound.password)
     .then((isMatched) => {
       if (isMatched) {
         updatelastSignIn(userFound)
-        const token = TokenManager.generate()
+        const token = tokenManager.generate()
         const structuredUser = _structureUserObj(userFound)
 
         return {
@@ -51,7 +48,7 @@ module.exports = (app) => {
     })
 
   const _structureUserObj = (userFound) => {
-    const userObj = QueryUtils.makeObject(userFound)
+    const userObj = queryUtils.makeObject(userFound)
     Reflect.deleteProperty(userObj, 'password')
     Reflect.set(userObj, 'userRef', userObj._id.toString())
     Reflect.deleteProperty(userObj, '_id')
@@ -72,11 +69,9 @@ module.exports = (app) => {
     .catch((err) => err)
 
   const updatelastSignIn = (user) => {
-    user.lastSignInAt = getCurrentTime()
+    user.lastSignInAt = dateManager.getUTCToday()
     user.save()
   }
-
-  const getCurrentTime = () => moment.parseZone().utc().format()
 
   return {
     singIn
