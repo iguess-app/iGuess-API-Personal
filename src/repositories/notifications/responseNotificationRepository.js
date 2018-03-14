@@ -46,7 +46,7 @@ module.exports = (app) => {
     return booleanUserResponse
   }
 
-  const _checkErrors = (userNotifications,dictionary) => {
+  const _checkErrors = (userNotifications, dictionary) => {
     if (!userNotifications) {
       throw Boom.notFound(dictionary.notificationNotFound)
     }
