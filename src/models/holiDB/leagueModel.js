@@ -38,6 +38,10 @@ const leagueSchema = new Schema({
     type: Boolean,
     required: true
   },
+  haveActiveLines: {
+    type: Boolean,
+    required: true
+  },
   flag: {
     type: logoSchema,
     required: true

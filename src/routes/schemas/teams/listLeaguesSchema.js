@@ -17,10 +17,11 @@ const response = Joi.array().items(
     serie: Joi.number().required(),
     association: Joi.string().required(),
     flag: Joi.object({
-      mini: Joi.string().required(),
-      small: Joi.string().required(),
-      normal: Joi.string().required()
-    })
+      mini: Joi.string().allow('').required(),
+      small: Joi.string().allow('').required(),
+      normal: Joi.string().allow('').required()
+    }),
+    haveActiveLines: Joi.bool().required()
   })
 )
 
