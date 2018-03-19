@@ -2,7 +2,6 @@
 
 const schemas = require('./schemas/updateProfile')
 const defaultSessionHeaderSchema = require('./schemas/headers').defaultSessionHeaderSchema
-const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
 
 module.exports = (app) => {
   const updateProfileController = app.src.controllers.updateProfileController
@@ -44,17 +43,14 @@ module.exports = (app) => {
 
   server.route({
     path: '/profile/updateAvatar',
-    method: 'PATCH',
+    method: 'PUT',
     config: {
       handler: (request, reply) => {
-        updateProfileController.updatePassword(request, reply)
+        updateProfileController.updateAvatar(request, reply)
       },
       validate: {
         payload: schemas.updateAvatarSchemas.request,
         headers: defaultSessionHeaderSchema
-      },
-      response: {
-        schema: schemas.updateAvatarSchemas.response
       }
     }
   })
