@@ -1,0 +1,17 @@
+{
+  "apps": [{
+    "name": "personal",
+    "script": "app.js",
+    "watch": true,
+    "env": {
+      "NODE_ENV": "development",
+      "SALT": "$2a$10$5PMJupkGGUJ22DxQC4UoUe",
+      "TOKEN_SEED": "GUGDASU89yHdausdg231",
+      "MONGO_DB": "personalDB",
+      "SERVER_PORT": "9002",
+      "REDIS_HOST": "35.199.64.70",
+      "SESSION_REDIS_EXPIRE_TIME": "900",
+      "REDIS_KEY": "wAMK4Hig"
+    }
+  }]
+}

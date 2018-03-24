@@ -1,7 +1,5 @@
 'use strict'
 
-const Joi = require('joi')
-const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
 const defaultSessionHeaderSchema = require('./schemas/headers').defaultSessionHeaderSchema
 const schemas = require('./schemas/notifications')
 

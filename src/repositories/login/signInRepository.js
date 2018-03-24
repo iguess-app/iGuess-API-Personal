@@ -69,7 +69,7 @@ module.exports = (app) => {
     .catch((err) => err)
 
   const updatelastSignIn = (user) => {
-    user.lastSignInAt = dateManager.getUTCToday()
+    user.lastSignInAt = dateManager.getUTCNow()
     user.save()
   }
 
