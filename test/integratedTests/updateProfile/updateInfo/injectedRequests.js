@@ -19,6 +19,15 @@ const updateName = {
   headers
 }
 
+const updateUserName = {
+  method: 'PATCH',
+  url: '/profile/updateInfo',
+  payload: {
+    'userName': 'DYNAMICALLY GENERATED'
+  },
+  headers
+}
+
 const updateDescription = {
   method: 'PATCH',
   url: '/profile/updateInfo',
@@ -66,6 +75,7 @@ const userNameAlredyInUse = {
 
 module.exports = {
   updateName,
+  updateUserName,
   updateDescription,
   updateEmail,
   tooLongUserName,

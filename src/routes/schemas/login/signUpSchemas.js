@@ -1,15 +1,20 @@
 'use strict'
 
 const Joi = require('joi')
+const coincidents = require('iguess-api-coincidents')
 
 const footballSupportedTeamSchema = require('../embeddedSchemas/footballSupportedTeamSchema')
+const profileRules = coincidents.Config.profile
+const USERNAME_MIN_SIZE = profileRules.userNameMinSize
+const USERNAME_MAX_SIZE = profileRules.userNameMaxSize
+const NAME_MIN_SIZE = profileRules.nameMinSize
+const NAME_MAX_SIZE = profileRules.nameMaxSize
 
 const request = Joi.object({
-  name: Joi.string(),
+  userName: Joi.string().min(USERNAME_MIN_SIZE).max(USERNAME_MAX_SIZE).required(),
+  name: Joi.string().min(NAME_MIN_SIZE).max(NAME_MAX_SIZE).required(),
   password: Joi.string().required(),
-  description: Joi.string().allow(''),
-  email: Joi.string(),
-  userName: Joi.string().required()
+  email: Joi.string().required()
 })
 
 const response = Joi.object({

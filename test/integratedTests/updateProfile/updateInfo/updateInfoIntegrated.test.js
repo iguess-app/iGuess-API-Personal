@@ -14,6 +14,7 @@ const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
 const statusCode = coincidents.Utils.statusUtils
+const profileRules = coincidents.Config.profile
 let token = ''
 
 lab.experiment('Integrated Test ==> Update Info Profile', () => {
@@ -27,7 +28,7 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
   })
 
   lab.test('[MONGO] [REDIS] Update Info Profile - update Name', (done) => {
-    injectedRequests.updateName.payload.name = generateString(8)
+    injectedRequests.updateName.payload.name = generateString(profileRules.userNameMinSize)
     injectedRequests.updateName.headers.token = token
     server.inject(injectedRequests.updateName)
       .then((response) => {
@@ -41,7 +42,7 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
   })
 
   lab.test('[MONGO] [REDIS] Update Info Profile - update Description', (done) => {
-    injectedRequests.updateDescription.payload.description = generateString(20)
+    injectedRequests.updateDescription.payload.description = generateString(profileRules.descriptionMaxSize)
     injectedRequests.updateDescription.headers.token = token
     server.inject(injectedRequests.updateDescription)
       .then((response) => {
@@ -68,14 +69,32 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
       })
   })
 
-  lab.test('[REDIS] Update Info Profile - too long Name', (done) => {
-    injectedRequests.updateName.payload.name = generateString(21)
+  lab.test('[REDIS] Update Info Profile - too short Name', (done) => {
+    injectedRequests.updateName.payload.name = generateString(profileRules.nameMinSize - 1)
     injectedRequests.updateName.headers.token = token    
     server.inject(injectedRequests.updateName)
       .then((response) => {
-        const result = response.result
-        expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
-        expect(result.message).to.be.equal(dictionary.tooLongName)
+        expect(response.statusCode).to.be.equal(statusCode.badRequest)
+        done()
+      })
+  })
+
+  lab.test('[REDIS] Update Info Profile - too long Name', (done) => {
+    injectedRequests.updateName.payload.name = generateString(profileRules.nameMaxSize + 1)
+    injectedRequests.updateName.headers.token = token    
+    server.inject(injectedRequests.updateName)
+      .then((response) => {
+        expect(response.statusCode).to.be.equal(statusCode.badRequest)
+        done()
+      })
+  })
+
+  lab.test('[REDIS] Update Info Profile - too short userName', (done) => {
+    injectedRequests.updateUserName.payload.userName = generateString(profileRules.userNameMinSize - 1)
+    injectedRequests.updateUserName.headers.token = token    
+    server.inject(injectedRequests.updateUserName)
+      .then((response) => {
+        expect(response.statusCode).to.be.equal(statusCode.badRequest)
         done()
       })
   })
@@ -84,15 +103,13 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
     injectedRequests.tooLongUserName.headers.token = token        
     server.inject(injectedRequests.tooLongUserName)
       .then((response) => {
-        const result = response.result
-        expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
-        expect(result.message).to.be.equal(dictionary.tooLongUserName)
+        expect(response.statusCode).to.be.equal(statusCode.badRequest)
         done()
       })
   })
 
   lab.test('[REDIS] Update Info Profile - too long Description', (done) => {
-    injectedRequests.updateDescription.payload.description = generateString(101)
+    injectedRequests.updateDescription.payload.description = generateString(profileRules.descriptionMaxSize + 1)
     injectedRequests.updateDescription.headers.token = token            
     server.inject(injectedRequests.updateDescription)
       .then((response) => {
@@ -126,3 +143,6 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
   })
 
 })
+
+/*eslint max-statements: 0*/
+/*eslint no-magic-numbers: 0*/

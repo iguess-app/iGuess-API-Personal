@@ -15,6 +15,7 @@ const happyPath = {
   url: '/login/signup',
   payload: {
     'userName': 'ancelotti',
+    'name': 'ancelotti',
     'password': 'ancelotti',
     'email': 'ancelotti@gmail.com'
   },
@@ -26,6 +27,7 @@ const emailAlreadyExists = {
   url: '/login/signup',
   payload: {
     'userName': 'mcRodolfinho',
+    'name': 'mcRodolfinho',
     'password': 'mcRodolfinho',
     'email': 'mcRodolfinho@gmail.com'
   },
@@ -37,6 +39,7 @@ const userNameAlreadyExists = {
   url: '/login/signup',
   payload: {
     'userName': 'mcRodolfinh',
+    'name': 'mcRodolfinh',
     'password': 'mcRodolfinho',
     'email': 'mcRodolfinho@gmail.com'
   },
@@ -48,6 +51,7 @@ const notAemail = {
   url: '/login/signup',
   payload: {
     'userName': 'mcRodolfinho',
+    'name': 'mcRodolfinho',
     'password': 'mcRodolfinho',
     'email': 'mcRodolfinho@gmailcom'
   },
@@ -59,6 +63,7 @@ const passwordTooWeak = {
   url: '/login/signup',
   payload: {
     'userName': 'mcRodolfinho',
+    'name': 'mcRodolfinho',
     'password': 'mcRodolfinho',
     'email': 'mcRodolfinho@gmail.com'
   },
