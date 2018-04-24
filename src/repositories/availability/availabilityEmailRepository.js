@@ -3,30 +3,26 @@
 module.exports = (app) => {
   const Profile = app.src.models.profileModel
 
-  const emailAvailability = (request) => _checkIfEmailExists(request.email)
-
-  const _checkIfEmailExists = (email) => {
+  const emailAvailability = (request, dictionary) => {
 
     const searchQuery = {
-      email
+      email: request.email
     }
 
     return Profile.findOne(searchQuery)
       .then((userFound) => {
-        let available = true
         if (userFound) {
-          available = false
+          return {
+            available: false,
+            alertMessage: dictionary.emailAlreadyUsed
+          }
         }
 
         return {
-          available
+          available: true
         }
       })
-      .catch((err) =>
-        err
-      )
   }
-
 
   return {
     emailAvailability

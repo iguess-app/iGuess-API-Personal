@@ -13,7 +13,7 @@ module.exports = (app) => {
       return Promise.reject(Boom.notAcceptable(dictionary.notAEmail))
     }
 
-    return availabilityEmailRepository.emailAvailability(request, headers)
+    return availabilityEmailRepository.emailAvailability(request, dictionary)
   }
 
   return {

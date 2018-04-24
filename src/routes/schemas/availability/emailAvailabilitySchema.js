@@ -7,7 +7,8 @@ const request = Joi.object({
 })
 
 const response = Joi.object({
-  available: Joi.bool().required()
+  available: Joi.bool().required(),
+  alertMessage: Joi.string()
 })
 
 module.exports = {

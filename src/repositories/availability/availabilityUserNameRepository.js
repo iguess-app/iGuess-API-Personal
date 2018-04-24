@@ -3,30 +3,26 @@
 module.exports = (app) => {
   const Profile = app.src.models.profileModel
 
-  const userNameAvailability = (request) => _checkIfUserExists(request.userName)
-
-  const _checkIfUserExists = (userName) => {
+  const userNameAvailability = (request, dictionary) => {
 
     const searchQuery = {
-      userName
+      userName: request.userName
     }
 
     return Profile.findOne(searchQuery)
       .then((userFound) => {
-        let available = true
         if (userFound) {
-          available = false
+          return {
+            available: false,
+            alertMessage: dictionary.userNameAlreadyUsed
+          }
         }
 
         return {
-          available
+          available: true
         }
       })
-      .catch((err) =>
-        err
-      )
   }
-
 
   return {
     userNameAvailability
