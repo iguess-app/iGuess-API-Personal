@@ -1,11 +1,12 @@
 'use strict'
 
-const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
+
+const { errorCode, errorUtils, profileUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 module.exports = (app) => {
   const Profile = app.src.models.profileModel
-  const ProfileUtils = app.coincidents.Utils.profileUtils
-  const Errors = app.coincidents.Utils.errorUtils
 
   const updateInfo = (userData, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
@@ -61,8 +62,8 @@ module.exports = (app) => {
       updateObject.userName = payload.newUserName
     }
     if (payload.email) {
-      if (ProfileUtils.isEmail(payload.email) === Errors.userErrors.notEmail) {
-        throw Boom.notAcceptable(dictionary.notAEmail)
+      if (profileUtils.isEmail(payload.email) === errorUtils.userErrors.notEmail) {
+        throw boom('notAcceptable', dictionary.notAEmail, errorCode.notAEmail)
       }
       updateObject.email = payload.email
       updateObject.confirmedEmail = false

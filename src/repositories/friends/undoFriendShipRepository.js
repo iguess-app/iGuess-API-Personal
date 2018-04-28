@@ -1,7 +1,10 @@
 'use strict'
 
 const Promise = require('bluebird')
-const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
+
+const { errorCode, errorUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 const SPLICE_NUMBER = 1
 const NOT_FOUND_FRIEND = -1
@@ -25,7 +28,7 @@ module.exports = (app) => {
     }).then((user) => {
       if (!user) {
         const errMsg = dictionary.userNotFound.replace('{{userName}}', userName)
-        throw Boom.notFound(errMsg)
+        throw boom('notFound', errMsg, errorCode.userNotFound)
       }
 
       return user
@@ -36,7 +39,7 @@ module.exports = (app) => {
     const friendPosition = friendUserName.friendList.indexOf(userName.id)
 
     if (userPosition === NOT_FOUND_FRIEND && friendPosition === NOT_FOUND_FRIEND) {
-      throw Boom.badRequest(dictionary.notFriends)
+      throw boom('badRequest', dictionary.notFriends, errorCode.notFriends)
     }
 
     userName.friendList.splice(userPosition, SPLICE_NUMBER)

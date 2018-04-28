@@ -1,7 +1,10 @@
 'use strict'
 
 const Promise = require('bluebird')
-const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
+
+const { errorCode, errorUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 module.exports = (app) => {
   const Profile = app.src.models.profileModel
@@ -21,7 +24,7 @@ module.exports = (app) => {
   const _updateData = (invitatorUser, invitedUser, dictionary) => {
     const alreadyFriends = invitatorUser.friendList.find((invitatorFriendId) => invitatorFriendId === invitedUser.id)
     if (alreadyFriends) {
-      throw Boom.notAcceptable(dictionary.alreadyFriends)
+      throw boom('notAcceptable', dictionary.alreadyFriends, errorCode.alreadyFriends)
     }
     const saveInvitatorPromise = _saveInvitatorUserProfile(invitatorUser, invitedUser)
     const updateInvitedPromise = _updateInvitedUserNotifications(invitatorUser, invitedUser, dictionary)
@@ -42,14 +45,14 @@ module.exports = (app) => {
 
   const _getUser = (userName, dictionary) =>
     Profile.findOne({ userName })
-      .then((user) => {
-        if (!user) {
-          const errMsg = dictionary.userNotFound.replace('{{userName}}', userName)
-          throw Boom.notFound(errMsg)
-        }
+    .then((user) => {
+      if (!user) {
+        const errMsg = dictionary.userNotFound.replace('{{userName}}', userName)
+        throw boom('notFound', errMsg, errorCode.userNotFound)
+      }
 
-        return user
-      })
+      return user
+    })
 
   const _updateInvitedUserNotifications = (invitatorUser, invitedUser, dictionary) => {
     const searchQuery = {
@@ -67,7 +70,7 @@ module.exports = (app) => {
         const alreadyExists = nofitications.find((notification) =>
           notification.messageType === FRIENDSHIP_TYPE && invitatorUser.id === notification.messageUserRef)
         if (alreadyExists) {
-          throw Boom.notAcceptable(dictionary.notificationExists)
+          throw boom('notAcceptable', dictionary.notificationExists, errorCode.notificationExists)
         }
         userNotifications.notifications.unshift(newNotification)
 

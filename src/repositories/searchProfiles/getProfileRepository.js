@@ -1,8 +1,11 @@
 'use strict'
 
-const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
 const Mongoose = require('mongoose')
 const objectId = Mongoose.Types.ObjectId
+
+const { errorCode, errorUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 module.exports = (app) => {
   const Profile = app.src.models.profileModel
@@ -17,7 +20,7 @@ module.exports = (app) => {
       .then((userFound) => {
         if (!userFound) {
           const errMsg = dictionary.userNotFound.replace('{{userName}}', searchQuery.userName)
-          throw Boom.notFound(errMsg)
+          throw boom('notFound', errMsg, errorCode.userNotFound)
         }
 
         return _buildProfileObject(QueryUtils.makeObject(userFound))

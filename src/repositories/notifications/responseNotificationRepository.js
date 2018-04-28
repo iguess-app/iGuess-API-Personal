@@ -1,9 +1,12 @@
 'use strict'
 
 const Promise = require('bluebird')
-const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
 
 const inviteResponseRepository = require('../guess/inviteResponseRepository')
+
+const { errorCode, errorUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 module.exports = (app) => {
   const Notifications = app.src.models.notificationsModel
@@ -48,7 +51,7 @@ module.exports = (app) => {
 
   const _checkErrors = (userNotifications, dictionary) => {
     if (!userNotifications) {
-      throw Boom.notFound(dictionary.notificationNotFound)
+      throw boom('notFound', dictionary.notificationNotFound, errorCode.notificationNotFound)      
     }
   }
 
@@ -74,7 +77,7 @@ module.exports = (app) => {
 
       return inviteResponseRepository.inviteReponse(requestObj, headers)
     }
-    throw Boom.notImplemented('No messageType found')
+    throw boom('notImplemented', 'No messageType found')      
   }
 
   const _getNotification = (notifications, notificationId) =>

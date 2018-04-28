@@ -1,25 +1,28 @@
 'use strict'
 
-const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
+
+const { errorCode, errorUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 module.exports = (app) => {
   const Profile = app.src.models.profileModel
 
-  const areFriends = (request, dictionary) => 
+  const areFriends = (request, dictionary) =>
     Profile.findById(request.userRef)
-      .then((userFound) => {
-        _checkErrors(userFound, dictionary)
+    .then((userFound) => {
+      _checkErrors(userFound, dictionary)
 
-        return {
-          areFriends: userFound.friendList.includes(request.userRefFriend)
-        }
-      })
+      return {
+        areFriends: userFound.friendList.includes(request.userRefFriend)
+      }
+    })
 
   return areFriends
 }
 
 const _checkErrors = (userFound, dictionary) => {
   if (!userFound) {
-    throw Boom.notFound(dictionary.userNotFoundImpersonal)
+    throw boom('notFound', dictionary.userNotFoundImpersonal, errorCode.userNotFoundImpersonal)
   }
 }

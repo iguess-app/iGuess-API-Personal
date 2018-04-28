@@ -1,8 +1,12 @@
 'use strict'
 
 const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
 
 const sessionManager = require('../../managers/sessionManager')
+
+const { errorCode, errorUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 const POSITION_ZERO = 0
 const POSITION_ONE = 1
@@ -21,7 +25,7 @@ module.exports = (app) => {
     payload.secondAppreciatedTeam = appreciatedTeamsId[POSITION_ONE]
 
     if (payload.firstAppreciatedTeam && payload.firstAppreciatedTeam === payload.secondAppreciatedTeam) {
-      throw Boom.notAcceptable(dictionary.sameTeams)
+      throw boom('notAcceptable', dictionary.sameTeams, errorCode.sameTeams)
     }
 
     if (!payload.firstAppreciatedTeam && payload.secondAppreciatedTeam) {
@@ -30,13 +34,13 @@ module.exports = (app) => {
     }
 
     return updateAppreciatedTeamsRepository.updateAppreciatedTeams(payload, headers)
-    .catch((err) => {
-      if (err.kind === 'ObjectId') {
-       throw Boom.conflict('The ID sent is not the expected format')
-      }
+      .catch((err) => {
+        if (err.kind === 'ObjectId') {
+        throw Boom.conflict('The ID sent is not the expected format')
+        }
 
-      return err
-    })
+        return err
+      })
   }
 
   return {

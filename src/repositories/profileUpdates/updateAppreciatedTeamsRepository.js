@@ -1,9 +1,12 @@
 'use strict'
 
-const Boom = require('boom')
 const Promise = require('bluebird')
+const coincidents = require('iguess-api-coincidents')
 
 const Team = require('../../models/holiDB/teamModel')
+
+const { errorCode, errorUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 const POSITION_ZERO = 0
 const POSITION_ONE = 1
@@ -24,7 +27,7 @@ module.exports = (app) => {
     return Promise.all([firstAppreciatedTeamPromise, secondAppreciatedTeamPromise])
       .spread((firstAppreciatedTeam, secondAppreciatedTeam) => {
         if (!firstAppreciatedTeam || !secondAppreciatedTeam) {
-          throw Boom.notFound(dictionary.teamNotFound)
+          throw boom('notFound', dictionary.teamNotFound, errorCode.teamNotFound)
         }
         const searchQuery = {
           userName: payload.userName
@@ -34,14 +37,14 @@ module.exports = (app) => {
           .then((userFound) => {
             if (!userFound) {
               const errMsg = dictionary.userNotFound.replace('{{userName}}', payload.userName)
-              throw Boom.notFound(errMsg)
+              throw boom('notFound', errMsg, errorCode.userNotFound)
             }
             const responseObj = {
               profileModified: false
             }
             const footballSupportedTeams = userFound.footballSupportedTeams
             if (_theSupportedTeamIsEqualToAppreciatedTeam(footballSupportedTeams.supportedTeam, firstAppreciatedTeam.id, secondAppreciatedTeam.id)) {
-              throw Boom.notAcceptable(dictionary.sameTeams)
+              throw boom('notAcceptable', dictionary.sameTeams, errorCode.sameTeams)
             }
 
             if (_isTheSameAppreciatedTeamsAtDataBase(footballSupportedTeams.appreciatedTeams, firstAppreciatedTeam.id, secondAppreciatedTeam.id)) {

@@ -1,8 +1,11 @@
 'use strict'
 
-const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
 
 const Team = require('../../models/holiDB/teamModel')
+
+const { errorCode, errorUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 module.exports = (app) => {
   const Profile = app.src.models.profileModel
@@ -13,7 +16,7 @@ module.exports = (app) => {
     return Team.findById(payload.supportedTeamId)
       .then((teamChosen) => {
         if (!teamChosen) {
-          throw Boom.notFound(dictionary.teamNotFound)
+          throw boom('notFound', dictionary.teamNotFound, errorCode.teamNotFound)
         }
         const searchQuery = {
           userName: payload.userName
@@ -23,7 +26,7 @@ module.exports = (app) => {
           .then((userFound) => {
             if (!userFound) {
               const errMsg = dictionary.userNotFound.replace('{{userName}}', payload.userName)
-              throw Boom.notFound(errMsg)
+              throw boom('notFound', errMsg, errorCode.userNotFound)          
             }
             const responseObj = {
               profileModified: false

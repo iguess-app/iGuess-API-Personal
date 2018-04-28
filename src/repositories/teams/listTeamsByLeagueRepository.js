@@ -1,8 +1,11 @@
 'use strict'
 
-const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
 
 const Team = require('../../models/holiDB/teamModel')
+
+const { errorCode, errorUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 module.exports = () => {
 
@@ -27,7 +30,7 @@ module.exports = () => {
 
 const _checkErrors = (teams, dictionary) => {
   if (!teams.length) {
-    throw Boom.notFound(dictionary.noTeamForThisLeague)
+    throw boom('notFound', dictionary.noTeamForThisLeague, errorCode.noTeamForThisLeague)
   }
 
   return teams

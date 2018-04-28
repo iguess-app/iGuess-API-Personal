@@ -1,10 +1,12 @@
 'use strict'
 
-const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
+
+const { errorCode, errorUtils, passwordUtils, profileUtils, queryUtils } = coincidents.Utils
+const { tokenManager, dateManager } = coincidents.Managers
+const { boom } = errorUtils
 
 module.exports = (app) => {
-  const { passwordUtils, profileUtils, queryUtils } = app.coincidents.Utils
-  const { tokenManager, dateManager } = app.coincidents.Managers
   const Profile = app.src.models.profileModel
 
   const singIn = (data, headers) => {
@@ -44,7 +46,7 @@ module.exports = (app) => {
         }
       }
 
-      throw Boom.unauthorized(dictionary.invalidLogin)
+      throw boom('unauthorized', dictionary.invalidLogin, errorCode.invalidLogin)      
     })
 
   const _structureUserObj = (userFound) => {
@@ -63,10 +65,9 @@ module.exports = (app) => {
       if (userFound) {
         return userFound
       }
-
-      throw Boom.unauthorized(dictionary.invalidLogin)
+      
+      throw boom('unauthorized', dictionary.invalidLogin, errorCode.invalidLogin)      
     })
-    .catch((err) => err)
 
   const updatelastSignIn = (user) => {
     user.lastSignInAt = dateManager.getUTCNow()

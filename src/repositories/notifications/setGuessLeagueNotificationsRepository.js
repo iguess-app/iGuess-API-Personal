@@ -1,7 +1,10 @@
 'use strict'
 
-const Boom = require('boom')
 const Promise = require('bluebird')
+const coincidents = require('iguess-api-coincidents')
+
+const { errorCode, errorUtils } = coincidents.Utils
+const { boom } = errorUtils
 
 module.exports = (app) => {
   const Notifications = app.src.models.notificationsModel
@@ -41,6 +44,6 @@ module.exports = (app) => {
 
 const _checkErrors = (userNotifications, dictionary) => {
   if (!userNotifications) {
-    throw Boom.notFound(dictionary.userNotFoundImpersonal)
+    throw boom('notFound', dictionary.userNotFoundImpersonal, errorCode.userNotFoundImpersonal)
   }
 }

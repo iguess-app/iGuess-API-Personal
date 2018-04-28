@@ -1,11 +1,10 @@
 'use strict'
 
-const Boom = require('boom')
 const coincidents = require('iguess-api-coincidents')
 const sessionManager = require('../../managers/sessionManager')
 
-const PasswordUtils = coincidents.Utils.passwordUtils
-const ProfileUtils = coincidents.Utils.profileUtils
+const { errorCode, errorUtils, passwordUtils, profileUtils } = coincidents.Utils
+const { boom } = errorUtils
 const PROMISE_INDEX = 1
 
 module.exports = (app) => {
@@ -16,11 +15,11 @@ module.exports = (app) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
     _checkRestricts(payload, dictionary)
 
-    return PasswordUtils.cryptPassword(payload.password)
+    return passwordUtils.cryptPassword(payload.password)
       .then((cryptedPassword) => _buildNewUserObj(payload, cryptedPassword))
       .then((userToDB) => signUpRepository.singUp(userToDB))
       .then((singUpObj) => _createSessionAndBuildResponseObj(singUpObj, headers))
-      .catch((err) => ProfileUtils.treatErrors(err, dictionary))
+      .catch((err) => profileUtils.treatErrors(err, dictionary))
   }
 
   const _createSessionAndBuildResponseObj = (singUpObj, headers) => 
@@ -44,11 +43,11 @@ module.exports = (app) => {
   }
 
   const _checkRestricts = (payload, dictionary) => {
-    if (PasswordUtils.checkPasswordRestrict(payload.password) !== true) {
-      throw Boom.notAcceptable(dictionary.passwordAlert)
+    if (passwordUtils.checkPasswordRestrict(payload.password) !== true) {
+      throw boom('notAcceptable', dictionary.passwordAlert, errorCode.passwordAlert)
     }
-    if (ProfileUtils.isEmail(payload.email) !== true) {
-      throw Boom.notAcceptable(dictionary.notAEmail)
+    if (profileUtils.isEmail(payload.email) !== true) {
+      throw boom('notAcceptable', dictionary.notAEmail, errorCode.notAEmail)
     }
 
     return payload
