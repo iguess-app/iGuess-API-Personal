@@ -1,6 +1,9 @@
 'use strict'
 
-const Boom = require('boom')
+const coincidents = require('iguess-api-coincidents')
+
+const errorCode = coincidents.Utils.errorCodeUtils
+const boom = coincidents.Utils.errorUtils.boom
 
 module.exports = (app) => {
   const availabilityEmailRepository = app.src.repositories.availability.availabilityEmailRepository
@@ -10,7 +13,7 @@ module.exports = (app) => {
   const emailAvailability = (request, headers) => {
     const dictionary = app.coincidents.Translate.gate.selectLanguage(headers.language)
     if (ProfileUtils.isEmail(request.email) === Errors.userErrors.notEmail) {
-      return Promise.reject(Boom.notAcceptable(dictionary.notAEmail))
+      return Promise.reject(boom('notAcceptable', dictionary.notAEmail, errorCode.notAEmail))
     }
 
     return availabilityEmailRepository.emailAvailability(request, dictionary)
