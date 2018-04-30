@@ -10,6 +10,7 @@ const schemaValidate = require('../../../../src/routes/schemas/friends/').addFri
 const undoFriendShipBeforeTests = require('./lib/undoFriendShipBeforeTests')
 const signInAddFriendsBeforeTests = require('../../lib/getTokenWithSignInBeforeTests').signInAddFriendsBeforeTests
 
+const { errorCode } = coincidents.Utils
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
@@ -55,6 +56,7 @@ lab.experiment('Integrated Test ==> Add Friends', () => {
       .then((response) => {
         const result = response.result
         expect(result.message).to.be.equal(dictionary.notificationExists)
+        expect(result.errorCode).to.be.equal(errorCode.notificationExists)
         expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
         done()
       })

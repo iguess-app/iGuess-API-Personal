@@ -7,6 +7,7 @@ const injectedRequests = require('./injectedRequests')
 const server = require('../../../../app').configServer
 const getTokenWithSignInBeforeTests = require('../../lib/getTokenWithSignInBeforeTests').getTokenWithSignInBeforeTests
 
+const { errorCode } = coincidents.Utils
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
@@ -32,6 +33,7 @@ lab.experiment('Integrated Test ==> Add Friends (Already Friends Scenario)', () 
       .then((response) => {
         const result = response.result
         expect(result.message).to.be.equal(dictionary.alreadyFriends)
+        expect(result.errorCode).to.be.equal(errorCode.alreadyFriends)
         expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
         done()
       })

@@ -9,6 +9,7 @@ const server = require('../../../../app').configServer
 const schemaValidate = require('../../../../src/routes/schemas/login').signUpSchemas.response
 const deleteProfileBeforeTest = require('./lib/deleteProfileBeforeTest')
 
+const { errorCode } = coincidents.Utils
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
@@ -40,6 +41,7 @@ lab.experiment('Integrated Test ==> Sign Up', () => {
       .then((response) => {
         const result = response.result
         expect(result.message).to.be.equal(dictionary.emailAlreadyUsed)
+        expect(result.errorCode).to.be.equal(errorCode.emailAlreadyUsed)
         expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
         done()
       })
@@ -53,6 +55,7 @@ lab.experiment('Integrated Test ==> Sign Up', () => {
       .then((response) => {
         const result = response.result
         expect(result.message).to.be.equal(dictionary.userNameAlreadyUsed)
+        expect(result.errorCode).to.be.equal(errorCode.userNameAlreadyUsed)
         expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
         done()
       })
@@ -63,6 +66,7 @@ lab.experiment('Integrated Test ==> Sign Up', () => {
       .then((response) => {
         const result = response.result
         expect(result.message).to.be.equal(dictionary.notAEmail)
+        expect(result.errorCode).to.be.equal(errorCode.notAEmail)
         expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
         done()
       })

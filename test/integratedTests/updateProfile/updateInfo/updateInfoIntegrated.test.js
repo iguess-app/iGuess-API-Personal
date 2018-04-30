@@ -10,6 +10,7 @@ const schemaValidate = require('../../../../src/routes/schemas/updateProfile').u
 const generateString = require('./lib/generateString')
 const signInProfileUpdateBeforeTests = require('../../lib/getTokenWithSignInBeforeTests').signInProfileUpdateBeforeTests
 
+const { errorCode } = coincidents.Utils
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
@@ -116,6 +117,7 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
         const result = response.result
         expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
         expect(result.message).to.be.equal(dictionary.tooLongDescription)
+        expect(result.errorCode).to.be.equal(errorCode.tooLongDescription)
         done()
       })
   })
@@ -127,6 +129,7 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
         const result = response.result
         expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
         expect(result.message).to.be.equal(dictionary.notAEmail)
+        expect(result.errorCode).to.be.equal(errorCode.notAEmail)
         done()
       })
   })
@@ -138,6 +141,7 @@ lab.experiment('Integrated Test ==> Update Info Profile', () => {
         const result = response.result
         expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
         expect(result.message).to.be.equal(dictionary.userNameAlreadyUsed)
+        expect(result.errorCode).to.be.equal(errorCode.userNameAlreadyUsed)
         done()
       })
   })

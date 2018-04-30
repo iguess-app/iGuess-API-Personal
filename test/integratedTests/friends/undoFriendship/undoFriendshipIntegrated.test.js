@@ -10,6 +10,7 @@ const schemaValidate = require('../../../../src/routes/schemas/friends/').undoFr
 const doAFriendshipBeforeTests = require('./lib/doAFriendshipBeforeTests')
 const getTokenWithSignInBeforeTests = require('../../lib/getTokenWithSignInBeforeTests').getTokenWithSignInBeforeTests
 
+const { errorCode } = coincidents.Utils
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
@@ -52,6 +53,7 @@ lab.experiment('Integrated Test ==> Undo Friendship', () => {
       .then((response) => {
         const result = response.result
         expect(result.message).to.be.equal(dictionary.notFriends)
+        expect(result.errorCode).to.be.equal(errorCode.notFriends)
         expect(response.statusCode).to.be.equal(statusCode.badRequest)
         done()
       })

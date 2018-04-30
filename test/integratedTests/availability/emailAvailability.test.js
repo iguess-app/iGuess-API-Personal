@@ -8,6 +8,7 @@ const injectedRequests = require('./injectedRequests')
 const server = require('../../../app').configServer
 const schemaValidate = require('../../../src/routes/schemas/availability').emailAvailabilitySchema.response
 
+const { errorCode } = coincidents.Utils
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
@@ -45,6 +46,7 @@ lab.experiment('Integrated Test ==> email availability', () => {
       .then((response) => {
         const result = response.result
         expect(result.message).to.be.equal(dictionary.notAEmail)
+        expect(result.errorCode).to.be.equal(errorCode.notAEmail)
         expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
         done()
       })

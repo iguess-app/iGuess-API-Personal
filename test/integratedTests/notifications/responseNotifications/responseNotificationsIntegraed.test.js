@@ -9,6 +9,7 @@ const server = require('../../../../app').configServer
 const schemaValidate = require('../../../../src/routes/schemas/notifications').responseNotificationSchemas.response
 const recreateNotificationBeforeTest = require('./lib/recreateNotificationBeforeTest')
 
+const { errorCode } = coincidents.Utils
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
@@ -67,6 +68,7 @@ lab.experiment('Integrated Test ==> Response Notifications', () => {
         const result = response.result
         expect(response.statusCode).to.be.equal(statusCode.notFound)
         expect(result.message).to.be.equal(dictionary.notificationNotFound)
+        expect(result.errorCode).to.be.equal(errorCode.notificationNotFound)
         done()
       })
   })

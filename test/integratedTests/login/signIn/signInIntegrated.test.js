@@ -8,6 +8,7 @@ const injectedRequests = require('./injectedRequests')
 const server = require('../../../../app').configServer
 const schemaValidate = require('../../../../src/routes/schemas/login').signInSchemas.response
 
+const { errorCode } = coincidents.Utils
 const lab = exports.lab = Lab.script()
 const expect = Lab.expect
 const dictionary = coincidents.Translate.gate.selectLanguage()
@@ -43,6 +44,7 @@ lab.experiment('Integrated Test ==> Sign In', () => {
       .then((response) => {
         const result = response.result
         expect(result.message).to.be.equal(dictionary.invalidLogin)
+        expect(result.errorCode).to.be.equal(errorCode.invalidLogin)
         expect(response.statusCode).to.be.equal(statusCode.unauthorized)
         done()
       })
