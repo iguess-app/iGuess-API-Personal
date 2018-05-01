@@ -2,6 +2,9 @@
 
 const consign = require('consign')
 const coincidents = require('iguess-api-coincidents')
+
+const plugins = require('./config/plugins/serverPlugins')
+
 const app = { coincidents }
 
 consign()
@@ -14,12 +17,12 @@ consign()
   .include('src/routes')
   .into(app)
 
-app.configServer.start((err) => {
-  if (err) {
-    throw err
-  }
-
-  app.coincidents.Managers.log.info(`Server running at ${app.configServer.info.uri}`)
+app.configServer.register(plugins, () => {
+  app.configServer.start((err) => {
+    if (err) {
+      throw err
+    }
+  })
 })
 
 module.exports = app
