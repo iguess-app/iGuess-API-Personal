@@ -1,6 +1,7 @@
 'use strict'
 
 const defaultHeaderSchema = require('./schemas/headers').defaultHeaderSchema
+const defaultSessionHeaderSchema = require('./schemas/headers').defaultSessionHeaderSchema
 const loginSchemas = require('./schemas/login')
 
 module.exports = (app) => {
@@ -49,7 +50,7 @@ module.exports = (app) => {
         loginController.logout(request, reply)
       },
       validate: {
-        headers: defaultHeaderSchema
+        headers: defaultSessionHeaderSchema
       },
       response: {
         schema: loginSchemas.logoutSchemas.response
