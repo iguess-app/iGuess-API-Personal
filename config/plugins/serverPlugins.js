@@ -8,7 +8,7 @@ const config = coincidents.Config
 const hapiPinoPlugin = {
   register: hapiPino,
   options: {
-    prettyPrint: !config.isProd(),
+    prettyPrint: config.isLocal(),
     logPayload: true,
     logEvents: config.isTest() ? false : ['onPostStart', 'onPostStop', 'response', 'request-error']
   }
