@@ -14,8 +14,8 @@ module.exports = (app) => {
     Profile.create(userData)
     .then((info) => {
       _createNotificationDocument(info)
-      const token = tokenManager.generate()
       const user = _structureUserObj(QueryUtils.makeObject(info))
+      const token = tokenManager.generate(user)
 
       return {
         token,

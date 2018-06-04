@@ -37,8 +37,8 @@ module.exports = (app) => {
     .then((isMatched) => {
       if (isMatched) {
         updatelastSignIn(userFound)
-        const token = tokenManager.generate()
         const structuredUser = _structureUserObj(userFound)
+        const token = tokenManager.generate(structuredUser)
 
         return {
           token,
