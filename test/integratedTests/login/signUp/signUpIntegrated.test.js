@@ -72,12 +72,16 @@ lab.experiment('Integrated Test ==> Sign Up', () => {
       })
   })
 
-  /*//TODO: 
+  
   lab.test('[IO] Sign Up - password Too Weak', (done) => {
     server.inject(injectedRequests.passwordTooWeak)
       .then((response) => {
+        const result = response.result
+        expect(result.message).to.be.equal(dictionary.passwordAlert)
+        expect(result.errorCode).to.be.equal(errorCode.passwordAlert)
+        expect(response.statusCode).to.be.equal(statusCode.notAcceptable)
         done()
       })
-  }) */
+  })
 
 })

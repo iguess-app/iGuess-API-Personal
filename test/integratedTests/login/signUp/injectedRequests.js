@@ -64,7 +64,7 @@ const passwordTooWeak = {
   payload: {
     'userName': 'mcRodolfinho',
     'name': 'mcRodolfinho',
-    'password': 'mcRodolfinho',
+    'password': 'mc',
     'email': 'mcRodolfinho@gmail.com'
   },
   headers
