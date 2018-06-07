@@ -14,10 +14,19 @@ module.exports = (app) => {
 
     const usrRegex = new RegExp(searchField)
     const searchQuery = {
-      'userName': {
-        '$regex': usrRegex,
-        '$options': 'i'
-      }
+      '$or': [{
+          'userName': {
+            '$regex': usrRegex,
+            '$options': 'i'
+          }
+        },
+        {
+          'name': {
+            '$regex': usrRegex,
+            '$options': 'i'
+          }
+        }
+      ]
     }
 
     const projectionQuery = {
