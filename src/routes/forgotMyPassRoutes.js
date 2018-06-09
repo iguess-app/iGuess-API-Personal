@@ -24,4 +24,21 @@ module.exports = (app) => {
     }
   })
 
+  server.route({
+    path: '/forgotMyPass/validateSoftToken',
+    method: 'GET',
+    config: {
+      handler: (request, reply) => {
+        forgotMyPassController.validateSoftToken(request, reply)
+      },
+      validate: {
+        query: forgotMyPassSchemas.validateSoftTokenSchemas.request,
+        headers: defaultHeaderSchema
+      },
+      response: {
+        schema: forgotMyPassSchemas.validateSoftTokenSchemas.response
+      }
+    }
+  })
+
 }

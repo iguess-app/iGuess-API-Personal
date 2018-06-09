@@ -21,7 +21,6 @@ module.exports = () => {
     const emailMsg = _buildEmailObj(emailObj, token)
     
     cacheManager.set(commonData.REDIS_PREFIX_KEY+token, emailObj, TIME_TO_EXPIRE_TOKEN)
-
     sgMail.send(emailMsg)
 
     const emailHiddened = cipheringEmail()(emailObj.email)
@@ -43,10 +42,13 @@ const _buildEmailObj = (emailObj, token) => {
     from: config.sendGrid.emailFrom,
     subject: 'Parece que esqueceu seu senha né!?',
     text: 'Seu token está aqui',
-    html: `Tudo bem, a gente te ajuda! Esse é seu token: ${token}. Copia o token volta lá no app e reseta a senha o/`
+    html: `Tudo bem, a gente te ajuda! 
+     Esse é seu token: ${token}. Copia o token volta lá no app e reseta a senha o/ <br>
+     Se você não pediu para resetar a senha, fica tranquilo. É só deixar o token expirar!`
   }
 
   return emailMsg
 }
 
 //TODO: add english and portuguese email according to the req
+//TODO: tela de 404 para qd n encontrar user/email inputado 
