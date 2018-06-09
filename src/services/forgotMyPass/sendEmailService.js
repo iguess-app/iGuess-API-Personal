@@ -9,7 +9,7 @@ const commonData = require('./commonData')
 const getProfileByEmailOrUsernameRepository = require('../../repositories/searchProfiles/getProfileByEmailOrUsernameRepository')()
 const cacheManager = coincidents.Managers.cacheManager
 
-const TIME_TO_EXPIRE_TOKEN = 900 //15min
+const TIME_TO_EXPIRE_TOKEN = 1200 //20min
 
 sgMail.setApiKey(config.sendGrid.apiKey)
 

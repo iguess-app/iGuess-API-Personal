@@ -24,7 +24,7 @@ module.exports = () => {
 
     return {
       name: softTokenContent.name,
-      token: payload.softToken
+      softToken: payload.softToken
     }
   }
 
