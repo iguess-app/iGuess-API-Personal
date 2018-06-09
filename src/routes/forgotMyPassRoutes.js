@@ -41,4 +41,21 @@ module.exports = (app) => {
     }
   })
 
+  server.route({
+    path: '/forgotMyPass/updateNewPassword',
+    method: 'PATCH',
+    config: {
+      handler: (request, reply) => {
+        forgotMyPassController.updateNewPassword(request, reply)
+      },
+      validate: {
+        payload: forgotMyPassSchemas.updateNewPasswordSchemas.request,
+        headers: defaultHeaderSchema
+      },
+      response: {
+        schema: forgotMyPassSchemas.updateNewPasswordSchemas.response
+      }
+    }
+  })
+
 }

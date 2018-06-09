@@ -1,13 +1,16 @@
 'use strict'
 
-module.exports = (app) => {
-  const Profile = app.src.models.profileModel
-  const ErrorUtils = app.coincidents.Utils.errorUtils
+const coincidents = require('iguess-api-coincidents')
+
+const Profile = require('../../models/profileModel')()
+
+const ErrorUtils = coincidents.Utils.errorUtils
+const queryUtils = coincidents.Utils.queryUtils
+
+module.exports = () => {
 
   const updatePassword = (payload) => {
-    const searchQuery = {
-      userName: payload.userName
-    }
+    const searchQuery = _buildSearchQuery(payload)
     const updateQuery = {
       '$set': {
         password: payload.newPassword
@@ -17,7 +20,7 @@ module.exports = (app) => {
     return Profile
       .findOne(searchQuery)
       .then((userFound) => {
-        if (userFound && userFound.password !== payload.oldPassword) {
+        if (userFound && userFound.password !== payload.oldPassword && payload.updateByForgotService !== true) {
           throw new Error(ErrorUtils.userErrors.passwordInvalid)
         }
 
@@ -39,4 +42,16 @@ module.exports = (app) => {
   return {
     updatePassword
   }
+}
+
+const _buildSearchQuery = (payload) => {
+  const searchQuery = {}
+  if (payload.userName) {
+    searchQuery.userName = payload.userName
+  }
+  if (payload._id || payload.userRef) {
+    searchQuery._id = queryUtils.makeObjectId(payload._id || payload.userRef)
+  }
+  
+  return searchQuery
 }
