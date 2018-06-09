@@ -16,6 +16,7 @@
   "author": "{{Lucas Alves L.A.}}",
   "dependencies": {
     "@google-cloud/storage": "^1.2.1",
+    "@sendgrid/mail": "^6.2.1",
     "bcrypt": "^1.0.3",
     "bluebird": "3.5.0",
     "boom": "4.2.0",
@@ -31,7 +32,7 @@
     "md5": "2.2.1",
     "moment": "2.18.1",
     "mongoose": "4.7.6",
-    "nodemailer": "^4.6.4",
-    "redis": "2.6.3"
+    "redis": "2.6.3",
+    "sendgrid": "^5.2.3"
   }
 }
