@@ -18,7 +18,7 @@ module.exports = () => {
     const dictionary = coincidents.Translate.gate.selectLanguage(headers.language)
     const emailObj = await getProfileByEmailOrUsernameRepository(payload, dictionary)
     const token = await generateToken()()
-    const emailMsg = _buildEmailObj(emailObj, token)
+    const emailMsg = _buildEmailObj(emailObj, token, dictionary)
     
     cacheManager.set(commonData.REDIS_PREFIX_KEY+token, emailObj, TIME_TO_EXPIRE_TOKEN)
     sgMail.send(emailMsg)
@@ -36,19 +36,14 @@ module.exports = () => {
   }
 }
 
-const _buildEmailObj = (emailObj, token) => {
+const _buildEmailObj = (emailObj, token, dictionary) => {
   const emailMsg = {
     to: emailObj.email,
     from: config.sendGrid.emailFrom,
-    subject: 'Parece que esqueceu seu senha né!?',
-    text: 'Seu token está aqui',
-    html: `Tudo bem, a gente te ajuda! 
-     Esse é seu token: ${token}. Copia o token volta lá no app e reseta a senha o/ <br>
-     Se você não pediu para resetar a senha, fica tranquilo. É só deixar o token expirar!`
+    subject: dictionary.forgotMyPassSubject,
+    text: 'z',
+    html: dictionary.forgotMyPassBody.replace('{{token}}', token)
   }
-
+  
   return emailMsg
 }
-
-//TODO: add english and portuguese email according to the req
-//TODO: tela de 404 para qd n encontrar user/email inputado 

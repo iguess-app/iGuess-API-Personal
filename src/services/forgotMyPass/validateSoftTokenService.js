@@ -18,8 +18,7 @@ module.exports = () => {
     const softTokenContent = await cacheManager.get(commonData.REDIS_PREFIX_KEY+payload.softToken)
 
     if (!softTokenContent) {
-      //todo: criar msg e errorcode pra isso
-      throw boom('badRequest', dictionary.notificationExists, errorCode.notificationExists)
+      throw boom('badRequest', dictionary.softTokenExpired, errorCode.softTokenExpired)
     }
 
     return {

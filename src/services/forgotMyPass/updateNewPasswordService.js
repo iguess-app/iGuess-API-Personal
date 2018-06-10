@@ -40,7 +40,6 @@ const _checkErrors = (payload, softTokenContent, dictionary) => {
     throw boom('badRequest', dictionary.passwordAlert, errorCode.passwordAlert)
   }
   if (!softTokenContent) {
-    //todo: criar msg e errorcode pra isso
-    throw boom('badRequest', dictionary.notificationExists, errorCode.notificationExists)
+    throw boom('badRequest', dictionary.softTokenExpired, errorCode.softTokenExpired)
   }
 }
