@@ -42,8 +42,13 @@ const _buildEmailObj = (emailObj, token, dictionary) => {
     from: config.sendGrid.emailFrom,
     subject: dictionary.forgotMyPassSubject,
     text: 'z',
-    html: dictionary.forgotMyPassBody.replace('{{token}}', token)
+    html: _getEmailHtml(emailObj, token, dictionary)
   }
   
   return emailMsg
 }
+
+const _getEmailHtml = (emailObj, token, dictionary) => 
+  dictionary.forgotMyPassBody
+    .replace('{{token}}', token)
+    .replace('{{userName}}', emailObj.userName)

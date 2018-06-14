@@ -38,7 +38,8 @@ const _buildSearchQuery = (payload) => {
 const _buildProjectionQuery = () => ({
   _id: 1,
   email: 1,
-  name: 1
+  name: 1,
+  userName: 1
 })
 
 module.exports = () => getProfile
