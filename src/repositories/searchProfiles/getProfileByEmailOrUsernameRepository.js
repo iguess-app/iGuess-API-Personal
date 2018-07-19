@@ -16,7 +16,7 @@ const getProfile = (payload, dictionary) => {
     .findOne(searchQuery, projectionQuery)
     .then((userFound) => {
       if (!userFound) {
-        const errMsg = dictionary.userNotFound.replace('{{userName}}', searchQuery.userName)
+        const errMsg = dictionary.userNotFound.replace('{{userName}}', payload.emailOrUsername)
         throw boom('notFound', errMsg, errorCode.userNotFound)
       }
 
