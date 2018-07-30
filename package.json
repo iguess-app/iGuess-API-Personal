@@ -24,7 +24,7 @@
     "google-cloud": "^0.56.0",
     "hapi": "16.1.0",
     "hapi-pino": "^2.2.0",
-    "iguess-api-coincidents": "git+https://github.com/LuhalvesBR/iGuess-API-Coincidents.git",
+    "iguess-api-coincidents": "git+https://github.com/iguess-app/iguess_lib_coincidents.git",
     "joi": "10.1.0",
     "jsonwebtoken": "7.2.1",
     "lab": "^14.2.1",
